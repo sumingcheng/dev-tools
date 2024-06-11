@@ -7,7 +7,6 @@
 echo "正在安装 pyenv..."
 index_main() {
     set -e  # 启用错误检查：遇到错误时脚本将停止执行。
-    # 使用 -v 参数增加详细输出，以便能看到所有步骤的执行详情
     curl -v -S -L https://raw.githubusercontent.com/pyenv/pyenv-installer/master/bin/pyenv-installer | bash
 }
 
