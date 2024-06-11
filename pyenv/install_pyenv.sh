@@ -3,7 +3,7 @@
 # Usage: curl https://pyenv.run | bash
 #
 # For more info, visit: https://github.com/pyenv/pyenv-installer
-
+echo "正在安装 pyenv..."
 index_main() {
     set -e  # Enable error checking: script will stop on any error.
     curl -s -S -L https://raw.githubusercontent.com/pyenv/pyenv-installer/master/bin/pyenv-installer | bash
