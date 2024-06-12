@@ -16,7 +16,7 @@ install_pyenv() {
     fi
     
     # 下载并执行安装脚本
-    curl -v -S -L https://raw.githubusercontent.com/pyenv/pyenv-installer/master/bin/pyenv-installer | bash
+    curl -# -o -L https://raw.githubusercontent.com/pyenv/pyenv-installer/master/bin/pyenv-installer | bash
 }
 
 # 调用安装函数
