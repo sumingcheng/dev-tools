@@ -40,14 +40,6 @@ fi
 } >> "$HOME/.bashrc"
 
 echo "环境变量配置完成。"
+
+
 echo "请手动执行 'source ~/.bashrc' 以使环境变量更改生效。"
-
-echo "正在检查 pyenv 版本..."
-
-# 显示 pyenv 版本
-if command -v pyenv &> /dev/null; then
-    pyenv --version
-    echo "pyenv 版本检查完成。"
-else
-    echo "警告：未能找到 pyenv 命令，可能由于环境变量未设置。" >&2
-fi
