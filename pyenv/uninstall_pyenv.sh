@@ -1,32 +1,29 @@
 #!/bin/bash
 
-# Step 1: 删除 pyenv 安装目录
-echo "正在删除 pyenv 安装目录..."
-rm -rf ~/.pyenv
+# 使用说明：通过 bash 执行此脚本以卸载 pyenv
+# 更多信息可参见 pyenv 的官方文档
 
-# Step 2: 清除 shell 配置文件中的 pyenv 相关条目
-echo "正在更新 shell 配置文件，移除 pyenv 相关设置..."
-if [ -f ~/.bashrc ]; then
-    sed -i '/export PYENV_ROOT="$HOME\/.pyenv"/d' ~/.bashrc
-    sed -i '/export PATH="$PYENV_ROOT\/bin:$PATH"/d' ~/.bashrc
-    sed -i '/eval "\$(pyenv init --path)"/d' ~/.bashrc
-    sed -i '/eval "\$(pyenv virtualenv-init -)"/d' ~/.bashrc
-fi
+set -e  # 启用错误检查：遇到错误时脚本将停止执行。
 
-if [ -f ~/.zshrc ]; then
-    sed -i '/export PYENV_ROOT="$HOME\/.pyenv"/d' ~/.zshrc
-    sed -i '/export PATH="$PYENV_ROOT\/bin:$PATH"/d' ~/.zshrc
-    sed -i '/eval "\$(pyenv init --path)"/d' ~/.zshrc
-    sed -i '/eval "\$(pyenv virtualenv-init -)"/d' ~/.zshrc
-fi
+echo "开始卸载 pyenv..."
 
-# Step 3: 重新加载配置文件
-echo "重新加载 shell 配置文件..."
-source ~/.bashrc || source ~/.zshrc
-
-# Step 4: 检查 pyenv 是否已完全移除
-if [ -z "$(command -v pyenv)" ]; then
-    echo "pyenv 已成功移除。"
+# 移除 pyenv 安装目录
+if [ -d "$HOME/.pyenv" ]; then
+    rm -rf "$HOME/.pyenv"
+    echo "已删除 pyenv 安装目录。"
 else
-    echo "移除 pyenv 失败，请手动检查。"
+    echo "未找到 pyenv 安装目录，可能已经被移除。"
 fi
+
+echo "正在更新 shell 配置文件，移除 pyenv 相关设置..."
+
+# 删除 .bashrc 中的 pyenv 相关环境变量设置
+sed -i '/PYENV_ROOT/d' "$HOME/.bashrc"
+sed -i '/pyenv init/d' "$HOME/.bashrc"
+sed -i '/pyenv virtualenv-init/d' "$HOME/.bashrc"
+
+echo "shell 配置文件更新完成。"
+
+echo "请手动执行 'source ~/.bashrc' 以使更改生效。"
+
+echo "pyenv 已成功卸载。"
