@@ -3,16 +3,16 @@
 # 使用说明: 通过bash执行此脚本以安装pyenv
 # 更多信息参见: https://github.com/pyenv/pyenv-installer
 
+set -e  # 启用错误检查：遇到错误时脚本将停止执行。
+
 echo "开始安装 pyenv..."
 
 # 定义一个函数来安装 pyenv
 install_pyenv() {
-    set -e  # 启用错误检查：遇到错误时脚本将停止执行。
-    
     # 检查 curl 是否已安装
     if ! command -v curl &> /dev/null; then
         echo "错误：curl 未安装，无法下载 pyenv。" >&2
-        return 1
+        exit 1
     fi
     
     # 下载并执行安装脚本
@@ -20,12 +20,8 @@ install_pyenv() {
 }
 
 # 调用安装函数
-if install_pyenv; then
-    echo "pyenv 安装成功。"
-else
-    echo "pyenv 安装失败。" >&2
-    exit 1
-fi
+install_pyenv
+echo "pyenv 安装成功。"
 
 echo "正在配置环境变量..."
 
