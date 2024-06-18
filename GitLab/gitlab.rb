@@ -8,7 +8,7 @@ gitlab_rails['time_zone'] = 'Asia/Shanghai'
 external_url 'http:/172.22.220.64'
 
 # 设置 GitLab 的 root 密码
-gitlab_rails['initial_root_password'] = '123456'
+gitlab_rails['initial_root_password'] = '13245678'
 
 # # 设置 GitLab Shell 使用的 SSH 端口
 # gitlab_rails['gitlab_shell_ssh_port'] = 2222
