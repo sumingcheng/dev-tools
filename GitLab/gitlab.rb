@@ -1,11 +1,11 @@
 # 启用 Git Large File Storage (LFS)
-gitlab_rails['lfs_enabled'] = true
+# gitlab_rails['lfs_enabled'] = true
 
 # 设置 GitLab 服务器的时区
 gitlab_rails['time_zone'] = 'Asia/Shanghai'
 
 # 设置 GitLab 访问的 URL
-external_url = 'http:/172.22.220.64'
+external_url = 'http://172.22.220.64'
 
 # 设置 GitLab 的 root 密码
 gitlab_rails['initial_root_password'] = '12345678'
