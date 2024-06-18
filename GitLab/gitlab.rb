@@ -11,7 +11,7 @@ external_url 'http:/172.22.220.64'
 gitlab_rails['initial_root_password'] = '12345678'
 
 # # 设置 GitLab Shell 使用的 SSH 端口
-# gitlab_rails['gitlab_shell_ssh_port'] = 2222
+gitlab_rails['gitlab_shell_ssh_port'] = 2222
 
 # # 启用 HTTPS，自动将 HTTP 流量重定向至 HTTPS
 # nginx['redirect_http_to_https'] = true
