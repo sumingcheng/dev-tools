@@ -1,4 +1,5 @@
 version: '3.8'
+
 services:
   gitlab:
     image: gitlab/gitlab-ce:latest
@@ -17,11 +18,11 @@ services:
       - './gitlab/logs:/var/log/gitlab'
       - './gitlab/data:/var/opt/gitlab'
 
-  gitlab-runner:
-    image: gitlab/gitlab-runner:latest
-    restart: always
-    depends_on:
-      - gitlab
-    volumes:
-      - '/var/run/docker.sock:/var/run/docker.sock'
-      - 'config.toml:/etc/gitlab-runner/config.toml'
+  # gitlab-runner:
+  #   image: gitlab/gitlab-runner:latest
+  #   restart: always
+  #   depends_on:
+  #     - gitlab
+  #   volumes:
+  #     - '/var/run/docker.sock:/var/run/docker.sock'
+  #     - 'config.toml:/etc/gitlab-runner/config.toml'
