@@ -1,0 +1,25 @@
+version: '3.8'
+services:
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: portainer
+    ports:
+      - "40000:9000" # 主界面
+      - "40001:8000" # Portainer Agent 端口
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+    environment:
+      - TZ=Asia/Shanghai # 设置时区
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true # 禁止提升权限
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:9000" ]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+
+volumes:
+  portainer_data:
+    driver: local
