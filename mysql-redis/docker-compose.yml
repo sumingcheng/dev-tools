@@ -43,7 +43,6 @@ volumes:
   mysql:
   redis:
 
-
 networks:
   default_network:
     driver: bridge
