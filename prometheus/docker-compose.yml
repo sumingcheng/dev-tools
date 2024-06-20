@@ -32,6 +32,20 @@ services:
     depends_on:
       - prometheus # 确保 Grafana 在 Prometheus 服务启动后再启动
 
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor
+    container_name: cadvisor
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    ports:
+      - "8080:8080"
+    networks:
+      - monitor-net
+    restart: unless-stopped
+
 volumes:
   prometheus_data:
     driver: local
