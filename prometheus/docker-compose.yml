@@ -29,7 +29,7 @@ services:
       - grafana_data:/var/lib/grafana
       - ./grafana.ini:/etc/grafana/grafana.ini #  Grafana 配置文件
     environment:
-      # GF_SECURITY_ADMIN_PASSWORD: admin123456 # 管理员密码
+      GF_SECURITY_ADMIN_PASSWORD: admin123456 # 管理员密码
       GF_USERS_ALLOW_SIGN_UP: "false" # 禁止用户自行注册
     ports:
       - "53000:3000"
