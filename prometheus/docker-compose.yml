@@ -3,7 +3,7 @@ services:
     image: prom/prometheus:v2.53.0
     volumes:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
-      - prometheus_data:/prometheus
+      - prometheus_data:/prometheus # 持久化 Prometheus 数据
     ports:
       - "59090:9090"
     networks:
@@ -17,17 +17,18 @@ services:
   grafana:
     image: grafana/grafana:10.4.4
     volumes:
-      - grafana_data:/var/lib/grafana
+      - grafana_data:/var/lib/grafana # 持久化 Grafana 数据
+      - ./grafana.ini:/etc/grafana/grafana.ini #  Grafana 配置文件
     environment:
-      GF_SECURITY_ADMIN_PASSWORD: secret
-      GF_USERS_ALLOW_SIGN_UP: "false"
+      GF_SECURITY_ADMIN_PASSWORD: admin123456 # 管理员密码
+      GF_USERS_ALLOW_SIGN_UP: "false" # 禁止用户自行注册
     ports:
       - "53000:3000"
     networks:
       - monitor-net
     restart: unless-stopped # 除非手动停止，否则总是重启
     depends_on:
-      - prometheus # 确保Grafana在Prometheus服务启动后再启动
+      - prometheus # 确保 Grafana 在 Prometheus 服务启动后再启动
 
 volumes:
   prometheus_data:
