@@ -1,25 +1,32 @@
 services:
   prometheus:
     image: prom/prometheus:v2.53.0
-    container_name : prometheus
+    container_name: prometheus
     volumes:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
-      - prometheus_data:/prometheus # 持久化 Prometheus 数据
+      - prometheus_data:/prometheus
     ports:
       - "59090:9090"
     networks:
       - monitor-net
-    restart: unless-stopped # 除非手动停止，否则总是重启
+    restart: unless-stopped
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--storage.tsdb.path=/prometheus'
       - '--web.enable-lifecycle'
+    depends_on:
+      - cadvisor
+    logging:
+      driver: json-file
+      options:
+        max-size: "200m"
+        max-file: "10"
 
   grafana:
     image: grafana/grafana:10.4.4
-    container_name : grafana
+    container_name: grafana
     volumes:
-      - grafana_data:/var/lib/grafana # 持久化 Grafana 数据
+      - grafana_data:/var/lib/grafana
       - ./grafana.ini:/etc/grafana/grafana.ini #  Grafana 配置文件
     environment:
       GF_SECURITY_ADMIN_PASSWORD: admin123456 # 管理员密码
@@ -28,9 +35,14 @@ services:
       - "53000:3000"
     networks:
       - monitor-net
-    restart: unless-stopped # 除非手动停止，否则总是重启
+    restart: unless-stopped
     depends_on:
-      - prometheus # 确保 Grafana 在 Prometheus 服务启动后再启动
+      - prometheus
+    logging:
+      driver: json-file
+      options:
+        max-size: "200m"
+        max-file: "10"
 
   cadvisor:
     image: gcr.io/cadvisor/cadvisor
@@ -45,6 +57,11 @@ services:
     networks:
       - monitor-net
     restart: unless-stopped
+    logging:
+      driver: json-file
+      options:
+        max-size: "100m"
+        max-file: "5"
 
 volumes:
   prometheus_data:
