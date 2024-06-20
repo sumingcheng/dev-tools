@@ -15,11 +15,17 @@ services:
     security_opt:
       - no-new-privileges:true # 禁止提升权限
     healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:9000" ]
-      interval: 1m30s
-      timeout: 10s
+      test: [ "CMD-SHELL", "netstat -tuln | grep 9000" ]
+      interval: 30s
+      timeout: 5s
       retries: 3
+    networks:
+      - portainer
 
 volumes:
   portainer_data:
     driver: local
+    
+networks:
+  portainer:
+    driver: bridge
