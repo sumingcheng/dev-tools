@@ -40,8 +40,8 @@ services:
       - default_network
 
 volumes:
-  my_db:
-  my_redis:
+  mysql:
+  redis:
 
 
 networks:
