@@ -9,5 +9,5 @@ s3 = boto3.client('s3',
                   config=Config(signature_version='s3v4'),
                   region_name='us-east-1')
 
-# 上传文件
+# 使用该脚本，测试上传文件
 s3.upload_file('file.txt', 'test', 'file.txt')
