@@ -1,12 +1,9 @@
-global:
-  scrape_interval: 5s
-
 scrape_configs:
   - job_name: 'prometheus'
     static_configs:
-      - targets: ['localhost:9090']
+      - targets: ['prometheus:9090'] # 使用 Docker Compose 服务名和内部端口
 
   - job_name: 'cadvisor'
     scrape_interval: 5s
     static_configs:
-      - targets: ['localhost:8080']
+      - targets: ['cadvisor:8080'] # 使用 Docker Compose 服务名和内部端口
