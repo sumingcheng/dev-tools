@@ -1,4 +1,3 @@
-
 services:
   mysql:
     image: mysql:8.0.36
@@ -10,6 +9,7 @@ services:
       MYSQL_PASSWORD: admin123456
     ports:
       - "3306:3306"
+    command: --default-authentication-plugin=mysql_native_password
     volumes:
       - mysql:/var/lib/mysql
     healthcheck:
