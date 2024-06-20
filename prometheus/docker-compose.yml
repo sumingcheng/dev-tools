@@ -5,7 +5,7 @@ services:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
       - prometheus_data:/prometheus
     ports:
-      - "9090:9090"
+      - "59090:9090"
     networks:
       - monitor-net
     restart: unless-stopped # 除非手动停止，否则总是重启
@@ -22,7 +22,7 @@ services:
       GF_SECURITY_ADMIN_PASSWORD: secret
       GF_USERS_ALLOW_SIGN_UP: "false"
     ports:
-      - "3000:3000"
+      - "53000:3000"
     networks:
       - monitor-net
     restart: unless-stopped # 除非手动停止，否则总是重启
