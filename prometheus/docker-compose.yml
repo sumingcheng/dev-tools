@@ -1,6 +1,7 @@
 services:
   prometheus:
     image: prom/prometheus:v2.53.0
+    container_name : prometheus
     volumes:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
       - prometheus_data:/prometheus # 持久化 Prometheus 数据
@@ -16,6 +17,7 @@ services:
 
   grafana:
     image: grafana/grafana:10.4.4
+    container_name : grafana
     volumes:
       - grafana_data:/var/lib/grafana # 持久化 Grafana 数据
       - ./grafana.ini:/etc/grafana/grafana.ini #  Grafana 配置文件
