@@ -14,11 +14,6 @@ services:
     restart: unless-stopped
     security_opt:
       - no-new-privileges:true # 禁止提升权限
-    healthcheck:
-      test: [ "CMD-SHELL", "netstat -tuln | grep 9000" ]
-      interval: 30s
-      timeout: 5s
-      retries: 3
     networks:
       - portainer
 
