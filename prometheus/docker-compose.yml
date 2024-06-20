@@ -53,7 +53,7 @@ services:
       - /sys:/sys:ro
       - /var/lib/docker/:/var/lib/docker:ro
     ports:
-      - "8080:8080"
+      - "58080:8080"
     networks:
       - monitor-net
     restart: unless-stopped
