@@ -13,6 +13,9 @@ services:
     environment:
       MINIO_ROOT_USER: admin # 设置MinIO的用户名
       MINIO_ROOT_PASSWORD: admin123456 # 设置MinIO的密码
+      MINIO_REGION: "cn-north-1"
+      MINIO_BROWSER: "on" # 是否开启浏览器访问
+
     command: server /data --console-address ":9001"
     healthcheck:
       test:
