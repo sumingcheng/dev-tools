@@ -44,3 +44,6 @@ welcome_email_on_sign_up = true          # 是否在用户注册时发送欢迎�
 templates_pattern = emails/*.html        # 邮件模板文件路径
 
 ```
+# 仪表盘
+
+1. 11600
