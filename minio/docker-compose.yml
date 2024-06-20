@@ -11,8 +11,8 @@ services:
       - minio_data:/data
       - minio_config:/root/.minio
     environment:
-      MINIO_ROOT_USER: minioadmin # 设置MinIO的用户名
-      MINIO_ROOT_PASSWORD: minioadmin # 设置MinIO的密码
+      MINIO_ROOT_USER: admin # 设置MinIO的用户名
+      MINIO_ROOT_PASSWORD: 123456 # 设置MinIO的密码
     command: server /data --console-address ":9001"
     healthcheck:
       test:
