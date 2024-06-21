@@ -5,7 +5,7 @@ services:
     image: postgres:14.5
     container_name: postgres_production
     environment:
-      POSTGRES_DB: production_db
+      POSTGRES_DB: postgres_db
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin123456
     volumes:
@@ -13,18 +13,13 @@ services:
         source: postgres_data
         target: /var/lib/postgresql/data
     ports:
-      - target: 5432
-        published: 5432
-        protocol: tcp
-        mode: host
+      - "5432:5432" # 简化的端口映射格式
     restart: always
     healthcheck:
       test:
         [
           "CMD",
           "pg_isready",
-          "-d",
-          "production_db",
           "-h",
           "localhost",
           "-p",
