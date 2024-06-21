@@ -2,12 +2,12 @@ services:
   jellyfin:
     image: jellyfin/jellyfin:latest
     container_name: jellyfin
-    # user: "1000:1000"
     hostname: jellyfin-server
+    privileged: true
     volumes:
       - /jellyfin/config:/config
       - /jellyfin/cache:/cache
-      - /jellyfin/media:/media
+      - /jellyfin/videos:/media
     # deploy:
     #   resources:
     #     limits:
