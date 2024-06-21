@@ -22,12 +22,12 @@ services:
     ports:
       - 9200:9200
     networks:
-      - esnet
+      - esnet_network
 
 volumes:
   esdata1:
     driver: local
 
 networks:
-  esnet:
+  esnet_network:
     driver: bridge

@@ -12,7 +12,7 @@ services:
     volumes:
       - ./mongo/data:/data/db
     networks:
-      - mongo
+      - mongo_network
     entrypoint:
       - bash
       - -c
@@ -49,5 +49,5 @@ volumes:
     driver: local
 
 networks:
-  mongo:
+  mongo_network:
     driver: bridge
