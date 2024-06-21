@@ -13,7 +13,7 @@ services:
         source: postgres_data
         target: /var/lib/postgresql/data
     ports:
-      - "5432:5432" # 简化的端口映射格式
+      - "5432:5432"
     restart: always
     healthcheck:
       test:
