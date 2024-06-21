@@ -8,6 +8,14 @@ services:
       - /data/jellyfin/config:/config
       - /data/jellyfin/cache:/cache
       - /data/jellyfin/media:/media
+    # deploy:
+    #   resources:
+    #     limits:
+    #       cpus: '2.0'
+    #       memory: 4G
+    #     reservations:
+    #       cpus: '0.5'
+    #       memory: 2G
     environment:
       JELLYFIN_PublishedServerUrl: "http://localhost:8096"
       JELLYFIN_CACHE_DIR: "/cache"
