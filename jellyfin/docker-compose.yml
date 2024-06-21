@@ -5,9 +5,9 @@ services:
     # user: "1000:1000"
     hostname: jellyfin-server
     volumes:
-      - /data/jellyfin/config:/config
-      - /data/jellyfin/cache:/cache
-      - /data/jellyfin/media:/media
+      - /jellyfin/config:/config
+      - /jellyfin/cache:/cache
+      - /jellyfin/media:/media
     # deploy:
     #   resources:
     #     limits:
