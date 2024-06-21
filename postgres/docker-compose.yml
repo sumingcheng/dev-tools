@@ -1,7 +1,7 @@
 services:
   postgres:
     image: postgres:14.5
-    container_name: postgres_production
+    container_name: postgres_db
     environment:
       POSTGRES_DB: postgres_db
       POSTGRES_USER: admin
