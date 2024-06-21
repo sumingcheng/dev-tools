@@ -1,0 +1,34 @@
+services:
+  jellyfin:
+    image: jellyfin/jellyfin:latest
+    container_name: jellyfin
+    user: "1000:1000"
+    hostname: jellyfin-server
+    volumes:
+      - /data/jellyfin/config:/config
+      - /data/jellyfin/cache:/cache
+      - /data/jellyfin/media:/media
+    environment:
+      JELLYFIN_PublishedServerUrl: "http://localhost:8096"
+      JELLYFIN_CACHE_DIR: "/cache"
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8096" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+    ports:
+      - "8096:8096" # 默认HTTP端口
+      - "8920:8920" # 默认HTTPS端口
+    networks:
+      - jellyfin
+
+networks:
+  jellyfin:
+    driver: bridge
