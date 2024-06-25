@@ -19,6 +19,6 @@ rm-networks-all:
 	@docker network ls -q | xargs -r docker network rm || true
 
 # 停止并删除所有容器和网络
-clean-all: stop-all remove-all rm-networks-all
+clean-all: stop-all remove-all remove-networks
 
 .PHONY: stop-all start-all remove-all remove-networks rm-networks-all clean-all
