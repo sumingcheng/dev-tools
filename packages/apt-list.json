@@ -1,5 +1,6 @@
 [
   { "name": "docker-ce", "description": "开源的应用容器引擎,用于容器化应用的自动部署," },
+  { "name": "docker", "description": "容器" },
   { "name": "git", "description": "分布式版本控制系统,用于有效、高速地处理项目版本管理," },
   { "name": "lrzsz", "description": "在Unix和类Unix系统中用于执行Zmodem、Xmodem或Ymodem文件传输的程序," },
   { "name": "lynx", "description": "文本浏览器,用于在命令行环境中浏览网页," },
