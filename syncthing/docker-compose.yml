@@ -21,9 +21,14 @@ services:
       options:
         max-size: "10m" # 日志文件最大尺寸
         max-file: "3" # 日志文件最大数量
-    network_mode: bridge
+    networks:
+      - syncthing
     healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:8384" ] # 健康检查
+      test: [ "CMD", "curl", "-f", "http://localhost:8384" ]
       interval: 30s
       timeout: 10s
       retries: 3
+
+networks:
+  syncthing:
+    driver: bridge
