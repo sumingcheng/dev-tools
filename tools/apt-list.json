@@ -15,5 +15,9 @@
   { "name": "fastfetch", "description": "系统信息工具,用于快速检索和展示系统配置和参数," },
   { "name": "grep", "description": "文本搜索工具,用于搜索文件中匹配特定模式的行," },
   { "name": "gzip", "description": "文件压缩工具,用于通过使用Lempel-Ziv编码来压缩或展开文件," },
-  { "name": "wget", "description": "网络下载工具,支持通过HTTP、HTTPS和FTP协议下载文件," }
+  { "name": "wget", "description": "网络下载工具,支持通过HTTP、HTTPS和FTP协议下载文件," },
+  { "name": "tmux", "description": "终端多路复用器，允许用户在一个窗口中同时运行多个终端会话。" },
+  { "name": "conda", "description": "包、依赖和环境管理系统，用于管理和部署应用程序及其环境。" },
+  { "name": "bash-completion", "description": "为bash shell提供命令行自动补全功能，提高命令行操作效率。" },
+  { "name": "htop", "description": "交互式进程查看器，提供直观的界面监控系统资源和进程状态。" }
 ]
