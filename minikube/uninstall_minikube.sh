@@ -13,9 +13,9 @@ EOF
 read -p "确定继续吗？(y/N): " confirm
 [[ "$confirm" =~ ^[Yy]$ ]] || exit 1
 
-# 停止 Minikube
-echo "正在停止 Minikube..."
-minikube stop || { echo "停止 Minikube 失败。"; exit 1; }
+# # 停止 Minikube
+# echo "正在停止 Minikube..."
+# minikube stop || { echo "停止 Minikube 失败。"; exit 1; }
 
 # 删除 Minikube 及其所有相关文件
 echo "正在删除 Minikube VM 及所有相关文件..."
