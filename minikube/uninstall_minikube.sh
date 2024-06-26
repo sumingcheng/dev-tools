@@ -2,31 +2,47 @@
 
 set -e
 
-# 脚本头部注释
+# 打印脚本功能描述
 cat << EOF
-This script will uninstall Minikube, kubectl, and optionally conntrack.
-It will remove all associated data and configurations.
-Use this script with caution as data loss is irreversible.
+该脚本将卸载 Minikube、kubectl 及可选的 conntrack。
+将删除所有相关数据和配置。
+请谨慎使用，数据删除后无法恢复。
 EOF
 
-# 确认是否继续
-read -p "Are you sure you want to continue? (y/N): " confirm
+# 请求用户确认
+read -p "确定继续吗？(y/N): " confirm
 [[ "$confirm" =~ ^[Yy]$ ]] || exit 1
 
-echo "Stopping Minikube..."
-minikube stop || { echo "Failed to stop Minikube."; exit 1; }
+# 停止 Minikube
+echo "正在停止 Minikube..."
+minikube stop || { echo "停止 Minikube 失败。"; exit 1; }
 
-echo "Deleting Minikube VM and all associated files..."
-minikube delete --all --purge || { echo "Failed to delete Minikube data."; exit 1; }
+# 删除 Minikube 及其所有相关文件
+echo "正在删除 Minikube VM 及所有相关文件..."
+minikube delete --all --purge || { echo "删除 Minikube 数据失败。"; exit 1; }
 
-echo "Removing Minikube executable..."
-sudo rm -f /usr/local/bin/minikube || { echo "Failed to remove Minikube executable."; exit 1; }
+# 移除 Minikube 可执行文件
+echo "正在移除 Minikube 可执行文件..."
+sudo rm -f /usr/local/bin/minikube || { echo "移除 Minikube 可执行文件失败。"; exit 1; }
 
-echo "Removing kubectl executable..."
-sudo rm -f /usr/local/bin/kubectl || { echo "Failed to remove kubectl executable."; exit 1; }
+# 移除 kubectl 可执行文件
+echo "正在移除 kubectl 可执行文件..."
+sudo rm -f /usr/local/bin/kubectl || { echo "移除 kubectl 可执行文件失败。"; exit 1; }
 
-echo "Cleaning up leftover files..."
-sudo rm -rf ~/.minikube || { echo "Failed to remove .minikube directory."; exit 1; }
-sudo rm -rf ~/.kube || { echo "Failed to remove .kube directory."; exit 1; }
+# 清理遗留文件
+echo "正在清理遗留文件..."
+sudo rm -rf ~/.minikube || { echo "移除 .minikube 目录失败。"; exit 1; }
+sudo rm -rf ~/.kube || { echo "移除 .kube 目录失败。"; exit 1; }
 
-echo "Minikube and associated tools have been uninstalled successfully."
+# 可选：卸载 conntrack
+read -p "也要移除 conntrack 吗？(y/N): " remove_conntrack
+if [[ "$remove_conntrack" =~ ^[Yy]$ ]]; then
+    if sudo apt-get remove --auto-remove conntrack; then
+        echo "成功移除 conntrack。"
+    else
+        echo "移除 conntrack 失败。"
+        exit 1
+    fi
+fi
+
+echo "Minikube 及相关工具已成功卸载。"
