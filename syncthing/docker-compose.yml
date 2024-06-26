@@ -1,0 +1,29 @@
+services:
+  syncthing:
+    image: linuxserver/syncthing:latest
+    container_name: syncthing
+    ports:
+      - "8384:8384" # Web UI端口
+      - "22000:22000" # 同步协议端口
+      - "21027:21027/udp" # 本地发现端口
+    volumes:
+      - ./syncthing/config:/config # 配置文件挂载
+      - ./syncthing/data:/sync # 数据文件挂载
+    restart: unless-stopped
+    environment:
+      - PUID=1000 # 用户ID
+      - PGID=1000 # 组ID
+      - UMASK_SET=022 # 文件权限掩码
+    security_opt:
+      - no-new-privileges:true # 禁用新增权限
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m" # 日志文件最大尺寸
+        max-file: "3" # 日志文件最大数量
+    network_mode: bridge
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8384" ] # 健康检查
+      interval: 30s
+      timeout: 10s
+      retries: 3
