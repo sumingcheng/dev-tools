@@ -39,5 +39,4 @@ for pkg in "${packages[@]}"; do
     fi
 done
 
-# 输出安装总结
 echo "尝试安装 $total_packages 个包：成功 $success_count 个，失败 $fail_count 个。失败的包：${failed_packages[*]}"
