@@ -18,6 +18,7 @@
   { "name": "gzip", "description": "文件压缩工具,用于通过使用Lempel-Ziv编码来压缩或展开文件," },
   { "name": "wget", "description": "网络下载工具,支持通过HTTP、HTTPS和FTP协议下载文件," },
   { "name": "tmux", "description": "终端多路复用器，允许用户在一个窗口中同时运行多个终端会话。" },
-  { "name": "bash-completion", "description": "为bash shell提供命令行自动补全功能，提高命令行操作效率。" },
-  { "name": "htop", "description": "交互式进程查看器，提供直观的界面监控系统资源和进程状态。" }
+  { "name": "bash-completion", "description": "为bash shell提供命令行自动补全功能,提高命令行操作效率。" },
+  { "name": "htop", "description": "交互式进程查看器，提供直观的界面监控系统资源和进程状态" },
+  { "name": "fzf", "description": "快速搜索功能工具,ctrl+r 查找历史记录" }
 ]
