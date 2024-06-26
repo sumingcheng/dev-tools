@@ -7,8 +7,8 @@ services:
       - "22000:22000" # 同步协议端口
       - "21027:21027/udp" # 本地发现端口
     volumes:
-      - ./syncthing/config:/config # 配置文件挂载
-      - ./syncthing/data:/sync # 数据文件挂载
+      - /syncthing/config:/config # 配置文件挂载
+      - /syncthing/data:/sync # 数据文件挂载
     restart: unless-stopped
     environment:
       - PUID=1000 # 用户ID
