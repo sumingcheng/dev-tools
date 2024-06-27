@@ -37,6 +37,7 @@
 | Redis         | `redis`         | 键值存储        |
 | RocketMQ      | `rocketMQ`      | 消息中间件      |
 | Syncthing     | `syncthing`     | 文件同步服务    |
+| Harbor        | `harbor`        | 镜像仓库        |
 
 ### 脚本列表
 
