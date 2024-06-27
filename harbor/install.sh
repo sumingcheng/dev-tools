@@ -56,4 +56,4 @@ echo "cd harbor"
 echo "docker-compose up -d"
 
 echo "默认管理员用户名: admin"
-echo "默认管理员密码: 123456"
+echo "默认管理员密码: Harbor12345"
