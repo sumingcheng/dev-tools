@@ -51,13 +51,14 @@ configure_harbor() {
     cp harbor.yml.tmpl harbor.yml
     # 将所有配置项设置为 HTTP
     sed -i "s/hostname: reg.mydomain.com/hostname: ${HOSTNAME}/" harbor.yml
-    sed -i "s/port: 80/port: ${HTTP_PORT}/" harbor.yml
-    sed -i "s|data_volume: /data|data_volume: ${DATA_VOLUME}|g" harbor.yml
+    sed -i "s/http:\s*$/http:\n  port: ${HTTP_PORT}/" harbor.yml
+    sed -i "/https:/,/certificate:/d" harbor.yml
+    sed -i "/private_key:/d" harbor.yml
+    # 删除内部 TLS 启用
+    sed -i '/internal_tls:/,+6 d' harbor.yml
     # 确保协议设置为 HTTP
-    sed -i "s/https: \/\/\${hostname}/http:\/\/\${hostname}/" harbor.yml
-    sed -i "s/protocol: https/protocol: http/" harbor.yml
-    sed -i '/certificate:/d' harbor.yml
-    sed -i '/private_key:/d' harbor.yml
+    sed -i "s/external_url: https:\/\/reg.mydomain.com:8433/#external_url: http:\/\/${HOSTNAME}:${HTTP_PORT}/" harbor.yml
+    
     # 调试输出当前 harbor.yml 文件状态
     echo "当前 harbor.yml 配置:"
     cat harbor.yml
