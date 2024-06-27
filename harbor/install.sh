@@ -54,6 +54,9 @@ configure_harbor() {
     # 确保协议设置为 HTTP
     sed -i "s/external_url: https:\/\/reg.mydomain.com:8433/#external_url: http:\/\/127.0.0.1:80/" harbor.yml
     
+    # 设置管理员用户名和密码
+    sed -i "s/^# harbor_admin_password:.*/harbor_admin_password: 123456/" harbor.yml
+    
     # 调试输出当前 harbor.yml 文件状态
     echo "当前 harbor.yml 配置:"
     cat harbor.yml
@@ -66,3 +69,6 @@ configure_harbor
 echo "Harbor 已下载并解压。请查看 'harbor' 目录中的 docker-compose.yml 文件，并使用以下命令来启动 Harbor："
 echo "cd harbor"
 echo "docker-compose up -d"
+
+echo "默认管理员用户名: admin"
+echo "默认管理员密码: 123456"
