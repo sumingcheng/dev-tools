@@ -69,7 +69,7 @@
 ## 快速开始
 
 ```git
-git clone https://github.com/yourusername/project-deployment-toolkit.git
+git clone https://github.com/sumingcheng/DevTools.git
 ```
 
 选择需要部署的应用，进入对应目录，执行`docker-compose -up`
