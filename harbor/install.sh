@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# 检查是否为 root 用户运行
+if [[ $(id -u) -ne 0 ]]; then
+    echo "此脚本需要以 root 用户权限运行"
+    exit 1
+fi
+
 # 代理检查
 echo "HTTP Proxy: $HTTP_PROXY"
 echo "HTTPS Proxy: $HTTPS_PROXY"
@@ -32,7 +38,7 @@ done
 # 功能：下载并解压 Harbor
 download_and_unpack() {
     echo "正在下载 Harbor 安装包..."
-    wget ${HARBOR_URL} || { echo "下载失败"; exit 1; }
+    wget --no-check-certificate -c ${HARBOR_URL} -O ${HARBOR_INSTALLER} || { echo "下载失败"; exit 1; }
     
     echo "正在解压安装包..."
     tar xvf ${HARBOR_INSTALLER} || { echo "解压失败"; exit 1; }
@@ -41,12 +47,12 @@ download_and_unpack() {
 # 功能：配置 Harbor
 configure_harbor() {
     echo "正在配置 Harbor..."
-    cd harbor
+    cd harbor || { echo "进入目录失败"; exit 1; }
     cp harbor.yml.tmpl harbor.yml
     sed -i "s/hostname: reg.mydomain.com/hostname: ${HOSTNAME}/" harbor.yml
     sed -i "s/port: 80/port: ${HTTP_PORT}/" harbor.yml
-    sed -i "s|/your/certificate/path|/etc/ssl/certs|g" harbor.yml
-    sed -i "s|/your/private/key/path|/etc/ssl/private|g" harbor.yml
+    # sed -i "s|/your/certificate/path|/etc/ssl/certs|g" harbor.yml
+    # sed -i "s|/your/private/key/path|/etc/ssl/private|g" harbor.yml
     sed -i "s|data_volume: /data|data_volume: ${DATA_VOLUME}|g" harbor.yml
 }
 
