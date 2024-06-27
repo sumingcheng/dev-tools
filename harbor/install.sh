@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# 代理检查
+echo "HTTP Proxy: $HTTP_PROXY"
+echo "HTTPS Proxy: $HTTPS_PROXY"
+
 # 设置默认参数
 HOSTNAME="172.22.220.64"
 HTTP_PORT="9999"
