@@ -1,34 +1,37 @@
 #!/bin/bash
 
-# 检查传入的参数，根据参数设置或取消代理
-if [ "$1" == "set" ]; then
-    # 设置 HTTP 和 HTTPS 代理
-    export HTTP_PROXY="http://127.0.0.1:7890"
-    export HTTPS_PROXY="http://127.0.0.1:7890"
-    
-    echo "HTTP/HTTPS 代理正在设置..."
-    
-    # 检查代理是否设置成功
-    if [ "$HTTP_PROXY" == "http://127.0.0.1:7890" ] && [ "$HTTPS_PROXY" == "http://127.0.0.1:7890" ]; then
-        echo "HTTP/HTTPS 代理已成功设置。"
-    else
-        echo "代理设置失败，请检查脚本。"
-    fi
-    
-    elif [ "$1" == "unset" ]; then
-    # 取消 HTTP 和 HTTPS 代理
-    unset HTTP_PROXY
-    unset HTTPS_PROXY
-    
-    echo "HTTP/HTTPS 代理正在取消..."
-    
-    # 检查代理是否取消成功
-    if [ -z "$HTTP_PROXY" ] && [ -z "$HTTPS_PROXY" ]; then
-        echo "HTTP/HTTPS 代理已成功取消。"
-    else
-        echo "代理取消失败，请检查脚本。"
-    fi
-    
-else
-    echo "请使用 'set' 或 'unset' 参数。"
+# 函数：显示使用方法
+usage() {
+    echo "Usage: source $0 [set|unset]"
+    echo "请确保使用 'source' 或 '.' 命令执行此脚本以影响当前 shell 环境。"
+    return
+}
+
+# 检查是否通过 source 执行
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+    echo "错误：此脚本应该使用 'source' 或 '.' 命令执行以修改环境变量。"
+    exit 1
 fi
+
+# 检查参数数量
+if [ $# -ne 1 ]; then
+    usage
+    return
+fi
+
+# 设置或取消代理
+case $1 in
+    set)
+        export HTTP_PROXY="http://127.0.0.1:7890"
+        export HTTPS_PROXY="http://127.0.0.1:7890"
+        echo "HTTP/HTTPS 代理已设置为 $HTTP_PROXY"
+    ;;
+    unset)
+        unset HTTP_PROXY
+        unset HTTPS_PROXY
+        echo "HTTP/HTTPS 代理已取消。"
+    ;;
+    *)
+        usage
+    ;;
+esac
