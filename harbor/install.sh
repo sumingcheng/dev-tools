@@ -11,25 +11,20 @@ echo "HTTP Proxy: $HTTP_PROXY"
 echo "HTTPS Proxy: $HTTPS_PROXY"
 
 # 默认参数设置
-HOSTNAME="172.22.220.64"
-HTTP_PORT="9999"
-DATA_VOLUME="/data/harbor"
 HARBOR_VERSION="v2.5.0"
 HARBOR_INSTALLER="harbor-offline-installer-${HARBOR_VERSION}.tgz"
 HARBOR_URL="https://github.com/goharbor/harbor/releases/download/${HARBOR_VERSION}/${HARBOR_INSTALLER}"
 
 # 显示使用方法
 usage() {
-    echo "用法: $0 [--hostname <hostname>] [--http-port <port>] [--data-volume <path>]"
-    echo "默认安装 Harbor v${HARBOR_VERSION} 至指定主机和端口。"
+    echo "用法: $0 [--version <harbor-version>]"
+    echo "默认下载 Harbor v${HARBOR_VERSION} 安装包。"
 }
 
 # 解析命令行参数
 while [[ "$#" -gt 0 ]]; do
     case $1 in
-        --hostname) HOSTNAME="$2"; shift ;;
-        --http-port) HTTP_PORT="$2"; shift ;;
-        --data-volume) DATA_VOLUME="$2"; shift ;;
+        --version) HARBOR_VERSION="$2"; HARBOR_INSTALLER="harbor-offline-installer-${HARBOR_VERSION}.tgz"; HARBOR_URL="https://github.com/goharbor/harbor/releases/download/${HARBOR_VERSION}/${HARBOR_INSTALLER}"; shift ;;
         *) echo "未知参数: $1"; usage; exit 1 ;;
     esac
     shift
@@ -50,35 +45,24 @@ configure_harbor() {
     cd harbor || { echo "进入目录失败"; exit 1; }
     cp harbor.yml.tmpl harbor.yml
     # 将所有配置项设置为 HTTP
-    sed -i "s/hostname: reg.mydomain.com/hostname: ${HOSTNAME}/" harbor.yml
-    sed -i "s/http:\s*$/http:\n  port: ${HTTP_PORT}/" harbor.yml
+    sed -i "s/hostname: reg.mydomain.com/hostname: 127.0.0.1/" harbor.yml
+    sed -i "s/http:\s*$/http:\n  port: 80/" harbor.yml
     sed -i "/https:/,/certificate:/d" harbor.yml
     sed -i "/private_key:/d" harbor.yml
     # 删除内部 TLS 启用
     sed -i '/internal_tls:/,+6 d' harbor.yml
     # 确保协议设置为 HTTP
-    sed -i "s/external_url: https:\/\/reg.mydomain.com:8433/#external_url: http:\/\/${HOSTNAME}:${HTTP_PORT}/" harbor.yml
+    sed -i "s/external_url: https:\/\/reg.mydomain.com:8433/#external_url: http:\/\/127.0.0.1:80/" harbor.yml
     
     # 调试输出当前 harbor.yml 文件状态
     echo "当前 harbor.yml 配置:"
     cat harbor.yml
 }
 
-# 安装 Harbor
-install_harbor() {
-    echo "正在安装 Harbor..."
-    ./install.sh || {
-        echo "安装失败。请检查日志并尝试以下步骤："
-        echo "1. 打开 harbor.yml 文件。"
-        echo "2. 确保所有与 HTTPS 相关的配置项均已注释或删除。"
-        echo "3. 确保 HTTP 配置正确无误。"
-        echo "4. 重新运行此脚本。"
-        exit 1
-    }
-    echo "Harbor 安装成功！请访问 http://${HOSTNAME}:${HTTP_PORT} 来验证安装。"
-}
-
 # 主执行流程
 download_and_unpack
 configure_harbor
-install_harbor
+
+echo "Harbor 已下载并解压。请查看 'harbor' 目录中的 docker-compose.yml 文件，并使用以下命令来启动 Harbor："
+echo "cd harbor"
+echo "docker-compose up -d"
