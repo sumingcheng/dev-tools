@@ -52,6 +52,9 @@ configure_harbor() {
     sed -i "s/hostname: reg.mydomain.com/hostname: ${HOSTNAME}/" harbor.yml
     sed -i "s/port: 80/port: ${HTTP_PORT}/" harbor.yml
     sed -i "s|data_volume: /data|data_volume: ${DATA_VOLUME}|g" harbor.yml
+    # 确保协议设置为 HTTP
+    sed -i "s/https: \/\/\${hostname}/http:\/\/\${hostname}/" harbor.yml
+    sed -i "s/protocol: https/protocol: http/" harbor.yml
 }
 
 # 安装 Harbor
