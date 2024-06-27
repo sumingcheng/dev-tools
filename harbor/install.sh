@@ -43,23 +43,8 @@ download_and_unpack() {
 configure_harbor() {
     echo "正在配置 Harbor..."
     cd harbor || { echo "进入目录失败"; exit 1; }
-    cp harbor.yml.tmpl harbor.yml
-    # 将所有配置项设置为 HTTP
-    sed -i "s/hostname: reg.mydomain.com/hostname: 127.0.0.1/" harbor.yml
-    sed -i "s/http:\s*$/http:\n  port: 80/" harbor.yml
-    sed -i "/https:/,/certificate:/d" harbor.yml
-    sed -i "/private_key:/d" harbor.yml
-    # 删除内部 TLS 启用
-    sed -i '/internal_tls:/,+6 d' harbor.yml
-    # 确保协议设置为 HTTP
-    sed -i "s/external_url: https:\/\/reg.mydomain.com:8433/#external_url: http:\/\/127.0.0.1:80/" harbor.yml
-    
-    # 设置管理员用户名和密码
-    sed -i "s/^# harbor_admin_password:.*/harbor_admin_password: 123456/" harbor.yml
-    
-    # 调试输出当前 harbor.yml 文件状态
-    echo "当前 harbor.yml 配置:"
-    cat harbor.yml
+    # 使用当前目录下的 config.yml 覆盖原来的 harbor.yml
+    cp ../config.yml harbor.yml
 }
 
 # 主执行流程
@@ -71,4 +56,4 @@ echo "cd harbor"
 echo "docker-compose up -d"
 
 echo "默认管理员用户名: admin"
-echo "默认管理员密码: 123456"
+echo "默认管理员密码: admin"
