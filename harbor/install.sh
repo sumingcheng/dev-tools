@@ -49,12 +49,14 @@ configure_harbor() {
     echo "正在配置 Harbor..."
     cd harbor || { echo "进入目录失败"; exit 1; }
     cp harbor.yml.tmpl harbor.yml
+    # 将所有配置项设置为 HTTP 和移除 SSL 证书引用
     sed -i "s/hostname: reg.mydomain.com/hostname: ${HOSTNAME}/" harbor.yml
     sed -i "s/port: 80/port: ${HTTP_PORT}/" harbor.yml
     sed -i "s|data_volume: /data|data_volume: ${DATA_VOLUME}|g" harbor.yml
-    # 确保协议设置为 HTTP
     sed -i "s/https: \/\/\${hostname}/http:\/\/\${hostname}/" harbor.yml
     sed -i "s/protocol: https/protocol: http/" harbor.yml
+    sed -i '/ssl_cert/d' harbor.yml
+    sed -i '/ssl_cert_key/d' harbor.yml
 }
 
 # 安装 Harbor
