@@ -20,10 +20,10 @@ http:
 
 # # Uncomment following will enable tls communication between all harbor components
 # internal_tls:
-#   # set enabled to true means internal tls is enabled
-#   enabled: true
-#   # put your cert and key files on dir
-#   dir: /etc/harbor/tls/internal
+  # set enabled to true means internal tls is enabled
+  enabled: true
+  # put your cert and key files on dir
+  dir: /etc/harbor/tls/internal
 
 # Uncomment external_url if you want to enable external proxy
 # And when it enabled the hostname will no longer used
@@ -215,28 +215,28 @@ proxy:
 # if using jaeger collector mode, uncomment endpoint and uncomment username, password if needed
 # if using jaeger agetn mode uncomment agent_host and agent_port
 # trace:
-#   enabled: true
-#   # set sample_rate to 1 if you wanna sampling 100% of trace data; set 0.5 if you wanna sampling 50% of trace data, and so forth
-#   sample_rate: 1
-#   # # namespace used to differenciate different harbor services
-#   # namespace:
-#   # # attributes is a key value dict contains user defined attributes used to initialize trace provider
-#   # attributes:
-#   #   application: harbor
-#   # # jaeger should be 1.26 or newer.
-#   # jaeger:
-#   #   endpoint: http://hostname:14268/api/traces
-#   #   username:
-#   #   password:
-#   #   agent_host: hostname
-#   #   # export trace data by jaeger.thrift in compact mode
-#   #   agent_port: 6831
-#   # otel:
-#   #   endpoint: hostname:4318
-#   #   url_path: /v1/traces
-#   #   compression: false
-#   #   insecure: true
-#   #   timeout: 10s
+  enabled: true
+  # set sample_rate to 1 if you wanna sampling 100% of trace data; set 0.5 if you wanna sampling 50% of trace data, and so forth
+  sample_rate: 1
+  # # namespace used to differenciate different harbor services
+  # namespace:
+  # # attributes is a key value dict contains user defined attributes used to initialize trace provider
+  # attributes:
+  #   application: harbor
+  # # jaeger should be 1.26 or newer.
+  # jaeger:
+  #   endpoint: http://hostname:14268/api/traces
+  #   username:
+  #   password:
+  #   agent_host: hostname
+  #   # export trace data by jaeger.thrift in compact mode
+  #   agent_port: 6831
+  # otel:
+  #   endpoint: hostname:4318
+  #   url_path: /v1/traces
+  #   compression: false
+  #   insecure: true
+  #   timeout: 10s
 
 # enable purge _upload directories
 upload_purging:
