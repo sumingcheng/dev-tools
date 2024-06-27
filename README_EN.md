@@ -69,7 +69,7 @@ Here are the currently supported applications and services:
 ```
 git
 Copy code
-git clone https://github.com/yourusername/project-deployment-toolkit.git
+git clone https://github.com/sumingcheng/DevTools.git
 ```
 
 Choose the application you need to deploy, go to the corresponding directory, and execute `docker-compose up`.
