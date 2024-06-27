@@ -1,5 +1,5 @@
 <div align="center">
-<a href="https://github.com/sumingcheng/DevTools"><img src="https://github.com/sumingcheng/DevTools/assets/21992204/46b58f58-8215-4527-837c-f99180dd6c8b" width="120" height="120" alt="DevToos logo" ></a>
+<a href="https://github.com/sumingcheng/DevTools"><img src="https://github.com/sumingcheng/DevTools/assets/21992204/1deffe84-a22d-4d16-b1eb-770fe66fdec8" width="120" height="120" alt="DevToos logo" ></a>
 
 # DevToos
 
