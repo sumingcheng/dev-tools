@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+  frps:
+    image: fatedier/frps:latest
+    container_name: frps
+    ports:
+      - "7000:7000" # frps 默认服务端口
+      - "7500:7500" # frps 管理界面端口
+    volumes:
+      - ./frps.ini:/etc/frp/frps.ini # 映射配置文件
+    restart: always
+    networks:
+      - frps
+
+  frpc:
+    image: fatedier/frpc:latest
+    container_name: frpc
+    volumes:
+      - ./frpc.ini:/etc/frp/frpc.ini # 映射配置文件
+    restart: always
+    networks:
+      - frps
+
+networks:
+  frps:
+    driver: bridge
