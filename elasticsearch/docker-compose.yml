@@ -2,6 +2,7 @@
 services:
   elasticsearch:
     image: elasticsearch:8.14.1
+    container_name: elasticsearch
     environment:
       - node.name=es01
       - cluster.name=es-docker-cluster
