@@ -1,4 +1,3 @@
-version: "2"
 services:
   goproxy:
     image: goproxy/goproxy:latest
