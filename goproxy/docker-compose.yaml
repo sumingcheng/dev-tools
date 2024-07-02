@@ -6,7 +6,7 @@ services:
       - "8081:8081"
     restart: always
     environment:
-      - HTTP_PROXY=http://host.docker.internal:7890
-      - HTTPS_PROXY=http://host.docker.internal:7890
+      - HTTP_PROXY=http://172.22.220.64:7890 # 代理地址
+      - HTTPS_PROXY=http://172.22.220.64:7890 # 代理地址
     volumes:
       - ./cacheDir:/ext
