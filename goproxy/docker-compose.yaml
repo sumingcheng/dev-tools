@@ -5,5 +5,8 @@ services:
     ports:
       - "8081:8081"
     restart: always
+    environment:
+      - HTTP_PROXY=http://host.docker.internal:7890
+      - HTTPS_PROXY=http://host.docker.internal:7890
     volumes:
       - ./cacheDir:/ext
