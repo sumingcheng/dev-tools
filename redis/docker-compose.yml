@@ -4,7 +4,7 @@ services:
   redis:
     image: redis:6.2.6
     container_name: redis_server
-    command: redis-server --appendonly yes
+    command: redis-server --appendonly yes --requirepass sumingcheng
     ports:
       - "6379:6379"
     volumes:
