@@ -22,6 +22,7 @@ services:
       GF_DATABASE_USER: grafana
       GF_DATABASE_PASSWORD: grafana
       GF_DATABASE_NAME: trivy
+      GF_DATABASE_SSL_MODE: disable
     restart: always
     volumes:
       - grafana-data:/var/lib/grafana
