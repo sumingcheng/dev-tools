@@ -3,7 +3,7 @@ services:
   neo4j:
     image: neo4j:latest
     container_name: neo4j
-    network_mode: "host" # 使用宿主机的网络
+    # network_mode: "host" # 使用宿主机的网络
     ports:
       - "7474:7474" # HTTP 接口用于 Neo4j Web 浏览器
       - "7687:7687" # Bolt 协议用于 Neo4j 客户端连接
