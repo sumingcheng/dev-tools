@@ -13,7 +13,7 @@ services:
       - ./import:/var/lib/neo4j/import # 用于导入数据的目录
       - ./plugins:/plugins # 插件目录
     environment:
-      - NEO4J_AUTH=admin/admin123456 # 设置默认用户名和密码
+      - NEO4J_AUTH=neo4j/admin123456 # 设置默认用户名和密码
       - NEO4J_dbms_memory_pagecache_size=8G # 页面缓存大小，影响读取性能
       - NEO4J_dbms_memory_heap_max__size=8G # JVM 最大堆内存大小
       - NEO4J_dbms_memory_heap_initial__size=4G # JVM 初始堆内存大小
