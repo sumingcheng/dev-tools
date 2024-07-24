@@ -23,10 +23,10 @@ fi
 chmod +x anaconda_installer.sh
 
 # 检查 Anaconda 是否已安装
-if [ -d "$HOME/anaconda3" ]; then
+if [ -d "/opt/anaconda3" ]; then
     read -p "Anaconda 已安装，是否重新安装? [y/n]: " answer
     if [ "$answer" != "${answer#[Yy]}" ] ;then
-        rm -rf "$HOME/anaconda3"
+        sudo rm -rf "/opt/anaconda3"
     else
         echo "取消安装"
         exit 0
@@ -35,14 +35,18 @@ fi
 
 # 安装 Anaconda
 echo "正在安装 Anaconda..."
-./anaconda_installer.sh -b -p $HOME/anaconda3
+sudo ./anaconda_installer.sh -b -p /opt/anaconda3
 
 # 清理安装器文件
 rm anaconda_installer.sh
 
-# 更新 .bashrc 文件，添加 Anaconda 初始化
-echo "正在更新 .bashrc ..."
-echo "source $HOME/anaconda3/etc/profile.d/conda.sh" >> $HOME/.bashrc
-echo "conda activate" >> $HOME/.bashrc
+# 更新全局环境文件，添加 Anaconda 初始化（需要 sudo 权限）
+if [ -f "/etc/profile.d/conda.sh" ]; then
+    echo "Anaconda 环境初始化文件已存在."
+else
+    echo "正在更新环境变量..."
+    sudo echo "source /opt/anaconda3/etc/profile.d/conda.sh" >> /etc/profile.d/conda.sh
+    sudo echo "conda activate" >> /etc/profile.d/conda.sh
+fi
 
 echo "Anaconda 安装完成，终端重启后将自动激活 Anaconda 环境。"
