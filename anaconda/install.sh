@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# 检查用户是否具有 sudo 权限
+if ! sudo -v &> /dev/null; then
+    echo "当前用户没有sudo权限，正在退出..."
+    exit 1
+fi
+
 # 检查 wget 是否已安装
 if ! command -v wget &> /dev/null
 then
@@ -24,13 +30,14 @@ chmod +x anaconda_installer.sh
 
 # 检查 Anaconda 是否已安装
 if [ -d "/opt/anaconda3" ]; then
-    read -p "Anaconda 已安装，是否重新安装? [y/n]: " answer
-    if [ "$answer" != "${answer#[Yy]}" ] ;then
-        sudo rm -rf "/opt/anaconda3"
-    else
-        echo "取消安装"
-        exit 0
-    fi
+    while true; do
+        read -p "Anaconda 已安装，是否重新安装? [y/n]: " answer
+        case $answer in
+            [Yy]* ) sudo rm -rf "/opt/anaconda3"; break;;
+            [Nn]* ) echo "取消安装"; exit 0;;
+            * ) echo "请输入 Y 或 N。";;
+        esac
+    done
 fi
 
 # 安装 Anaconda
@@ -45,8 +52,8 @@ if [ -f "/etc/profile.d/conda.sh" ]; then
     echo "Anaconda 环境初始化文件已存在."
 else
     echo "正在更新环境变量..."
-    sudo echo "source /opt/anaconda3/etc/profile.d/conda.sh" >> /etc/profile.d/conda.sh
-    sudo echo "conda activate" >> /etc/profile.d/conda.sh
+    echo "source /opt/anaconda3/etc/profile.d/conda.sh" | sudo tee -a /etc/profile.d/conda.sh > /dev/null
+    echo "conda activate" | sudo tee -a /etc/profile.d/conda.sh > /dev/null
 fi
 
 echo "Anaconda 安装完成，终端重启后将自动激活 Anaconda 环境。"
