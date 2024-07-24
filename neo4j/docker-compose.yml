@@ -1,0 +1,31 @@
+version: '3.8'
+services:
+  neo4j:
+    image: neo4j:latest
+    container_name: neo4j
+    ports:
+      - "7474:7474" # HTTP 接口用于 Neo4j Web 浏览器
+      - "7687:7687" # Bolt 协议用于 Neo4j 客户端连接
+    volumes:
+      - ./data:/data # 数据持久化目录
+      - ./logs:/logs # 日志目录
+      - ./import:/var/lib/neo4j/import # 用于导入数据的目录
+      - ./plugins:/plugins # 插件目录
+    environment:
+      - NEO4J_AUTH=admin/admin123456 # 设置默认用户名和密码
+      - NEO4J_dbms_memory_pagecache_size=2G # 页面缓存大小，影响读取性能
+      - NEO4J_dbms_memory_heap_max__size=2G # JVM 最大堆内存大小
+      - NEO4J_dbms_memory_heap_initial__size=1G # JVM 初始堆内存大小
+      - NEO4J_dbms_connector_bolt_advertised__address=:7687 # 明确设置 Bolt 连接地址
+      - NEO4J_dbms_connector_http_advertised__address=:7474 # 明确设置 HTTP 连接地址
+    healthcheck:
+      test: [ "CMD", "neo4j-admin", "check-consistency" ] # 使用 neo4j-admin 工具检查数据库一致性
+      interval: 10m # 每 10 分钟检查一次
+      timeout: 5m # 超时时间设置为 5 分钟
+      retries: 3 # 失败重试 3 次
+    deploy:
+      # resources:
+      #   limits:
+      #     cpus: '2' # 限制使用 2 个 CPU
+      #     memory: 4G # 限制最大使用 4G 内存
+    restart: unless-stopped
