@@ -47,13 +47,6 @@ sudo ./anaconda_installer.sh -b -p /opt/anaconda3
 # 清理安装器文件
 rm anaconda_installer.sh
 
-# 更新全局环境文件，添加 Anaconda 初始化（需要 sudo 权限）
-if [ -f "/etc/profile.d/conda.sh" ]; then
-    echo "Anaconda 环境初始化文件已存在."
-else
-    echo "正在更新环境变量..."
-    echo "source /opt/anaconda3/etc/profile.d/conda.sh" | sudo tee -a /etc/profile.d/conda.sh > /dev/null
-    echo "conda activate" | sudo tee -a /etc/profile.d/conda.sh > /dev/null
-fi
 
 echo "Anaconda 安装完成，终端重启后将自动激活 Anaconda 环境。"
+echo "手动执行 'source /opt/anaconda3/etc/profile.d/conda.sh' 或重启终端以激活 Anaconda 环境。"
