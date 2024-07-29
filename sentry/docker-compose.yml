@@ -1,32 +1,67 @@
 version: '3.8'
+
 services:
-  neo4j:
-    image: neo4j:latest
-    container_name: neo4j
-    # network_mode: "host" # 使用宿主机的网络
-    ports:
-      - "7474:7474" # HTTP 接口用于 Neo4j Web 浏览器
-      - "7687:7687" # Bolt 协议用于 Neo4j 客户端连接
-    volumes:
-      - ./data:/data # 数据持久化目录
-      - ./logs:/logs # 日志目录
-      - ./import:/var/lib/neo4j/import # 用于导入数据的目录
-      - ./plugins:/plugins # 插件目录
-    environment:
-      - NEO4J_AUTH=neo4j/admin123456 # 设置默认用户名和密码
-      - NEO4J_dbms_memory_pagecache_size=8G # 页面缓存大小，影响读取性能
-      - NEO4J_dbms_memory_heap_max__size=8G # JVM 最大堆内存大小
-      - NEO4J_dbms_memory_heap_initial__size=4G # JVM 初始堆内存大小
-      - NEO4J_dbms_connector_bolt_advertised__address=:7687 # 明确设置 Bolt 连接地址
-      - NEO4J_dbms_connector_http_advertised__address=:7474 # 明确设置 HTTP 连接地址
-    healthcheck:
-      test: [ "CMD", "neo4j-admin", "check-consistency" ] # 使用 neo4j-admin 工具检查数据库一致性
-      interval: 10m # 每 10 分钟检查一次
-      timeout: 5m # 超时时间设置为 5 分钟
-      retries: 3 # 失败重试 3 次
-    deploy:
-      # resources:
-      #   limits:
-      #     cpus: '2' # 限制使用 2 个 CPU
-      #     memory: 4G # 限制最大使用 4G 内存
+  redis:
+    image: redis:6.2-alpine
     restart: unless-stopped
+    volumes:
+      - sentry-redis:/data # 持久化 Redis 数据
+
+  postgres:
+    image: postgres:13
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: sentry # PostgreSQL 用户名
+      POSTGRES_PASSWORD: admin123456 # PostgreSQL 密码，请更换为强密码
+      POSTGRES_DB: sentry # 数据库名称
+    volumes:
+      - sentry-postgres:/var/lib/postgresql/data # 持久化 PostgreSQL 数据
+
+  sentry:
+    image: getsentry/sentry:latest
+    restart: unless-stopped
+    environment:
+      SENTRY_SECRET_KEY: 'generate_a_secure_key_here' # Sentry 密钥，生成一个安全的密钥
+      SENTRY_REDIS_HOST: redis
+      SENTRY_DB_NAME: sentry
+      SENTRY_DB_USER: sentry
+      SENTRY_DB_PASSWORD: admin123456
+      SENTRY_POSTGRES_HOST: postgres
+    depends_on:
+      - redis
+      - postgres
+    command: sentry upgrade --noinput # 自动运行 Sentry 升级
+
+  sentry-cron:
+    image: getsentry/sentry:latest
+    restart: unless-stopped
+    environment:
+      SENTRY_SECRET_KEY: 'generate_a_secure_key_here'
+      SENTRY_REDIS_HOST: redis
+      SENTRY_DB_NAME: sentry
+      SENTRY_DB_USER: sentry
+      SENTRY_DB_PASSWORD: admin123456
+      SENTRY_POSTGRES_HOST: postgres
+    depends_on:
+      - redis
+      - postgres
+    command: sentry run cron # 运行 Sentry 定时任务服务
+
+  sentry-worker:
+    image: getsentry/sentry:latest
+    restart: unless-stopped
+    environment:
+      SENTRY_SECRET_KEY: 'generate_a_secure_key_here'
+      SENTRY_REDIS_HOST: redis
+      SENTRY_DB_NAME: sentry
+      SENTRY_DB_USER: sentry
+      SENTRY_DB_PASSWORD: admin123456
+      SENTRY_POSTGRES_HOST: postgres
+    depends_on:
+      - redis
+      - postgres
+    command: sentry run worker # 运行 Sentry 工作进程服务
+
+volumes:
+  sentry-postgres: # PostgreSQL 数据卷
+  sentry-redis: # Redis 数据卷

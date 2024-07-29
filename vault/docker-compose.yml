@@ -19,7 +19,7 @@ services:
     restart: always
     entrypoint: [ "vault", "server" ]
     command: "-config=/vault/config/config.json"
-
+  
   # Optional: Vault UI
   vault-ui:
     image: djenriquez/vault-ui
