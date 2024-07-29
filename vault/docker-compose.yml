@@ -35,6 +35,6 @@ services:
     environment:
       VAULT_URL_DEFAULT: "http://vault:8200"
       VAULT_AUTH_DEFAULT: "TOKEN"
-      VAULT_TOKEN_DEFAULT: "myroot"
+      VAULT_TOKEN_DEFAULT: "admin123456"
     depends_on:
       - vault
