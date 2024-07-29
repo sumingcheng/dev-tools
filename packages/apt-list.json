@@ -20,5 +20,6 @@
   { "name": "tmux", "description": "终端多路复用器，允许用户在一个窗口中同时运行多个终端会话。" },
   { "name": "bash-completion", "description": "为bash shell提供命令行自动补全功能,提高命令行操作效率。" },
   { "name": "htop", "description": "交互式进程查看器，提供直观的界面监控系统资源和进程状态" },
-  { "name": "fzf", "description": "快速搜索功能工具,ctrl+r 查找历史记录" }
+  { "name": "fzf", "description": "快速搜索功能工具,ctrl+r 查找历史记录" },
+  { "name":"screen" ,"description":"终端复用工具，一个窗口，多个会话"}
 ]
