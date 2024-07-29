@@ -24,7 +24,7 @@ services:
       - ./vault/logs:/vault/logs
     restart: always
     entrypoint: [ "vault", "server" ]
-    command: "-config=/vault/config"
+    command: ""
 
   # Optional: Vault UI
   vault-ui:
