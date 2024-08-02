@@ -9,7 +9,7 @@ services:
       - embedding_network
     restart: always
     # environment:
-    #   sk-key: "sk-123456"
+      # sk-key: "sk-123456" 实际测试这个镜像设置环境变量无效
       # sk-key: "sk-aaabbbcccdddeeefffggghhhiiijjjkkk"
     deploy:
       resources:
