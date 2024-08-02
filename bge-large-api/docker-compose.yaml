@@ -1,0 +1,34 @@
+version: '3'
+services:
+  embedding:
+    image: jokerwho/bge-large-api:latest
+    container_name: embedding
+    ports:
+      - 6008:6008
+    networks:
+      - embedding_network
+    restart: always
+    environment:
+      - sk-key= sk-123456
+    deploy:
+      resources:
+        limits:
+          cpus: '4'
+          memory: 8G
+      restart_policy:
+        condition: on-failure
+        max_attempts: 3
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "5"
+    volumes:
+      - ./embedding-data:/data
+
+networks:
+  embedding_network:
+    name: embedding_network
+
+volumes:
+  embedding-data:

@@ -1,0 +1,17 @@
+version: '3'
+services:
+  m3e_api:
+    container_name: m3e-api
+    environment:
+      - TZ: Asia/Shanghai
+      - sk-key: sk-123456
+    image: registry.cn-hangzhou.aliyuncs.com/fastgpt_docker/m3e-large-api:latest
+    restart: always
+    networks:
+      - m3e-api
+    ports:
+      - "6200:6008"
+
+networks:
+  m3e-api:
+    driver: bridge
