@@ -1,0 +1,7 @@
+{
+  "model": "m3e",
+  "name": "M3E-large",
+  "price": 0.1,
+  "defaultToken": 500,
+  "maxToken": 1800
+}
