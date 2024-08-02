@@ -9,7 +9,7 @@ services:
       - embedding_network
     restart: always
     environment:
-      - sk-key= sk-123456
+      sk-key: "sk-123456"
     deploy:
       resources:
         limits:
@@ -23,12 +23,7 @@ services:
       options:
         max-size: "100m"
         max-file: "5"
-    volumes:
-      - ./embedding-data:/data
 
 networks:
   embedding_network:
     name: embedding_network
-
-volumes:
-  embedding-data:
