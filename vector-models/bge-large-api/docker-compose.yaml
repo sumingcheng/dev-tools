@@ -10,6 +10,7 @@ services:
     restart: always
     environment:
       sk-key: "sk-123456"
+      # sk-key: "sk-aaabbbcccdddeeefffggghhhiiijjjkkk"
     deploy:
       resources:
         limits:
