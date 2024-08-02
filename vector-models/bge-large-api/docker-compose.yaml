@@ -4,7 +4,7 @@ services:
     image: jokerwho/bge-large-api:latest
     container_name: embedding
     ports:
-      - 6008:6008
+      - 6009:6008
     networks:
       - embedding_network
     restart: always
