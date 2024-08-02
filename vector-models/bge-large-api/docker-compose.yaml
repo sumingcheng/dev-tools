@@ -8,8 +8,8 @@ services:
     networks:
       - embedding_network
     restart: always
-    environment:
-      sk-key: "sk-123456"
+    # environment:
+    #   sk-key: "sk-123456"
       # sk-key: "sk-aaabbbcccdddeeefffggghhhiiijjjkkk"
     deploy:
       resources:
