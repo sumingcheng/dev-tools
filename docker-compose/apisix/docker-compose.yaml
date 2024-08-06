@@ -2,7 +2,7 @@ version: "3"
 
 services:
   apisix:
-    image: model.vnet.com/sjhl/apisix:3.8.0-debian
+    image: apisix:3.8.0-debian
     container_name: apisix
     restart: always
     volumes:
@@ -19,7 +19,7 @@ services:
     networks:
       apisix:
   etcd:
-    image: model.vnet.com/sjhl/etcd:3.4.15
+    image: etcd:3.4.15
     container_name: etcd-apisix
     restart: always
     volumes:
@@ -34,7 +34,7 @@ services:
     networks:
       apisix:
   dashboard:
-    image: model.vnet.com/sjhl/apisix-dashboard:3.0.1-alpine
+    image: apisix-dashboard:3.0.1-alpine
     container_name: dashboard-apisix
     restart: always
     volumes:
