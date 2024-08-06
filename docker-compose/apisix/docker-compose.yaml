@@ -1,17 +1,54 @@
-version: '3'
+version: "3"
+
 services:
-  nginx:
-    image: nginx:stable-alpine3.17-perl
-    container_name: nginx
+  apisix:
+    image: model.vnet.com/sjhl/apisix:3.8.0-debian
+    container_name: apisix
     restart: always
     volumes:
-      - ./html:/usr/share/nginx/html
-      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./apisix_conf/config.yaml:/usr/local/apisix/conf/config.yaml:ro
+    depends_on:
+      - etcd
+    ##network_mode: host
     ports:
-      - "9001:80"
+      # - "9180:9180/tcp"
+      - "80:80/tcp"
+      # - "9091:9091/tcp"
+      - "443:443/tcp"
+      - "9092:9092/tcp"
     networks:
-      - frontend
+      apisix:
+  etcd:
+    image: model.vnet.com/sjhl/etcd:3.4.15
+    container_name: etcd-apisix
+    restart: always
+    volumes:
+      - etcd_data:/bitnami/etcd
+    environment:
+      ETCD_ENABLE_V2: "true"
+      ALLOW_NONE_AUTHENTICATION: "yes"
+      ETCD_ADVERTISE_CLIENT_URLS: "http://etcd:2379"
+      ETCD_LISTEN_CLIENT_URLS: "http://0.0.0.0:2379"
+    ports:
+      - "2379:2379/tcp"
+    networks:
+      apisix:
+  dashboard:
+    image: model.vnet.com/sjhl/apisix-dashboard:3.0.1-alpine
+    container_name: dashboard-apisix
+    restart: always
+    volumes:
+      - ./dashboard_conf/config.yaml:/usr/local/apisix-dashboard/conf/conf.yaml
+    ports:
+      - "9000:9000/tcp"
+    networks:
+      apisix:
+
 
 networks:
-  frontend:
+  apisix:
     driver: bridge
+
+volumes:
+  etcd_data:
+    driver: local
