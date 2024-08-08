@@ -5,7 +5,7 @@ services:
     container_name: filebrowser
     restart: unless-stopped
     ports:
-      - "6666:80" # 映射容器的 80 端口到宿主机的 8080 端口
+      - "6666:80"
     volumes:
       - /home/smc:/srv # 挂载宿主机的 /home/smc 目录到容器的 /srv 目录
       - ./filebrowser.db:/database.db # 挂载 FileBrowser 的数据库文件
@@ -14,20 +14,15 @@ services:
       - FB_BASEURL=/ # 设置 FileBrowser 的基础 URL
     cap_drop:
       - ALL # 禁用所有特权
-    # labels:
-    #   - "traefik.enable=true" # 启用 Traefik 反向代理
-    #   - "traefik.http.routers.filebrowser.rule=Host(`filebrowser.example.com`)" # 设置 Traefik 的路由规则
-    #   - "traefik.http.routers.filebrowser.tls=true" # 启用 TLS
-    #   - "traefik.http.routers.filebrowser.tls.certresolver=letsencrypt" # 使用 Let's Encrypt 证书
-    #   - "traefik.http.services.filebrowser.loadbalancer.server.port=80" # 设置 Traefik 的负载均衡端口
     logging:
       driver: "json-file" # 使用 JSON 格式的日志驱动
       options:
         max-size: "10m" # 限制单个日志文件的大小为 10MB
         max-file: "5" # 限制日志文件的数量为 5 个
     networks:
-      - proxy # 连接到名为 proxy 的外部网络
+      - filebrowser_net # 连接到新创建的 filebrowser_net 网络
 
 networks:
-  proxy:
-    external: true # 使用已经存在的名为 proxy 的网络
+  filebrowser_net:
+    # 定义一个新的内部网络
+    driver: bridge
