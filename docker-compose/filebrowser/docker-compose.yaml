@@ -8,8 +8,8 @@ services:
       - "6666:80"
     volumes:
       - /home/smc:/srv # 挂载宿主机的 /home/smc 目录到容器的 /srv 目录
-      - ./filebrowser.db:/database.db # 挂载 FileBrowser 的数据库文件
-      - ./filebrowser.json:/config.json # 挂载 FileBrowser 的配置文件
+      # - ./filebrowser.db:/database.db # 挂载 FileBrowser 的数据库文件
+      # - ./filebrowser.json:/config.json # 挂载 FileBrowser 的配置文件
     environment:
       - FB_BASEURL=/ # 设置 FileBrowser 的基础 URL
     cap_drop:
