@@ -1,0 +1,28 @@
+version: '3.8'
+services:
+  filebrowser:
+    image: filebrowser/filebrowser:latest
+    container_name: filebrowser
+    restart: unless-stopped
+    ports:
+      - "50000:80"
+    volumes:
+      - /home/smc:/srv # 挂载宿主机的 /home/smc 目录到容器的 /srv 目录
+      # - ./filebrowser.db:/database.db # 挂载 FileBrowser 的数据库文件
+      # - ./filebrowser.json:/config.json # 挂载 FileBrowser 的配置文件
+    environment:
+      - FB_BASEURL=/ # 设置 FileBrowser 的基础 URL
+    cap_drop:
+      - ALL # 禁用所有特权
+    logging:
+      driver: "json-file" # 使用 JSON 格式的日志驱动
+      options:
+        max-size: "10m" # 限制单个日志文件的大小为 10MB
+        max-file: "5" # 限制日志文件的数量为 5 个
+    networks:
+      - filebrowser_net # 连接到新创建的 filebrowser_net 网络
+
+networks:
+  filebrowser_net:
+    # 定义一个新的内部网络
+    driver: bridge
