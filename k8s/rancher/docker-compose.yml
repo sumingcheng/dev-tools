@@ -1,14 +1,20 @@
-version: '3.8'
+version: '3'
 services:
   rancher:
     image: rancher/rancher:latest
     restart: unless-stopped
-    privileged: true # 给予容器内的 root 用户真正的 root 权限。
+    privileged: true
     environment:
-      HTTP_PROXY: "http://127.0.0.1:7890"
-      HTTPS_PROXY: "https://127.0.0.1:7890"
+      HTTP_PROXY: "http://clash:7890"
+      HTTPS_PROXY: "http://clash:7890"
     ports:
       - 80:80
       - 443:443
     volumes:
       - ./rancher-data:/var/lib/rancher
+    networks:
+      - clash
+
+networks:
+  clash:
+    external: true
