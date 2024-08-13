@@ -8,7 +8,14 @@ DOCKER_SERVICE_DIR="/etc/systemd/system/docker.service.d"
 PROXY_CONF_FILE="$DOCKER_SERVICE_DIR/http-proxy.conf"
 
 setup_proxy() {
-    mkdir -p $DOCKER_SERVICE_DIR
+    if [ ! -d "$DOCKER_SERVICE_DIR" ]; then
+        mkdir -p $DOCKER_SERVICE_DIR
+    fi
+    
+    if [ -f "$PROXY_CONF_FILE" ]; then
+        rm -f $PROXY_CONF_FILE
+    fi
+    
     cat > $PROXY_CONF_FILE <<EOF
 [Service]
 Environment="HTTP_PROXY=http://$PROXY_HOST:$PROXY_PORT"
@@ -21,10 +28,14 @@ EOF
 }
 
 unset_proxy() {
-    rm -f $PROXY_CONF_FILE
-    systemctl daemon-reload
-    systemctl restart docker
-    echo "Docker proxy unset successfully."
+    if [ -f "$PROXY_CONF_FILE" ]; then
+        rm -f $PROXY_CONF_FILE
+        systemctl daemon-reload
+        systemctl restart docker
+        echo "Docker proxy unset successfully."
+    else
+        echo "Docker proxy configuration file not found."
+    fi
 }
 
 if [[ $EUID -ne 0 ]]; then
@@ -40,6 +51,6 @@ case "$1" in
         unset_proxy
         ;;
     *)
-        echo "Usage: $0 {setup|unset}"
+        echo "Usage: $0 {set|unset}"
         exit 1
 esac
