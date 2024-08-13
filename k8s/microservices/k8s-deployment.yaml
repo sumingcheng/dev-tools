@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: microservices
+spec:
+  #  副本数量
+  replicas: 3
+  selector:
+    matchLabels:
+      app: microservices
+  #   描述你的 POD
+  template:
+    metadata:
+      labels:
+        app: microservices
+    #    POD 的具体信息
+    spec:
+      containers:
+        - name: microservices
+          image: ghcr.io/sumingcheng/gin-blog-template:v1.2.0
+          ports:
+            - containerPort: 8080
+

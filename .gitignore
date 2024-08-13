@@ -163,3 +163,5 @@ cython_debug/
 
 frps.ini
 frpc.ini
+
+.idea/
