@@ -5,8 +5,8 @@ services:
     restart: unless-stopped
     privileged: true
     environment:
-      HTTP_PROXY: "http://clash:7890"
-      HTTPS_PROXY: "http://clash:7890"
+      HTTP_PROXY: "http://127.0.0.1:7890"
+      HTTPS_PROXY: "http://127.0.0.1:7890"
       TZ: "Asia/Shanghai"
     ports:
       - 80:80
