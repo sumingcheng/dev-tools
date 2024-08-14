@@ -13,9 +13,4 @@ services:
       - 443:443
     volumes:
       - ./rancher-data:/var/lib/rancher
-    networks:
-      - clash
 
-networks:
-  clash:
-    external: true
