@@ -13,4 +13,3 @@ services:
       - 443:443
     volumes:
       - ./rancher-data:/var/lib/rancher
-
