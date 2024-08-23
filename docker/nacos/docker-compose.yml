@@ -1,0 +1,57 @@
+version: "3"
+services:
+  nacos:
+    image: nacos-server:v2.3.2
+    container_name: nacos-standalone
+    privileged: true
+    environment:
+      - PREFER_HOST_MODE=hostname
+      - MODE=standalone
+      - NACOS_AUTH_TOKEN_EXPIRE_SECONDS=18000
+      - NACOS_AUTH_ENABLE=true
+      - NACOS_AUTH_IDENTITY_KEY=serverIdentity
+      - NACOS_AUTH_IDENTITY_VALUE=security
+      - NACOS_AUTH_TOKEN=SecretKey012345678901234567890123456789012345678901234567890123456789
+    volumes:
+      - ./standalone-logs/:/home/nacos/logs
+    ports:
+      - "8848:8848"
+      - "9848:9848"
+    networks:
+      - nacos-net
+    healthcheck:
+      test: [ "CMD-SHELL", "curl -f http://localhost:8848/nacos/ || exit 1" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  config-importer:
+    image: curl:8.9.1
+    container_name: config-importer
+    volumes:
+      - ./nacos_config_export_20240806103213.zip:/home/nacos/init/nacos_config_export.zip
+    depends_on:
+      nacos:
+        condition: service_healthy
+    entrypoint: >
+      sh -c "
+        CONFIG_FILE=/home/nacos/init/nacos_config_export.zip
+        if [ ! -f $CONFIG_FILE ]; then
+              echo '配置文件不存在，退出...';
+              exit 1;
+        fi
+        echo 'Nacos 服务已启动，导入配置...';
+        response=$(curl -s -o /dev/null -w '%{http_code}' -F 'file=@/home/nacos/init/nacos_config_export.zip' -X POST 'http://nacos-standalone:8848/nacos/v1/cs/configs?import=true&namespace=public')
+        echo 'HTTP 状态码: $response';
+        if [[ $response == 200 ]]; then
+          echo '配置已导入';
+        else
+          echo '配置导入失败，HTTP 状态码: $response';
+          exit 1;
+        fi
+      "
+    networks:
+      - nacos-net
+
+networks:
+  nacos-net:
