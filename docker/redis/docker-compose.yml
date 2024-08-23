@@ -21,7 +21,7 @@ services:
 volumes:
   redis:
 
-
 networks:
   redis:
+    name: redis
     driver: bridge
