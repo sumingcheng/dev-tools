@@ -1,25 +1,98 @@
 [
-  { "name": "docker-ce", "description": "开源的应用容器引擎,用于容器化应用的自动部署," },
-  { "name": "docker", "description": "容器" },
-  { "name": "git", "description": "分布式版本控制系统,用于有效、高速地处理项目版本管理," },
-  { "name": "lrzsz", "description": "在Unix和类Unix系统中用于执行Zmodem、Xmodem或Ymodem文件传输的程序," },
-  { "name": "lynx", "description": "文本浏览器,用于在命令行环境中浏览网页," },
-  { "name": "make", "description": "自动化编译程序,使用Makefile来管理项目中的代码编译," },
-  { "name": "micro", "description": "现代且易于使用的终端文本编辑器,支持快捷键和插件," },
-  { "name": "ncdu", "description": "基于ncurses的磁盘使用分析工具,用于分析磁盘空间占用," },
-  { "name": "neovim", "description": "Vim编辑器的重写版本,增加了更多功能和改进," },
-  { "name": "net-tools", "description": "网络配置工具集,包括arp、ifconfig、netstat等常用网络管理命令," },
-  { "name": "tree", "description": "在命令行中以树状图形式列出目录结构的工具," },
-  { "name": "unzip", "description": "用于解压缩和查看ZIP压缩文件的工具," },
-  { "name": "zsh", "description": "高级命令行解释器,提供许多改进的shell功能," },
-  { "name": "rsync", "description": "文件传输工具,用于高效地同步文件和目录之间的更改," },
-  { "name": "fastfetch", "description": "系统信息工具,用于快速检索和展示系统配置和参数," },
-  { "name": "grep", "description": "文本搜索工具,用于搜索文件中匹配特定模式的行," },
-  { "name": "gzip", "description": "文件压缩工具,用于通过使用Lempel-Ziv编码来压缩或展开文件," },
-  { "name": "wget", "description": "网络下载工具,支持通过HTTP、HTTPS和FTP协议下载文件," },
-  { "name": "tmux", "description": "终端多路复用器，允许用户在一个窗口中同时运行多个终端会话。" },
-  { "name": "bash-completion", "description": "为bash shell提供命令行自动补全功能,提高命令行操作效率。" },
-  { "name": "htop", "description": "交互式进程查看器，提供直观的界面监控系统资源和进程状态" },
-  { "name": "fzf", "description": "快速搜索功能工具,ctrl+r 查找历史记录" },
-  { "name":"screen" ,"description":"终端复用工具，一个窗口，多个会话"}
+  {
+    "name": "docker-ce",
+    "description": "开源的应用容器引擎,用于容器化应用的自动部署,"
+  },
+  {
+    "name": "docker",
+    "description": "容器"
+  },
+  {
+    "name": "git",
+    "description": "分布式版本控制系统,用于有效、高速地处理项目版本管理,"
+  },
+  {
+    "name": "lrzsz",
+    "description": "在Unix和类Unix系统中用于执行Zmodem、Xmodem或Ymodem文件传输的程序,"
+  },
+  {
+    "name": "trzsz",
+    "description": "流行的终端环境中的传输工具,"
+  },
+  {
+    "name": "lynx",
+    "description": "文本浏览器,用于在命令行环境中浏览网页,"
+  },
+  {
+    "name": "make",
+    "description": "自动化编译程序,使用Makefile来管理项目中的代码编译,"
+  },
+  {
+    "name": "micro",
+    "description": "现代且易于使用的终端文本编辑器,支持快捷键和插件,"
+  },
+  {
+    "name": "ncdu",
+    "description": "基于ncurses的磁盘使用分析工具,用于分析磁盘空间占用,"
+  },
+  {
+    "name": "neovim",
+    "description": "Vim编辑器的重写版本,增加了更多功能和改进,"
+  },
+  {
+    "name": "net-tools",
+    "description": "网络配置工具集,包括arp、ifconfig、netstat等常用网络管理命令,"
+  },
+  {
+    "name": "tree",
+    "description": "在命令行中以树状图形式列出目录结构的工具,"
+  },
+  {
+    "name": "unzip",
+    "description": "用于解压缩和查看ZIP压缩文件的工具,"
+  },
+  {
+    "name": "zsh",
+    "description": "高级命令行解释器,提供许多改进的shell功能,"
+  },
+  {
+    "name": "rsync",
+    "description": "文件传输工具,用于高效地同步文件和目录之间的更改,"
+  },
+  {
+    "name": "fastfetch",
+    "description": "系统信息工具,用于快速检索和展示系统配置和参数,"
+  },
+  {
+    "name": "grep",
+    "description": "文本搜索工具,用于搜索文件中匹配特定模式的行,"
+  },
+  {
+    "name": "gzip",
+    "description": "文件压缩工具,用于通过使用Lempel-Ziv编码来压缩或展开文件,"
+  },
+  {
+    "name": "wget",
+    "description": "网络下载工具,支持通过HTTP、HTTPS和FTP协议下载文件,"
+  },
+  {
+    "name": "tmux",
+    "description": "终端多路复用器，允许用户在一个窗口中同时运行多个终端会话。"
+  },
+  {
+    "name": "bash-completion",
+    "description": "为bash shell提供命令行自动补全功能,提高命令行操作效率。"
+  },
+  {
+    "name": "htop",
+    "description": "交互式进程查看器，提供直观的界面监控系统资源和进程状态"
+  },
+  {
+    "name": "fzf",
+    "description": "快速搜索功能工具,ctrl+r 查找历史记录"
+  },
+  {
+    "name": "screen",
+    "description": "终端复用工具，一个窗口，多个会话"
+  }
 ]
