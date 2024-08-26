@@ -1,14 +1,13 @@
-version: '3.7'
-
 services:
   redis:
     image: redis:6.2.6
     container_name: redis_server
-    command: redis-server --appendonly yes --requirepass sumingcheng
+    # command: redis-server --appendonly yes --requirepass sumingcheng
     ports:
       - "6379:6379"
     volumes:
       - redis:/data
+      - ./logs:/var/log/redis
     healthcheck:
       test: [ "CMD", "redis-cli", "ping" ]
       interval: 30s
