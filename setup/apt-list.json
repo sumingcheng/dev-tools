@@ -5,7 +5,7 @@
   },
   {
     "name": "docker",
-    "description": "容器"
+    "description": "开源的应用容器引擎,用于容器化应用的自动部署,"
   },
   {
     "name": "git",
@@ -36,10 +36,6 @@
     "description": "基于ncurses的磁盘使用分析工具,用于分析磁盘空间占用,"
   },
   {
-    "name": "neovim",
-    "description": "Vim编辑器的重写版本,增加了更多功能和改进,"
-  },
-  {
     "name": "net-tools",
     "description": "网络配置工具集,包括arp、ifconfig、netstat等常用网络管理命令,"
   },
@@ -50,10 +46,6 @@
   {
     "name": "unzip",
     "description": "用于解压缩和查看ZIP压缩文件的工具,"
-  },
-  {
-    "name": "zsh",
-    "description": "高级命令行解释器,提供许多改进的shell功能,"
   },
   {
     "name": "rsync",
@@ -94,5 +86,9 @@
   {
     "name": "screen",
     "description": "终端复用工具，一个窗口，多个会话"
+  },
+  {
+    "name": "tig",
+    "description": "git的终端图形化工具"
   }
 ]
