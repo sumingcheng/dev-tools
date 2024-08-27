@@ -14,12 +14,6 @@ build:
 		docker build -t $(IMAGE_FULL_NAME) -f ./docker/Dockerfile.prod .; \
 	fi
 
-# 运行目标
-run: build
-	@docker stop $(CONTAINER_NAME) > /dev/null 2>&1 || true
-	@docker rm $(CONTAINER_NAME) > /dev/null 2>&1 || true
-	@docker run -d --name $(CONTAINER_NAME) -p 30001:30001 $(IMAGE_FULL_NAME)
-
 # 停止目标
 stop:
 	@docker stop $(CONTAINER_NAME) || true
