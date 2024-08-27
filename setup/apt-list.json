@@ -94,5 +94,9 @@
   {
     "name": "lua5.3",
     "description": "Lua是一个小巧的脚本语言，用于扩展应用程序的功能"
+  },
+  {
+    "name": "redis-tools",
+    "description": "Redis的客户端工具集，用于与Redis服务器进行交互"
   }
 ]
