@@ -90,5 +90,9 @@
   {
     "name": "tig",
     "description": "git的终端图形化工具"
+  },
+  {
+    "name": "lua5.3",
+    "description": "Lua是一个小巧的脚本语言，用于扩展应用程序的功能"
   }
 ]
