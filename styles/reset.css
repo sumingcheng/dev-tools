@@ -1,0 +1,86 @@
+/* 全局样式重置 */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  vertical-align: baseline;
+  background: transparent;
+  box-sizing: border-box;
+}
+
+/* 基本字体和布局设置 */
+body {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #333;
+}
+
+/* 列表和引用重置 */
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote::before, blockquote::after,
+q::before, q::after {
+  content: none;
+}
+
+/* 表格样式重置 */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* 表单元素样式重置 */
+input, textarea, select, button {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+  appearance: none;
+  border: 1px solid #ccc;
+  padding: 0.4em 0.6em;
+}
+
+/* 超链接样式设置 */
+a {
+  color: #0066cc;
+  text-decoration: none;
+}
+
+a:hover, a:active {
+  text-decoration: underline;
+}
+
+/* HTML5 元素显示为块级元素 */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+/* 图片和嵌入内容响应式设置 */
+img, embed, object, video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* 表单按钮样式 */
+button, input[type="submit"], input[type="reset"] {
+  cursor: pointer;
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+}
+
+/* 禁用状态样式 */
+button[disabled], input[disabled] {
+  cursor: default;
+  opacity: 0.5;
+}
