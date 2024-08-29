@@ -2,26 +2,18 @@ services:
   jellyfin:
     image: jellyfin/jellyfin:latest
     container_name: jellyfin
-    hostname: jellyfin-server
-    privileged: true
+    user: 1000:1000
+    network_mode: 'host'
     volumes:
       - /jellyfin/config:/config
       - /jellyfin/cache:/cache
       - /jellyfin/videos:/media
-    # deploy:
-    #   resources:
-    #     limits:
-    #       cpus: '2.0'
-    #       memory: 4G
-    #     reservations:
-    #       cpus: '0.5'
-    #       memory: 2G
     environment:
-      JELLYFIN_PublishedServerUrl: "http://localhost:8096"
-      JELLYFIN_CACHE_DIR: "/cache"
+      JELLYFIN_PublishedServerUrl: 'http://172.22.220.64:8096'
+      JELLYFIN_CACHE_DIR: '/cache'
     restart: unless-stopped
     healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:8096" ]
+      test: ['CMD', 'curl', '-f', 'http://localhost:8096']
       interval: 30s
       timeout: 10s
       retries: 3
@@ -29,14 +21,5 @@ services:
     logging:
       driver: json-file
       options:
-        max-size: "10m"
-        max-file: "3"
-    ports:
-      - "8096:8096" # 默认HTTP端口
-      - "8920:8920" # 默认HTTPS端口
-    networks:
-      - jellyfin_network
-
-networks:
-  jellyfin_network:
-    driver: bridge
+        max-size: '10m'
+        max-file: '3'
