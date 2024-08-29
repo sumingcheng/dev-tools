@@ -23,5 +23,13 @@ rm-all:
 	@docker rm $(CONTAINER_NAME) || true
 	@docker rmi $(IMAGE_FULL_NAME) || true
 
+# 重头再来
+reset:
+	-@git pull
+	-@cd deploy && docker-compose down
+	-@docker rmi ${IMAGE_FULL_NAME}
+	-@$(MAKE) build
+	-@cd deploy && docker-compose up -d
+
 # 伪目标声明
-.PHONY: build run stop rm-all
+.PHONY: build run stop rm-all reset
