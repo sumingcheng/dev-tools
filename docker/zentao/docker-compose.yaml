@@ -14,7 +14,8 @@ services:
       - zentao-net
 
   zentao:
-    image: easysoft/zentao:latest
+    # image: easysoft/zentao:latest
+    image: easysoft/zentao:12.3.3
     container_name: zentao
     ports:
       - '18080:80'
