@@ -2,7 +2,7 @@ services:
   jellyfin:
     image: jellyfin/jellyfin:latest
     container_name: jellyfin
-    user: 1000:1000
+    user: "0:0"
     network_mode: 'host'
     volumes:
       - /jellyfin/config:/config
