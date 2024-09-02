@@ -7,6 +7,8 @@
   <a href="./README_EN.md">English</a> |
   <a href="./README.md">简体中文</a>
 </p>
+</div>
+
 
 ## 开发工具包
 
@@ -18,18 +20,16 @@
 
 ### 内容
 
-```bash
- ⚡ root@gptdev  /data/dev-tools   main ●  tree -D -L 1
-.
-├── [Aug 29 09:24]  docker          # 常用应用的 docker-compose
-├── [Aug 23 13:56]  k8s             # k8s 应用
-├── [Aug 29 17:14]  mk-template     # Makefile模板
-├── [Aug  9 17:54]  py              # python 脚本
-├── [Aug 29 09:24]  setup           # 常用的 linux 工具
-├── [Aug  9 17:51]  sh              # 常用 sh 脚本
-├── [Aug 29 09:24]  styles          # css 样式
-└── [Aug  5 10:23]  vector-models   # 向量模型
-```
+| 目录              | **描述**                      |
+| ----------------- | ----------------------------- |
+| **docker**        | **常用应用的 docker-compose** |
+| **k8s**           | **k8s 应用**                  |
+| **mk-template**   | **Makefile模板**              |
+| **py**            | **python 脚本**               |
+| **setup**         | **常用的 linux 工具**         |
+| **sh**            | **常用 sh 脚本**              |
+| **styles**        | **css 样式**                  |
+| **vector-models** | **向量模型**                  |
 
 ## 快速开始
 
