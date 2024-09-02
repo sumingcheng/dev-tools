@@ -7,8 +7,6 @@
   <a href="./README_EN.md">English</a> |
   <a href="./README.md">简体中文</a>
 </p>
-</div>
-
 
 ## 开发工具包
 
@@ -18,61 +16,28 @@
 
 集成多种常用服务和应用的 Docker compose 文件，只需你掌握 docker 的使用即可启动。提供实用脚本，快速处理环境配置、安装与卸载任务。大部分工具和脚本已在 `Ubuntu jammy 22.04 x86_64` 上测试，可以正常启动运行。如果需要其他环境，请测试提交`PR`
 
-### 应用列表
+### 内容
 
-以下是目前支持的应用和服务
-
-| 应用/服务     | 服务目录        | 主要功能        |
-| ------------- | --------------- | --------------- |
-| Elasticsearch | `elasticsearch` | 全文搜索引擎    |
-| GitLab Runner | `gitlab-runner` | CI/CD任务自动化 |
-| Jellyfin      | `jellyfin`      | 媒体服务器      |
-| Kafka         | `kafka`         | 消息队列系统    |
-| MinIO         | `minio`         | 对象存储        |
-| MongoDB       | `mongo`         | NoSQL数据库     |
-| MySQL         | `mysql`         | 关系数据库      |
-| Portainer     | `portainer`     | 容器管理平台    |
-| PostgreSQL    | `postgres`      | 关系数据库      |
-| Prometheus    | `prometheus`    | 监控系统        |
-| Redis         | `redis`         | 键值存储        |
-| RocketMQ      | `rocketMQ`      | 消息中间件      |
-| Syncthing     | `syncthing`     | 文件同步服务    |
-| Harbor        | `harbor`        | 镜像仓库        |
-
-### 脚本列表
-
-| 服务目录   | 脚本文件名称            | 主要功能              |
-| ---------- | ----------------------- | --------------------- |
-| harbor     | `install.sh`            | 安装Harbor            |
-| http-proxy | `set_proxy.sh`          | 设置代理服务器配置    |
-| minikube   | `install_minikube.sh`   | 安装Minikube          |
-| minikube   | `uninstall_minikube.sh` | 卸载Minikube          |
-| packages   | `install_apt.sh`        | 使用APT安装常用软件包 |
-| packages   | `select-sources.sh`     | APT多种源切换         |
-| pyenv      | `install_pyenv.sh`      | 安装 Pyenv            |
-| pyenv      | `uninstall_pyenv.sh`    | 卸载 Pyenv            |
-
-### 其他
-
-| 服务目录      | 文件类型       | 文件名称                                                     |
-| ------------- | -------------- | ------------------------------------------------------------ |
-| gitlab-runner | 配置文件       | `config.toml`, `gitlab.rb`                                   |
-| http-proxy    | 脚本文件       | `set_proxy.sh`                                               |
-| harbor        | 安装脚本       | `install.sh`                                                 |
-| minikube      | 安装与卸载脚本 | `install_minikube.sh`, `uninstall_minikube.sh`               |
-| minio         | 脚本和文本文件 | `file.txt`, `upload.py`                                      |
-| packages      | 脚本和配置文件 | `apt-list.json`, `install_apt.sh`, `select-sources.sh`, `sources.list` |
-| prometheus    | 配置文件       | `grafana.ini`, `prometheus.yml`                              |
-| pyenv         | 安装与卸载脚本 | `install_pyenv.sh`, `uninstall_pyenv.sh`                     |
-| system-info   | Python 脚本    | `getGPUs.py`, `requirements.txt`                             |
+```bash
+ ⚡ root@gptdev  /data/dev-tools   main ●  tree -D -L 1
+.
+├── [Aug 29 09:24]  docker          # 常用应用的 docker-compose
+├── [Aug 23 13:56]  k8s             # k8s 应用
+├── [Aug 29 17:14]  mk-template     # Makefile模板
+├── [Aug  9 17:54]  py              # python 脚本
+├── [Aug 29 09:24]  setup           # 常用的 linux 工具
+├── [Aug  9 17:51]  sh              # 常用 sh 脚本
+├── [Aug 29 09:24]  styles          # css 样式
+└── [Aug  5 10:23]  vector-models   # 向量模型
+```
 
 ## 快速开始
 
 ```git
-git clone https://github.com/sumingcheng/DevTools.git
+git clone https://github.com/sumingcheng/dev-tools
 ```
 
-选择需要部署的应用，进入对应目录，执行`docker-compose -up`
+选择需要部署的应用，进入对应目录，执行`docker-compose -up`或者是使用 `bash xx.sh`执行
 
 ### 如何贡献
 
