@@ -20,16 +20,16 @@
 
 ### 内容
 
-| 目录              | **描述**                      |
-| ----------------- | ----------------------------- |
-| **docker**        | **常用应用的 docker-compose** |
-| **k8s**           | **k8s 应用**                  |
-| **mk-template**   | **Makefile模板**              |
-| **py**            | **python 脚本**               |
-| **setup**         | **常用的 linux 工具**         |
-| **sh**            | **常用 sh 脚本**              |
-| **styles**        | **css 样式**                  |
-| **vector-models** | **向量模型**                  |
+| 目录          | **描述**                  |
+| ------------- | ------------------------- |
+| docker        | 常用应用的 docker-compose |
+| k8s           | k8s 应用                  |
+| mk-template   | Makefile模板              |
+| py            | python 脚本               |
+| setup         | 常用的 linux 工具         |
+| sh            | 常用 sh 脚本              |
+| styles        | css 样式                  |
+| vector-models | 向量模型                  |
 
 ## 快速开始
 
