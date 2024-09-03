@@ -23,11 +23,11 @@ fi
 chmod +x miniconda_installer.sh
 
 # 检查 Miniconda 是否已安装
-if [ -d "$HOME/miniconda3" ]; then
+if [ -d "/opt/miniconda3" ]; then
     while true; do
-        read -p "Miniconda 已安装，是否重新安装? [y/n]: " answer
+        read -p "Miniconda 已安装在 /opt/miniconda3，是否重新安装? [y/n]: " answer
         case $answer in
-            [Yy]* ) rm -rf "$HOME/miniconda3"; break;;
+            [Yy]* ) sudo rm -rf "/opt/miniconda3"; break;;
             [Nn]* ) echo "取消安装"; exit 0;;
             * ) echo "请输入 Y 或 N。";;
         esac
@@ -35,10 +35,10 @@ if [ -d "$HOME/miniconda3" ]; then
 fi
 
 # 安装 Miniconda
-echo "正在安装 Miniconda..."
-./miniconda_installer.sh -b -p $HOME/miniconda3
+echo "正在安装 Miniconda 到 /opt/miniconda3..."
+sudo ./miniconda_installer.sh -b -p /opt/miniconda3
 
 # 清理安装器文件
 rm miniconda_installer.sh
 
-echo "Miniconda 安装完成。请手动执行 'source $HOME/miniconda3/etc/profile.d/conda.sh' 或重启终端以激活 Miniconda 环境。"
+echo "Miniconda 安装完成。请手动执行 'source /opt/miniconda3/etc/profile.d/conda.sh' 或重启终端以激活 Miniconda 环境。"
