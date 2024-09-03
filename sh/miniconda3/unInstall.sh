@@ -1,31 +1,27 @@
 #!/bin/bash
 
-# 检查 Miniconda 是否已安装
-if [ ! -d "$HOME/miniconda3" ]; then
-    echo "未找到 Miniconda 安装目录，可能已经被移除。"
+# 检查 /opt/miniconda3 目录是否存在
+if [ ! -d "/opt/miniconda3" ]; then
+    echo "未找到 Miniconda 安装目录 /opt/miniconda3，可能已经被移除。"
     exit 1
 fi
 
-read -p "确定要卸载 Miniconda 吗? 这将移除 $HOME/miniconda3 目录和相关配置。[y/n]: " confirm
+# 确认用户想要卸载 Miniconda
+read -p "确定要卸载 Miniconda 吗? 这将移除 /opt/miniconda3 目录和相关配置。[y/n]: " confirm
 if [[ "$confirm" != [Yy] ]]; then
     echo "取消卸载"
     exit 0
 fi
 
-echo "正在移除 Miniconda 目录..."
-rm -rf "$HOME/miniconda3"
+# 使用 sudo 权限移除 Miniconda 目录
+echo "正在移除 Miniconda 目录 /opt/miniconda3..."
+sudo rm -rf "/opt/miniconda3"
 
-# 自动从bash和zsh配置文件中删除Conda初始化代码
-for rcfile in "$HOME/.bashrc" "$HOME/.bash_profile" "$HOME/.zshrc"
-do
-    if [ -f "$rcfile" ]; then
-        echo "正在清理 $rcfile..."
-        # 删除conda初始化的代码块
-        sed -i '/# >>> conda initialize >>>/,/# <<< conda initialize <<</d' "$rcfile"
-        # 删除单独添加到PATH的conda路径
-        sed -i '/export PATH=".*miniconda3\/bin:$PATH"/d' "$rcfile"
-    fi
-done
+# 自动从全局配置文件中删除 Miniconda 的环境初始化代码
+if [ -f "/etc/profile.d/miniconda3.sh" ]; then
+    echo "正在移除全局环境初始化脚本 /etc/profile.d/miniconda3.sh..."
+    sudo rm "/etc/profile.d/miniconda3.sh"
+fi
 
 echo "Miniconda 卸载完成。"
-echo "如果需要，手动检查并编辑配置文件，以确保所有关于 Miniconda 的引用都被移除。"
+echo "请手动检查其他配置文件，如 ~/.bashrc 或 ~/.bash_profile，确保所有 Miniconda 相关配置已经被清除。"
