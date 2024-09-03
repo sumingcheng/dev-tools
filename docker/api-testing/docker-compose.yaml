@@ -3,6 +3,15 @@ services:
   api-testing-server:
     image: ghcr.io/linuxsuren/api-testing:master
     ports:
-      - "8080:8080"
-    command: server
+      - '8080:8080'
     restart: always
+    command: server
+
+  api-testing-collector:
+    image: ghcr.io/linuxsuren/api-testing:master
+    ports:
+      - '1234:8080'
+    volumes:
+      - /var/tmp:/var/tmp
+    command: atest-collector --filter-path /api -o /var/tmp/sample.yaml
+    restart: on-failure
