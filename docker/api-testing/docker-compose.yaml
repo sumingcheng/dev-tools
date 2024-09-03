@@ -4,8 +4,11 @@ services:
     image: ghcr.io/linuxsuren/api-testing:master
     ports:
       - '8080:8080'
-    restart: always
+    environment:
+      - KUBERNETES_SERVICE_HOST=
+      - KUBERNETES_SERVICE_PORT=
     command: server
+    restart: always
 
   api-testing-collector:
     image: ghcr.io/linuxsuren/api-testing:master
@@ -14,4 +17,7 @@ services:
     volumes:
       - /var/tmp:/var/tmp
     command: atest-collector --filter-path /api -o /var/tmp/sample.yaml
+    environment:
+      - KUBERNETES_SERVICE_HOST=
+      - KUBERNETES_SERVICE_PORT=
     restart: on-failure
