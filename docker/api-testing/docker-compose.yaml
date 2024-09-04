@@ -3,15 +3,15 @@ services:
   api-testing-server:
     image: ghcr.io/linuxsuren/api-testing:master
     ports:
-      - '8080:8080'
-    command: server
+      - "8080:8080"
+    command: server --kubernetesClient=false
     restart: always
 
   api-testing-collector:
     image: ghcr.io/linuxsuren/api-testing:master
     ports:
-      - '1234:8080'
+      - "1234:8080"  
     volumes:
       - ./data:/var/tmp
-    command: atest-collector --filter-path /api -o /var/tmp/sample.yaml
+    command: atest-collector --filter-path /api -o /var/tmp/sample.yaml --kubernetesClient=false
     restart: on-failure
