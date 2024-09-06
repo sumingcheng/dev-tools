@@ -98,5 +98,9 @@
   {
     "name": "redis-tools",
     "description": "Redis的客户端工具集，用于与Redis服务器进行交互"
+  },
+  {
+    "name": "zip",
+    "description": "用于压缩ZIP文件的工具"
   }
 ]
