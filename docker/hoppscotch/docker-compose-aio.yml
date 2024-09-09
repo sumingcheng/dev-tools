@@ -5,10 +5,13 @@ services:
     container_name: hoppscotch
     restart: unless-stopped
     ports:
-      - "10996:3000"
+      - '10996:3000'
     environment:
       - HOPPSCOTCH_BACKEND_GQL_URL=http://192.168.33.42:3000/api/graphql
       - VITE_BACKEND_GQL_URL=http://192.168.33.42:3000/api/graphql
       - VITE_BACKEND_WS_URL=ws://192.168.33.42:3000/api/graphql
+      - ADMIN_EMAIL=sumingcheng.com
+      - ADMIN_PASSWORD=admin123456
+      - JWT_SECRET=sumingcheng
     volumes:
       - ./hoppscotch-data:/app/packages/hoppscotch-backend/data
