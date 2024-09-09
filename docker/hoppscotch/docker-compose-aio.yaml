@@ -13,7 +13,7 @@ services:
 
   postgres:
     image: model.vnet.com/sjhl/postgres:15
-    container_name: postgres_db
+    container_name: hoppscotch_postgres
     environment:
       POSTGRES_DB: postgres_db
       POSTGRES_USER: admin
