@@ -1,65 +1,52 @@
+# To make it easier to self-host, we have a preset docker compose config that also
+# has a container with a Postgres instance running.
+# You can tweak around this file to match your instances
+
 services:
-  postgres:
-    image: model.vnet.com/sjhl/postgres:15
-    volumes:
-      - ./data/postgres_data:/data/hoppscotch/postgresql/data
-    environment:
-      POSTGRES_DB: hoppscotch
-      POSTGRES_USER: hoppscotch
-      POSTGRES_PASSWORD: hoppscotch
-    networks:
-      - hoppscotch-network
-
-  # hoppscotch-migrate:
-  #   image: model.vnet.com/zhongzi/hoppscotch
-  #   env_file:
-  #     - hoppscotch.env
-  #   entrypoint: sh
-  #   depends_on:
-  #     - postgres
-  #   networks:
-  #     - hoppscotch-network
-  #   volumes:
-  #     - ./data/share_dir:/share_dir
-  #   restart: no
-  #   command: -c "pnpx prisma migrate deploy"
-
-  hoppscotch:
-    image: model.vnet.com/zhongzi/hoppscotch
-    ports:
-      - "8080:80"
-    env_file:
-      - hoppscotch.env
-    # depends_on:
-    #   hoppscotch-migrate:
-    #     condition: service_completed_successfully
-    networks:
-      - hoppscotch-network
+  # The service that spins up all 3 services at once in one container
+  hoppscotch-aio:
+    container_name: hoppscotch-aio
+    image: model.vnet.com/zhongzi/hoppscotch:latest
     restart: unless-stopped
-
-  # nginx:
-  #   image: nginx:latest
-  #   ports:
-  #     - "443:443"
-  #     - "80:80"
-  #   volumes:
-  #     - ./data/nginx/conf:/etc/nginx/conf.d
-  #     - ./data/nginx/ssl:/etc/nginx/ssl
-  #   depends_on:
-  #     - hoppscotch
-  #   networks:
-  #     - hoppscotch-network
-
-  hoppscotch-proxy:
-    image: model.vnet.com/sjhl/proxyscotch:latest
-    ports:
-      - "9159:9159"
+    env_file:
+      - ./.env
     depends_on:
-      - hoppscotch
-    networks:
-      - hoppscotch-network
+      hoppscotch-db:
+        condition: service_healthy
+    ports:
+      - '13000:3000'
+      - '3100:3100'
+      - '3170:3170'
+      - '3080:80'
 
-networks:
-  hoppscotch-network:
-    driver: bridge
-    name: hoppscotch-network
+  # The preset DB service, you can delete/comment the below lines if
+  # you are using an external postgres instance
+  # This will be exposed at port 5432
+  hoppscotch-db:
+    image: model.vnet.com/sjhl/postgres:15
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin123456
+      POSTGRES_DB: hoppscotch
+    healthcheck:
+      test: ['CMD-SHELL', "sh -c 'pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}'"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+
+  # app:
+  #   image: 'jc21/nginx-proxy-manager:latest'
+  #   restart: unless-stopped
+  #   ports:
+  #     - '80:80'
+  #     - '81:81'
+  #     - '443:443'
+  #   volumes:
+  #     - ./data:/data
+  #     - ./letsencrypt:/etc/letsencrypt
+
