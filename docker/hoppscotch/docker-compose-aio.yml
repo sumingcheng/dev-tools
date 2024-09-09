@@ -1,0 +1,14 @@
+version: '3'
+services:
+  hoppscotch:
+    image: model.vnet.com/zhongzi/hoppscotch:latest
+    container_name: hoppscotch
+    restart: unless-stopped
+    ports:
+      - "10996:3000"
+    environment:
+      - HOPPSCOTCH_BACKEND_GQL_URL=http://192.168.33.42:3000/api/graphql
+      - VITE_BACKEND_GQL_URL=http://192.168.33.42:3000/api/graphql
+      - VITE_BACKEND_WS_URL=ws://192.168.33.42:3000/api/graphql
+    volumes:
+      - ./hoppscotch-data:/app/packages/hoppscotch-backend/data
