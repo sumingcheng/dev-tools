@@ -29,7 +29,7 @@ services:
     ports:
       - "8080:80"
     env_file:
-      - ./data/hoppscotch/hoppscotch.env
+      - hoppscotch.env
     depends_on:
       hoppscotch-migrate:
         condition: service_completed_successfully
