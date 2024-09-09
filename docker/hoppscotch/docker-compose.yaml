@@ -13,7 +13,7 @@ services:
   hoppscotch-migrate:
     image: model.vnet.com/zhongzi/hoppscotch
     env_file:
-      - ./data/hoppscotch/hoppscotch.env
+      - hoppscotch.env
     entrypoint: sh
     depends_on:
       - postgres
