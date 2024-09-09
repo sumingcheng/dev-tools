@@ -5,14 +5,33 @@ services:
     container_name: hoppscotch
     restart: unless-stopped
     ports:
-      - '10996:3000'
-    environment:
-      - HOPPSCOTCH_BACKEND_GQL_URL=http://localhost:3000/api/graphql
-      - VITE_BACKEND_GQL_URL=http://localhost:3000/api/graphql
-      - VITE_BACKEND_WS_URL=ws://localhost:3000/api/graphql
-      - ADMIN_EMAIL=sumingcheng.com
-      - ADMIN_PASSWORD=admin123456
-      - JWT_SECRET=sumingcheng
-      - VITE_ALLOWED_AUTH_PROVIDERS=email,github,google,microsoft,twitter
-    volumes:
-      - ./hoppscotch-data:/app/packages/hoppscotch-backend/data
+      - '13000:3000'
+      - '13100:3100'
+      - '13170:3170'
+    env_file:
+      - .env
+
+  postgres:
+  image: postgres:14.5
+  container_name: postgres_db
+  environment:
+    POSTGRES_DB: postgres_db
+    POSTGRES_USER: admin
+    POSTGRES_PASSWORD: admin123456
+  volumes:
+    - type: volume
+      source: postgres_data
+      target: /var/lib/postgresql/data
+  ports:
+    - '5432:5432'
+  restart: always
+  healthcheck:
+    test: ['CMD', 'pg_isready', '-h', 'localhost', '-p', '5432']
+    interval: 10s
+    timeout: 5s
+    retries: 5
+  logging:
+    driver: json-file
+    options:
+      max-size: '100m'
+      max-file: '30'
