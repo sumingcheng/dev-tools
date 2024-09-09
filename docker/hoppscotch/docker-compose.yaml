@@ -1,37 +1,65 @@
 services:
-  hoppscotch:
-    image: model.vnet.com/zhongzi/hoppscotch:latest
-    container_name: hoppscotch
-    restart: unless-stopped
-    ports:
-      - '13000:3000'
-      - '13100:3100'
-      - '13170:3170'
-    env_file:
-      - .env
-
   postgres:
     image: model.vnet.com/sjhl/postgres:15
-    container_name: hoppscotch_postgres
-    environment:
-      POSTGRES_DB: hoppscotch_db
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: admin123456
     volumes:
-      - postgres_data:/var/lib/postgresql/data
-    ports:
-      - '15432:5432'
-    restart: always
-    healthcheck:
-      test: ['CMD', 'pg_isready', '-h', 'localhost', '-p', '5432']
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    logging:
-      driver: json-file
-      options:
-        max-size: '100m'
-        max-file: '30'
+      - ./data/postgres_data:/data/hoppscotch/postgresql/data
+    environment:
+      POSTGRES_DB: hoppscotch
+      POSTGRES_USER: hoppscotch
+      POSTGRES_PASSWORD: hoppscotch
+    networks:
+      - hoppscotch-network
 
-volumes:
-  postgres_data:
+  hoppscotch-migrate:
+    image: model.vnet.com/zhongzi/hoppscotch
+    env_file:
+      - ./data/hoppscotch/hoppscotch.env
+    entrypoint: sh
+    depends_on:
+      - postgres
+    networks:
+      - hoppscotch-network
+    volumes:
+      - ./data/share_dir:/share_dir
+    restart: no
+    command: -c "pnpx prisma migrate deploy"
+
+  hoppscotch:
+    image: model.vnet.com/zhongzi/hoppscotch
+    ports:
+      - "8080:80"
+    env_file:
+      - ./data/hoppscotch/hoppscotch.env
+    depends_on:
+      hoppscotch-migrate:
+        condition: service_completed_successfully
+    networks:
+      - hoppscotch-network
+    restart: unless-stopped
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "443:443"
+      - "80:80"
+    volumes:
+      - ./data/nginx/conf:/etc/nginx/conf.d
+      - ./data/nginx/ssl:/etc/nginx/ssl
+    depends_on:
+      - hoppscotch
+    networks:
+      - hoppscotch-network
+
+  hoppscotch-proxy:
+    image: model.vnet.com/sjhl/proxyscotch:latest
+    ports:
+      - "9159:9159"
+    depends_on:
+      - hoppscotch
+    networks:
+      - hoppscotch-network
+
+networks:
+  hoppscotch-network:
+    driver: bridge
+    name: hoppscotch-network
