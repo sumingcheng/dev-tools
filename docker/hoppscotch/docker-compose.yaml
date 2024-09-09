@@ -15,7 +15,7 @@ services:
     container_name: hoppscotch_postgres
     environment:
       POSTGRES_DB: postgres_db
-      POSTGRES_USER: admin
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: admin123456
     volumes:
       - postgres_data:/var/lib/postgresql/data
