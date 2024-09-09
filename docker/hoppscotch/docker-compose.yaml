@@ -14,7 +14,7 @@ services:
     image: model.vnet.com/sjhl/postgres:15
     container_name: hoppscotch_postgres
     environment:
-      POSTGRES_DB: postgres_db
+      POSTGRES_DB: hoppscotch_db
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: admin123456
     volumes:
