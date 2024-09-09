@@ -7,11 +7,12 @@ services:
     ports:
       - '10996:3000'
     environment:
-      - HOPPSCOTCH_BACKEND_GQL_URL=http://192.168.33.42:3000/api/graphql
-      - VITE_BACKEND_GQL_URL=http://192.168.33.42:3000/api/graphql
-      - VITE_BACKEND_WS_URL=ws://192.168.33.42:3000/api/graphql
+      - HOPPSCOTCH_BACKEND_GQL_URL=http://localhost:3000/api/graphql
+      - VITE_BACKEND_GQL_URL=http://localhost:3000/api/graphql
+      - VITE_BACKEND_WS_URL=ws://localhost:3000/api/graphql
       - ADMIN_EMAIL=sumingcheng.com
       - ADMIN_PASSWORD=admin123456
       - JWT_SECRET=sumingcheng
+      - VITE_ALLOWED_AUTH_PROVIDERS=email,github,google,microsoft,twitter
     volumes:
       - ./hoppscotch-data:/app/packages/hoppscotch-backend/data
