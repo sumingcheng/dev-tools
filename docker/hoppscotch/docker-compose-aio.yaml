@@ -23,7 +23,7 @@ services:
       source: postgres_data
       target: /var/lib/postgresql/data
   ports:
-    - '5432:5432'
+    - '15432:5432'
   restart: always
   healthcheck:
     test: ['CMD', 'pg_isready', '-h', 'localhost', '-p', '5432']
