@@ -37,18 +37,18 @@ services:
       - hoppscotch-network
     restart: unless-stopped
 
-  nginx:
-    image: nginx:latest
-    ports:
-      - "443:443"
-      - "80:80"
-    volumes:
-      - ./data/nginx/conf:/etc/nginx/conf.d
-      - ./data/nginx/ssl:/etc/nginx/ssl
-    depends_on:
-      - hoppscotch
-    networks:
-      - hoppscotch-network
+  # nginx:
+  #   image: nginx:latest
+  #   ports:
+  #     - "443:443"
+  #     - "80:80"
+  #   volumes:
+  #     - ./data/nginx/conf:/etc/nginx/conf.d
+  #     - ./data/nginx/ssl:/etc/nginx/ssl
+  #   depends_on:
+  #     - hoppscotch
+  #   networks:
+  #     - hoppscotch-network
 
   hoppscotch-proxy:
     image: model.vnet.com/sjhl/proxyscotch:latest
