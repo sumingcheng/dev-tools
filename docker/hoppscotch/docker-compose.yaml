@@ -10,19 +10,19 @@ services:
     networks:
       - hoppscotch-network
 
-  hoppscotch-migrate:
-    image: model.vnet.com/zhongzi/hoppscotch
-    env_file:
-      - hoppscotch.env
-    entrypoint: sh
-    depends_on:
-      - postgres
-    networks:
-      - hoppscotch-network
-    volumes:
-      - ./data/share_dir:/share_dir
-    restart: no
-    command: -c "pnpx prisma migrate deploy"
+  # hoppscotch-migrate:
+  #   image: model.vnet.com/zhongzi/hoppscotch
+  #   env_file:
+  #     - hoppscotch.env
+  #   entrypoint: sh
+  #   depends_on:
+  #     - postgres
+  #   networks:
+  #     - hoppscotch-network
+  #   volumes:
+  #     - ./data/share_dir:/share_dir
+  #   restart: no
+  #   command: -c "pnpx prisma migrate deploy"
 
   hoppscotch:
     image: model.vnet.com/zhongzi/hoppscotch
@@ -30,9 +30,9 @@ services:
       - "8080:80"
     env_file:
       - hoppscotch.env
-    depends_on:
-      hoppscotch-migrate:
-        condition: service_completed_successfully
+    # depends_on:
+    #   hoppscotch-migrate:
+    #     condition: service_completed_successfully
     networks:
       - hoppscotch-network
     restart: unless-stopped
