@@ -3,17 +3,14 @@ kind: Deployment
 metadata:
   name: go-sec-kill
 spec:
-  #  副本数量
   replicas: 3
   selector:
     matchLabels:
       app: go-sec-kill
-  #   描述你的 POD
   template:
     metadata:
       labels:
         app: go-sec-kill
-    #    POD 的具体信息
     spec:
       containers:
         - name: go-sec-kill
@@ -21,4 +18,10 @@ spec:
           ports:
             - containerPort: 8080
           imagePullPolicy: IfNotPresent
-
+          resources:
+            requests:
+              memory: "1Gi" # 请求1GB内存
+              cpu: "500m" # 请求0.5 CPU
+            limits:
+              memory: "2Gi" # 限制最多使用2GB内存
+              cpu: "1" # 限制最多使用1个CPU
