@@ -3,7 +3,8 @@ services:
     image: 'xhofe/alist:latest-ffmpeg'
     container_name: alist
     volumes:
-      - '/mnt/c/Thunder:/opt/alist/data'
+      - '/etc/alist:/opt/alist/data'
+      - '/mnt/c/Thunder:/mnt'
     ports:
       - '5244:5244'
     environment:
