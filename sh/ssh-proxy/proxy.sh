@@ -22,8 +22,8 @@ fi
 # 设置或取消代理
 case $1 in
     set)
-        export HTTP_PROXY="http://172.22.220.64:7890"
-        export HTTPS_PROXY="http://172.22.220.64:7890"
+        export HTTP_PROXY="http://127.0.0.1:7890"
+        export HTTPS_PROXY="http://127.0.0.1:7890"
         echo "HTTP/HTTPS 代理已设置为 $HTTP_PROXY"
     ;;
     unset)
