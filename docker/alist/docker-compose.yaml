@@ -5,8 +5,9 @@ services:
     volumes:
       - '/etc/alist:/opt/alist/data'
       - '/mnt/c/Thunder:/mnt'
-    ports:
-      - '5244:5244'
+    # ports:
+    #   - '5244:5244'
+    network_mode: 'host'
     environment:
       - PUID=0
       - PGID=0
