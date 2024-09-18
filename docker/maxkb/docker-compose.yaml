@@ -8,3 +8,5 @@ services:
     ports:
       - "8080:8080"
     restart: unless-stopped
+#  用户名：admin
+#  默认密码：MaxKB@123..
