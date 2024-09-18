@@ -1,0 +1,10 @@
+services:
+  maxkb:
+    image: cr2.fit2cloud.com/1panel/maxkb
+    container_name: maxkb
+    volumes:
+      - ~/.maxkb:/var/lib/postgresql/data
+      - ~/.python-packages:/opt/maxkb/app/sandbox/python-packages
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
