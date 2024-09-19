@@ -1,0 +1,16 @@
+services:
+  sftpgo:
+    image: drakkan/sftpgo:latest
+    container_name: sftpgo
+    user: "1100:1100"
+    ports:
+      - "8080:8080"
+      - "2022:2022"
+    volumes:
+      - type: bind
+        source: "${PWD}/data"
+        target: /srv/sftpgo
+      - type: bind
+        source: "${PWD}/config"
+        target: /var/lib/sftpgo
+    restart: unless-stopped
