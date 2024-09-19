@@ -1,8 +1,11 @@
 #!/bin/bash
 
+# 获取当前脚本所在目录
+current_dir="$(pwd)"
+
 # 设置必要的目录路径
-data_dir="/data/dev-tools/docker/sftpGo/data"
-config_dir="/data/dev-tools/docker/sftpGo/config"
+data_dir="$current_dir/data"
+config_dir="$current_dir/config"
 
 # 检查并创建数据和配置目录
 echo "检查并创建数据目录..."
