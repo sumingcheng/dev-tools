@@ -4,9 +4,15 @@
 mkdir -p lobe-chat-db
 cd lobe-chat-db
 
-# 从远程仓库拉取配置文件
-curl -fsSL https://raw.githubusercontent.com/lobehub/lobe-chat/HEAD/docker-compose/local/docker-compose.yml > docker-compose.yml
-curl -fsSL https://raw.githubusercontent.com/lobehub/lobe-chat/HEAD/docker-compose/local/.env.zh-CN.example > .env
+# 检查 docker-compose.yml 文件是否存在，如果不存在，则下载
+if [ ! -f "docker-compose.yml" ]; then
+    curl -fsSL https://raw.githubusercontent.com/lobehub/lobe-chat/HEAD/docker-compose/local/docker-compose.yml > docker-compose.yml
+fi
+
+# 检查 .env 文件是否存在，如果不存在，则下载
+if [ ! -f ".env" ]; then
+    curl -fsSL https://raw.githubusercontent.com/lobehub/lobe-chat/HEAD/docker-compose/local/.env.zh-CN.example > .env
+fi
 
 # 返回到原始目录
 cd ..
