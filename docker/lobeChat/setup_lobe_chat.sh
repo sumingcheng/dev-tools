@@ -12,4 +12,4 @@ curl -fsSL https://raw.githubusercontent.com/lobehub/lobe-chat/HEAD/docker-compo
 cd ..
 
 # 启动服务
-docker compose -f lobe-chat-db/docker-compose.yml up -d
+docker-compose -f lobe-chat-db/docker-compose.yml up -d
