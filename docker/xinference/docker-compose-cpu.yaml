@@ -1,0 +1,7 @@
+version: '3'
+services:
+  xinference:
+    image: xprobe/xinference:latest
+    ports:
+      - "9997:9997"
+    command: xinference-local -H 0.0.0.0

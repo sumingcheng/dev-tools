@@ -1,0 +1,13 @@
+services:
+  xinference:
+    image: xprobe/xinference:latest
+    ports:
+      - "9997:9997"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [ gpu ]
+    command: xinference-local -H 0.0.0.0
