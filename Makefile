@@ -10,7 +10,7 @@ SERVICES = alist apisix api-testing consul deep-lx elasticsearch filebrowser frp
            xinference zentao
 
 # 执行目标：启动和停止服务
-.PHONY: $(SERVICES) stop clean help stop
+.PHONY: $(SERVICES) stop clean help
 
 # 启动服务的规则
 $(SERVICES):
@@ -21,15 +21,9 @@ stop:
 	@read -p "输入要停止的服务名: " SERVICE; \
 	$(DC) $(DOCKER_DIR)/$$SERVICE/docker-compose.yaml down
 
-# 清理目标
-clean:
-	@echo "Cleaning up..."
-	# 这里可以添加清理生成的文件等命令
-
 # 帮助命令
 help:
 	@echo "可用的命令："
 	@echo "  make [服务名]         - 启动指定的服务。例如：make nginx"
 	@echo "  make stop            - 输入服务名来停止指定的服务。"
-	@echo "  make clean           - 执行一般清理操作。"
 	@echo "可管理的服务：$(SERVICES)"
