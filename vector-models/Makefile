@@ -2,8 +2,7 @@
 DC = docker-compose -f
 
 # 定义服务列表
-SERVICES = bge-large-api bge-reranker-base bge-reranker-large bge-reranker-v2-m3 /
-		   m3e-large-api
+SERVICES = bge-large-api bge-reranker-base bge-reranker-large bge-reranker-v2-m3 m3e-large-api
 
 # 执行目标：启动和停止服务
 .PHONY: $(SERVICES) stop clean help
