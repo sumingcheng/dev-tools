@@ -5,7 +5,7 @@ mkdir -p lobe-chat-db
 cd lobe-chat-db
 
 # 检查 docker-compose.yaml 文件是否存在，如果不存在，则下载
-if [ ! -f "docker-compose.yml" ]; then
+if [ ! -f "docker-compose.yaml" ]; then
     curl -fsSL https://raw.githubusercontent.com/lobehub/lobe-chat/HEAD/docker-compose/local/docker-compose.yml > docker-compose.yaml
 fi
 
