@@ -17,7 +17,7 @@ $(SERVICES):
 	$(DC) $(DOCKER_DIR)/$@/docker-compose.yaml up -d
 
 # 停止服务的规则
-stop-%:
+stop %:
 	$(DC) $(DOCKER_DIR)/$*/docker-compose.yaml down
 
 # 清理目标
@@ -29,6 +29,6 @@ clean:
 help:
 	@echo "可用的命令："
 	@echo "  make [服务名]         - 启动指定的服务。例如：make nginx"
-	@echo "  make stop-[服务名]    - 停止指定的服务。例如：make stop-nginx"
+	@echo "  make stop [服务名]    - 停止指定的服务。例如：make stop-nginx"
 	@echo "  make clean           - 执行一般清理操作。"
 	@echo "可管理的服务：$(SERVICES)"
