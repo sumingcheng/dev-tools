@@ -1,6 +1,5 @@
 # 通用变量定义
 DC = docker-compose -f
-DOCKER_DIR = docker
 
 # 定义服务列表
 SERVICES = alist apisix api-testing consul deep-lx elasticsearch filebrowser frp \
@@ -14,12 +13,12 @@ SERVICES = alist apisix api-testing consul deep-lx elasticsearch filebrowser frp
 
 # 启动服务的规则
 $(SERVICES):
-	$(DC) $(DOCKER_DIR)/$@/docker-compose.yaml up -d
+	$(DC) $*/docker-compose.yaml up -d
 
 # 停止服务的规则
 stop:
 	@read -p "输入要停止的服务名: " SERVICE; \
-	$(DC) $(DOCKER_DIR)/$$SERVICE/docker-compose.yaml down
+	$(DC) $$SERVICE/docker-compose.yaml down
 
 # 帮助命令
 help:
