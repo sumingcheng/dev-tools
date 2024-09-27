@@ -14,11 +14,11 @@ SERVICES = alist apisix api-testing consul deep-lx elasticsearch filebrowser frp
 
 # 启动服务的规则
 $(SERVICES):
-	$(DC) $(DOCKER_DIR)/$@/docker-compose.yml up -d
+	$(DC) $(DOCKER_DIR)/$@/docker-compose.yaml up -d
 
 # 停止服务的规则
 stop-%:
-	$(DC) $(DOCKER_DIR)/$*/docker-compose.yml down
+	$(DC) $(DOCKER_DIR)/$*/docker-compose.yaml down
 
 # 清理目标
 clean:
