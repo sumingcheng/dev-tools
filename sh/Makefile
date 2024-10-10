@@ -8,7 +8,7 @@ harbor:
 	@echo "正在进入 harbor 目录..."
 	@cd harbor && bash ./install.sh
 
-http-proxy:
+http:
 	@echo "正在进入 http-proxy 目录..."
 	@cd http-proxy && source ./proxy.sh
 
@@ -32,6 +32,6 @@ sources:
 	@echo "正在进入 sources 目录..."
 	@cd sources && bash select-sources.sh
 
-ssh-proxy:
+ssh:
 	@echo "正在进入 ssh-proxy 目录..."
 	@cd ssh-proxy && source ./proxy.sh
