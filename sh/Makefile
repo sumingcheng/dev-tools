@@ -33,6 +33,6 @@ http:
 	@echo "正在进入 http-proxy 目录..."
 	@cd http-proxy && bash ./proxy.sh
 
-#ssh:
-#	@echo "正在进入 ssh-proxy 目录..."
-#	@cd ssh-proxy && source ./proxy.sh
+ssh:
+	@echo "正在进入 ssh-proxy 目录..."
+	@cd ssh-proxy && source ./proxy.sh set
