@@ -1,3 +1,4 @@
+SHELL := /bin/bash
 .PHONY: anaconda harbor http-proxy miniconda3 minikube pyenv setup sources ssh-proxy
 
 anaconda:
