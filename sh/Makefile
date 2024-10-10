@@ -33,6 +33,6 @@ sources:
 	@echo "正在进入 sources 目录..."
 	@cd sources && bash select-sources.sh
 
-ssh:
-	@echo "正在进入 ssh-proxy 目录..."
-	@cd ssh-proxy && source ./proxy.sh
+#ssh:
+#	@echo "正在进入 ssh-proxy 目录..."
+#	@cd ssh-proxy && source ./proxy.sh
