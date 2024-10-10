@@ -9,10 +9,6 @@ harbor:
 	@echo "正在进入 harbor 目录..."
 	@cd harbor && bash ./install.sh
 
-http:
-	@echo "正在进入 http-proxy 目录..."
-	@cd http-proxy && source ./proxy.sh
-
 miniconda3:
 	@echo "正在进入 miniconda3 目录..."
 	@cd miniconda3 && bash ./install.sh
@@ -32,6 +28,10 @@ setup:
 sources:
 	@echo "正在进入 sources 目录..."
 	@cd sources && bash select-sources.sh
+
+http:
+	@echo "正在进入 http-proxy 目录..."
+	@cd http-proxy && bash ./proxy.sh
 
 #ssh:
 #	@echo "正在进入 ssh-proxy 目录..."
