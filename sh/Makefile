@@ -1,24 +1,37 @@
-# 通用变量定义
-DC = docker-compose -f
+.PHONY: anaconda harbor http-proxy miniconda3 minikube pyenv setup sources ssh-proxy
 
-# 定义服务列表
-SERVICES = bge-large-api bge-reranker-base bge-reranker-large bge-reranker-v2-m3 m3e-large-api
+anaconda:
+	@echo "正在进入 anaconda 目录..."
+	@cd anaconda && bash ./install.sh
 
-# 执行目标：启动和停止服务
-.PHONY: $(SERVICES) stop clean help
+harbor:
+	@echo "正在进入 harbor 目录..."
+	@cd harbor && bash ./install.sh
 
-# 启动服务的规则
-$(SERVICES):
-	$(DC) $@/docker-compose.yaml up -d
+http-proxy:
+	@echo "正在进入 http-proxy 目录..."
+	@cd http-proxy && source ./proxy.sh
 
-# 停止服务的规则
-stop:
-	@read -p "输入要停止的服务名: " SERVICE; \
-	$(DC) $$SERVICE/docker-compose.yaml down
+miniconda3:
+	@echo "正在进入 miniconda3 目录..."
+	@cd miniconda3 && bash ./install.sh
 
-# 帮助命令
-help:
-	@echo "可用的命令："
-	@echo "  make [服务名]         - 启动指定的服务。例如：make nginx"
-	@echo "  make stop            - 输入服务名来停止指定的服务。"
-	@echo "可管理的服务：$(SERVICES)"
+minikube:
+	@echo "正在进入 minikube 目录..."
+	@cd minikube && bash ./install.sh
+
+pyenv:
+	@echo "正在进入 pyenv 目录..."
+	@cd pyenv && bash ./install_pyenv.sh
+
+setup:
+	@echo "正在进入 setup 目录..."
+	@cd setup && bash install_apt.sh
+
+sources:
+	@echo "正在进入 sources 目录..."
+	@cd sources && bash select-sources.sh
+
+ssh-proxy:
+	@echo "正在进入 ssh-proxy 目录..."
+	@cd ssh-proxy && source ./proxy.sh
