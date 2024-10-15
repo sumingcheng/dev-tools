@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  attu:
+    image: zilliz/attu:v2.4
+    ports:
+      - "19000:3000"
+    environment:
+      - MILVUS_URL=172.22.220.64:19530
+    restart: unless-stopped
