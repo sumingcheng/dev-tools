@@ -6,7 +6,7 @@ services:
     container_name: uptime-kuma
     restart: always
     ports:
-      - "3001:3001"
+      - "7001:3001"
     volumes:
       - uptime-kuma:/app/data
 
