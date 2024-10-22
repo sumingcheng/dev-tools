@@ -1,0 +1,5 @@
+services:
+  omniparse:
+    image: savatar101/omniparse:0.1
+    ports:
+      - "8000:8000"
