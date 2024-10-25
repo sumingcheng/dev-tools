@@ -1,0 +1,19 @@
+services:
+  gpt-sovits:
+    image: breakstring/gpt-sovits:latest
+    command: [ "--gpus=all" ]  # 传递给容器的额外命令，例如 GPU 支持
+    environment:
+      - is_half=False  # 环境变量设置，此处设置半精度计算为假
+    volumes:
+      - /opt/GPT-SoVITS-DockerTest/output:/workspace/output  # 映射主机和容器之间的输出目录
+      - /opt/GPT-SoVITS-DockerTest/logs:/workspace/logs  # 映射日志目录
+      - /opt/GPT-SoVITS-DockerTest/SoVITS_weights:/workspace/SoVITS_weights  # 映射权重文件目录
+    working_dir: /workspace  # 设置容器内的工作目录
+    ports:
+      - "9880:9880"  # 映射容器和主机之间的端口，用于网络访问
+      - "9871:9871"
+      - "9872:9872"
+      - "9873:9873"
+      - "9874:9874"
+    shm_size: 16G  # 共享内存大小
+    restart: unless-stopped
