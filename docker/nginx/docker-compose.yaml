@@ -4,9 +4,10 @@ services:
     image: nginx:stable-alpine3.19-slim
     container_name: nginx
     restart: always
+    ports:
+      - '8080:8080'
     volumes:
       - ./html:/usr/share/nginx/html
       - ./bili.conf:/etc/nginx/nginx.conf
-    network_mode: 'host'
-    # ports:
-    #   - '8080:8080'
+#    network_mode: 'host'
+
