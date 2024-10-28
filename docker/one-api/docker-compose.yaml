@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  one-api:
+    container_name: one-api
+    image: justsong/one-api
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      SQL_DSN: "root:123456@tcp(localhost:3306)/oneapi"
+      TZ: Asia/Shanghai
+    volumes:
+      - /home/ubuntu/data/one-api:/data
