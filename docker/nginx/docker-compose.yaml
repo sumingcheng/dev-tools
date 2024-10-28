@@ -8,6 +8,6 @@ services:
       - '8080:8080'
     volumes:
       - ./html:/usr/share/nginx/html
-      - ./bili.conf:/etc/nginx/nginx.conf
+      - ./test.conf:/etc/nginx/nginx.conf
 #    network_mode: 'host'
 

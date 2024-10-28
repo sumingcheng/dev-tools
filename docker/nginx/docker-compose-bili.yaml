@@ -1,0 +1,18 @@
+version: '3'
+services:
+  nginx:
+    image: nginx:stable-alpine3.19-slim
+    container_name: nginx
+    restart: always
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    network_mode: "service:proxy"
+    depends_on:
+      - proxy
+
+  proxy:
+    image: alpine/socat
+    command: tcp-listen:7890,fork,reuseaddr tcp-connect:127.0.0.1:7890
+    network_mode: host
