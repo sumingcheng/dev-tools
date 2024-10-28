@@ -3,16 +3,9 @@ services:
     image: nginx:stable-alpine3.19-slim
     container_name: nginx
     restart: always
+    network_mode: host  # 直接使用主机网络
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
-    network_mode: "service:proxy"
-    depends_on:
-      - proxy
-
-  proxy:
-    image: alpine/socat
-    container_name: proxy
-    restart: always
-    network_mode: host
-    command: |
-      -dd tcp-listen:8080,fork,reuseaddr tcp-connect:127.0.0.1:7890
+    environment:
+      - http_proxy=http://127.0.0.1:7890  # 设置代理
+      - https_proxy=http://127.0.0.1:7890
