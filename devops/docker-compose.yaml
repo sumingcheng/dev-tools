@@ -1,0 +1,58 @@
+version: '3.7'
+
+services:
+  gitlab:
+    image: 'twang2218/gitlab-ce-zh'
+    container_name: 'gitlab'
+    restart: always
+    hostname: '172.22.220.64' # 替换为您的主机名或IP
+    environment:
+      TZ: 'Asia/Shanghai'
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'http://172.22.220.64' # 替换为您的主机名或IP
+        gitlab_rails['gitlab_shell_ssh_port'] = 2222
+        unicorn['port'] = 8888
+    ports:
+      - '80:80'
+      - '2222:22'
+    volumes:
+      - './gitlab/etc:/etc/gitlab'
+      - './gitlab/data:/var/opt/gitlab'
+      - './gitlab/logs:/var/log/gitlab'
+    networks:
+      - ci-network
+
+  harbor:
+    image: 'goharbor/harbor-core:v2.2.0'
+    container_name: 'harbor'
+    restart: always
+    environment:
+      TZ: 'Asia/Shanghai'
+    ports:
+      - '8077:80'
+    volumes:
+      - './harbor/data:/data'
+      - './harbor/log:/var/log/harbor'
+      - './harbor/config:/config'
+    networks:
+      - ci-network
+
+  jenkins:
+    image: 'jenkins/jenkins:lts'
+    container_name: 'jenkins'
+    restart: always
+    user: root
+    ports:
+      - '8989:8080'
+      - '50000:50000'
+    volumes:
+      - './jenkins/jenkins_home:/var/jenkins_home'
+      - '/var/run/docker.sock:/var/run/docker.sock'
+      - '/usr/bin/docker:/usr/bin/docker'
+    networks:
+      - ci-network
+
+networks:
+  ci-network:
+    driver: bridge
+
