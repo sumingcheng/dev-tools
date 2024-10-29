@@ -32,7 +32,7 @@ dev-tools 是一个集成多种常用服务和应用 Docker compose 模板的开
 | --------------------------------- | ------------------------- |
 | [docker](./docker/)               | 常用应用的 docker-compose |
 | [k8s](./k8s/)                     | k8s 应用(正在完善)        |
-| [mk-template](./mk-template/)     | Makefile 模板             |
+| [mk-template](Dockerfile/)     | Makefile 模板             |
 | [py](./py/)                       | python 脚本               |
 | [setup](./setup/)                 | 常用的 linux 工具         |
 | [sh](./sh/)                       | 常用 sh 脚本              |
