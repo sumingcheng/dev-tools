@@ -30,6 +30,11 @@ services:
     restart: always
     environment:
       TZ: 'Asia/Shanghai'
+      POSTGRESQL_HOST: postgres_db
+      POSTGRESQL_PORT: 5432
+      POSTGRESQL_DATABASE: postgres_db
+      POSTGRESQL_USERNAME: admin
+      POSTGRESQL_PASSWORD: admin123456
     ports:
       - '8077:80'
     volumes:
