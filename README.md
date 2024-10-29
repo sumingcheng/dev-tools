@@ -32,27 +32,28 @@ dev-tools 是一个集成多种常用服务和应用 Docker compose 模板的开
 | --------------------------------- | ------------------------- |
 | [docker](./docker/)               | 常用应用的 docker-compose |
 | [k8s](./k8s/)                     | k8s 应用(正在完善)        |
-| [mk-template](Dockerfile/)     | Makefile 模板             |
+| [Dockerfile](Dockerfile/) | 常用项目打包的 Makefile 模板 |
 | [py](./py/)                       | python 脚本               |
 | [setup](./setup/)                 | 常用的 linux 工具         |
 | [sh](./sh/)                       | 常用 sh 脚本              |
 | [styles](./styles/)               | css 样式                  |
 | [vector-models](./vector-models/) | 向量模型                  |
+| [devops](./devops/) | 部署CI/CD |
 
 ## 快速开始
 
-1. 克隆项目
-   ```bash 
-   git clone https//github.com/sumingcheng/dev-tools.git
-   cd dev-tools
-   ```
+克隆项目
+```bash 
+git clone https//github.com/sumingcheng/dev-tools.git
+cd dev-tools
+```
 
-2. 选择需要部署的应用,进入对应目录。例如启动 Redis
-   ```bash
-   cd docker/
-   make help    # 查看支持的命令
-   make up      # 启动服务 
-   ```
+选择需要部署的应用,进入对应目录。例如启动 Redis
+```bash
+cd docker/
+make help    # 查看支持的命令
+make up      # 启动服务 
+```
 
 ## 如何贡献
 
@@ -62,7 +63,6 @@ dev-tools 是一个集成多种常用服务和应用 Docker compose 模板的开
 
 - 快速搭建开发环境,启动常用服务,如 Redis、MySQL 等
 - 测试 docker-compose 编排的应用
-- 在本地或测试环境模拟多服务架构 
 - 自动化运维,批量管理服务
 - 学习和研究 docker、k8s 等技术
 
