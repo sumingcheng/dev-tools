@@ -1,5 +1,3 @@
-# 第一阶段：构建阶段
-# 使用官方Go 1.22镜像作为基础镜像
 FROM golang:1.22 as builder
 
 # 设置工作目录
@@ -18,8 +16,6 @@ COPY . .
 # 构建应用程序，启用CGO禁用以保证静态链接
 RUN CGO_ENABLED=0 GOOS=linux go build -o /goapp
 
-# 第二阶段：运行阶段
-# 使用官方的Alpine镜像为基础，因为它足够小，适合用来运行应用
 FROM alpine:latest
 
 # 在新的镜像中创建一个非root用户来运行我们的应用

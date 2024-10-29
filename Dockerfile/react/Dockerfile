@@ -1,4 +1,3 @@
-# 基于Alpine的Node.js 18.17镜像
 FROM node:18.17-alpine AS builder
 
 WORKDIR /react

@@ -1,4 +1,3 @@
-# 使用Alpine版的Node镜像以减小构建尺寸
 FROM node:18.17-alpine AS builder
 
 WORKDIR /vue
@@ -16,7 +15,6 @@ COPY package.json pnpm-lock.yaml ./
 RUN pnpm install
 RUN pnpm build
 
-# 使用轻量级的nginx镜像
 FROM nginx:stable-alpine AS production
 
 WORKDIR /vue

@@ -1,4 +1,3 @@
-# 使用 node 官方的 Alpine 基础镜像
 FROM node:18.17-alpine AS builder
 
 # 接受外部传入的 USE_CHINA_MIRROR 参数
@@ -28,7 +27,6 @@ COPY . .
 RUN pnpm install && \
     pnpm build
 
-# 生产阶段
 FROM node:18.17-alpine AS runner
 
 WORKDIR /app
