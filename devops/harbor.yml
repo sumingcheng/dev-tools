@@ -1,0 +1,18 @@
+hostname: 172.22.220.64 #修改为本机ip，不能使用localhost、127.0.0.1
+
+http:
+  port: 8077 #改一下http端口8077
+
+#https: #暂时将https注释掉，我们先不通过https只铜鼓http
+#  port: 443
+#  certificate: /your/certificate/path
+#  private_key: /your/private/key/path
+
+data_volume: /root/harbor/data #修改一下数据目录位置
+
+log:
+  level: info
+  local:
+    rotate_count: 50
+    rotate_size: 200M
+    location: /home/harbor/log #修改一下日志目录位置

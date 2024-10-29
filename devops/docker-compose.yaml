@@ -19,6 +19,7 @@ services:
       - './gitlab/etc:/etc/gitlab'
       - './gitlab/data:/var/opt/gitlab'
       - './gitlab/logs:/var/log/gitlab'
+      - './harbor.yml:/etc/harbor/harbor.yml'
     networks:
       - ci-network
 
