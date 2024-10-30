@@ -163,3 +163,4 @@ frps.ini
 frpc.ini
 
 .idea/
+.idea/*
