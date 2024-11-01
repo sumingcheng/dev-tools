@@ -1,53 +1,26 @@
-
+version: "3.8"
 services:
-  mongo:
-    image: mongo:5.0.18
-    container_name: mongo
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    ports:
+      - 27017:27017
+    volumes:
+      - ./database:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=admin
+  mongo-express:
+    image: mongo-express
+    container_name: mongo-express
     restart: always
     ports:
-      - "27017:27017"
+      - 8081:8081
     environment:
-      MONGO_INITDB_ROOT_USERNAME: myusername
-      MONGO_INITDB_ROOT_PASSWORD: mypassword
-    volumes:
-      - ./mongo/data:/data/db
-    networks:
-      - mongo_network
-    entrypoint:
-      - bash
-      - -c
-      - |
-        openssl rand -base64 128 > /data/mongodb.key
-        chmod 400 /data/mongodb.key
-        chown 999:999 /data/mongodb.key
-        echo 'const isInited = rs.status().ok === 1
-        if(!isInited){
-          rs.initiate({
-              _id: "rs0",
-              members: [
-                  { _id: 0, host: "mongo:27017" }
-              ]
-          })
-        }' > /data/initReplicaSet.js
-        # 启动MongoDB服务
-        exec docker-entrypoint.sh "$$@" &
-
-        # 等待MongoDB服务启动
-        until mongo -u myusername -p mypassword --authenticationDatabase admin --eval "print('waited for connection')" > /dev/null 2>&1; do
-          echo "Waiting for MongoDB to start..."
-          sleep 2
-        done
-
-        # 执行初始化副本集的脚本
-        mongo -u myusername -p mypassword --authenticationDatabase admin /data/initReplicaSet.js
-
-        # 等待docker-entrypoint.sh脚本执行的MongoDB服务进程
-        wait $$!
-
-volumes:
-  mongo_data:
-    driver: local
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=admin
+      - ME_CONFIG_MONGODB_SERVER=mongodb
 
 networks:
-  mongo_network:
-    driver: bridge
+  default:
+    name: mongodb_network
