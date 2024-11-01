@@ -1,26 +1,23 @@
-version: "3.8"
+version: '3.5'
 services:
+  # 服务名称为 mongodb，该名称主要用于容器之间服务的 dns 解析
   mongodb:
-    image: mongo
-    container_name: mongodb
-    ports:
-      - 27017:27017
-    volumes:
-      - ./database:/data/db
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=admin
-      - MONGO_INITDB_ROOT_PASSWORD=admin
-  mongo-express:
-    image: mongo-express
-    container_name: mongo-express
+    # 容器的名称为 mymongo
+    container_name: mymongo
+    # 使用的镜像名称
+    image: mongo:latest
+    # 当 docker 服务启动后，自动启动 mongodb 容器
     restart: always
+    # 对外映射的端口
     ports:
-      - 8081:8081
+      - "27017:27017"
     environment:
-      - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
-      - ME_CONFIG_MONGODB_ADMINPASSWORD=admin
-      - ME_CONFIG_MONGODB_SERVER=mongodb
-
-networks:
-  default:
-    name: mongodb_network
+      # 初始化一个 root 角色的用户 root 密码是 root
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root
+    # 宿主机硬盘目录映射容器内的存放数据的目录
+    volumes:
+      - /root/mongo/data:/data/db
+    # 增加启动参数，--auth，表示连接 mongodb 需要用户名和密码
+    command:
+      - "--auth"
