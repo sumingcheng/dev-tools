@@ -7,5 +7,5 @@ services:
     network_mode: host
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - ./conf/frpc.toml:/etc/frp/frpc.toml:ro
+      - ./frpc.toml:/etc/frp/frpc.toml:ro
       - ./logs:/frp/logs

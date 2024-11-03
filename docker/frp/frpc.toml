@@ -1,0 +1,56 @@
+# 连接配置
+## 连接服务端的地址
+serverAddr = "frp.hty1024.com"
+## 连接服务端的端口
+serverPort = 7000
+
+# 鉴权配置
+## 鉴权方式
+auth.method = "token"
+## Token
+auth.token = "123456"
+
+# 日志日志
+## 日志路径
+log.to = "/frp/logs/frpc.log"
+## 日志级别
+log.level = "info"
+## 日志文件最多保留天数
+log.maxDays = 180
+## 禁用标准输出中的日志颜色
+log.disablePrintColor = false
+
+# 代理配置
+## TCP 连接
+[[proxies]]
+### 连接名称
+name = "ssh-demo"
+### 连接类型
+type = "tcp"
+### 本地IP
+localIP = "192.168.1.100"
+### 本地端口
+localPort = 22
+### 是否启用加密功能，启用后该代理和服务端之间的通信内容都会被加密传输
+transport.useEncryption = true
+### 是否启用压缩功能，启用后该代理和服务端之间的通信内容都会被压缩传输
+transport.useCompression = false
+### 服务端绑定的端口，用户访问服务端此端口的流量会被转发到对应的本地服务
+remotePort = 2022
+
+## HTTP 连接
+[[proxies]]
+### 连接名称
+name = "web-demo"
+### 连接类型
+type = "http"
+### 本地IP
+localIP = "192.168.1.100"
+### 本地端口
+localPort = 80
+### 子域名列表，用户访问服务端此域名的流量会被转发到对应的本地服务
+customDomains = ["demo.hty1024.com"]
+### 是否启用加密功能，启用后该代理和服务端之间的通信内容都会被加密传输
+transport.useEncryption = true
+### 是否启用压缩功能，启用后该代理和服务端之间的通信内容都会被压缩传输
+transport.useCompression = false
