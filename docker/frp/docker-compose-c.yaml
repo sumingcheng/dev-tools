@@ -4,11 +4,6 @@ services:
     image: fatedier/frpc:v0.55.1
     container_name: frpc
     volumes:
-      - ./frpc.ini:/etc/frp/frpc.ini # 映射配置文件
+      - ./frpc.ini:/etc/frp/frpc.ini
     restart: always
-    networks:
-      - frps
-
-networks:
-  frps:
-    driver: bridge
+    command: /usr/bin/frpc -c /etc/frp/frpc.ini
