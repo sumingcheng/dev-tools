@@ -1,9 +1,11 @@
-version: '3.8'
+version: '3.9'
 services:
   frpc:
-    image: fatedier/frpc:v0.55.1
+    image: snowdreamtech/frpc:0.52.3
     container_name: frpc
-    volumes:
-      - ./frpc.ini:/etc/frp/frpc.ini
     restart: always
-    command: /usr/bin/frpc -c /etc/frp/frpc.ini
+    network_mode: host
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./conf/frpc.toml:/etc/frp/frpc.toml:ro
+      - ./logs:/frp/logs
