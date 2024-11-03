@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   frpc:
-    image: fatedier/frpc:latest
+    image: fatedier/frpc:v0.55.1
     container_name: frpc
     volumes:
       - ./frpc.ini:/etc/frp/frpc.ini # 映射配置文件
