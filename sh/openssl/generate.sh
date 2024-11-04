@@ -9,7 +9,7 @@ CSR_FILE="root.csr"
 openssl genrsa -out $KEY_FILE 2048
 
 # 创建证书签名请求 (CSR)
-openssl req -new -key $KEY_FILE -out $CSR_FILE -subj "/C=CN/ST=Beijing/L=Beijing/O=Example Corp/OU=IT Department/CN=example.com"
+openssl req -new -key $KEY_FILE -out $CSR_FILE -subj "/C=CN/ST=Beijing/L=Beijing/O=Example Corp/OU=IT Department/CN=harbor.com"
 
 # 自签名证书
 openssl x509 -req -days 365 -in $CSR_FILE -signkey $KEY_FILE -out $CRT_FILE
