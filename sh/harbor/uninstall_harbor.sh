@@ -7,7 +7,7 @@ if [[ $(id -u) -ne 0 ]]; then
 fi
 
 # Harbor 安装目录
-HARBOR_DIR="/path/to/harbor"  # 请替换为实际的 Harbor 安装路径
+HARBOR_DIR="./harbor"  # 请替换为实际的 Harbor 安装路径
 
 # 停止并删除所有 Harbor 容器
 echo "正在停止 Harbor 容器..."

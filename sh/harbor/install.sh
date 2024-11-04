@@ -10,50 +10,36 @@ fi
 echo "HTTP Proxy: $HTTP_PROXY"
 echo "HTTPS Proxy: $HTTPS_PROXY"
 
-# 默认参数设置
+# 设置 Harbor 版本
 HARBOR_VERSION="v2.11.1"
-HARBOR_INSTALLER="harbor-offline-installer-${HARBOR_VERSION}.tgz"
-HARBOR_URL="https://github.com/goharbor/harbor/releases/download/${HARBOR_VERSION}/${HARBOR_INSTALLER}"
+HARBOR_TAR="harbor-offline-installer-$HARBOR_VERSION.tgz"
+HARBOR_URL="https://github.com/goharbor/harbor/releases/download/$HARBOR_VERSION/$HARBOR_TAR"
 
-# 显示使用方法
-usage() {
-    echo "用法: $0 [--version <harbor-version>]"
-    echo "默认下载 Harbor v${HARBOR_VERSION} 安装包。"
-}
+# 创建 Harbor 安装目录
+mkdir -p ~/harbor && cd ~/harbor
 
-# 解析命令行参数
-while [[ "$#" -gt 0 ]]; do
-    case $1 in
-        --version) HARBOR_VERSION="$2"; HARBOR_INSTALLER="harbor-offline-installer-${HARBOR_VERSION}.tgz"; HARBOR_URL="https://github.com/goharbor/harbor/releases/download/${HARBOR_VERSION}/${HARBOR_INSTALLER}"; shift ;;
-        *) echo "未知参数: $1"; usage; exit 1 ;;
-    esac
-    shift
-done
+# 下载最新版本的 Harbor
+curl -LO $HARBOR_URL
 
-# 下载并解压 Harbor
-download_and_unpack() {
-    echo "正在下载 Harbor 安装包..."
-    wget --no-check-certificate -c ${HARBOR_URL} -O ${HARBOR_INSTALLER} || { echo "下载失败"; exit 1; }
-    
-    echo "正在解压安装包..."
-    tar xvf ${HARBOR_INSTALLER} || { echo "解压失败"; exit 1; }
-}
+# 解压安装包
+tar xvf $HARBOR_TAR
+cd harbor
 
-# 配置 Harbor
-configure_harbor() {
-    echo "正在配置 Harbor..."
-    cd harbor || { echo "进入目录失败"; exit 1; }
-    # 使用当前目录下的 config.yml 覆盖原来的 harbor.yml
-    cp ../config.yml harbor.yml
-}
+# 复制配置文件
+cp harbor.yml.tmpl harbor.yml
 
-# 主执行流程
-download_and_unpack
-configure_harbor
+# 自动配置示例 (可根据需要调整)
+# 修改主机名
+sed -i 's/hostname: reg.mydomain.com/hostname: localhost/g' harbor.yml
 
-echo "Harbor 已下载并解压。请查看 'harbor' 目录中的 docker-compose.yml 文件，并使用以下命令来启动 Harbor："
-echo "cd harbor"
-echo "docker-compose up -d"
+# 安装 Harbor
+./install.sh
 
+# 启动 Harbor
+docker-compose up -d
+
+# 提示用户
+echo "Harbor 已下载并解压。"
+echo "Harbor 正在运行中。"
 echo "默认管理员用户名: admin"
 echo "默认管理员密码: Harbor12345"
