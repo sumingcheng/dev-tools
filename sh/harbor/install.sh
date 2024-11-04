@@ -11,7 +11,7 @@ echo "HTTP Proxy: $HTTP_PROXY"
 echo "HTTPS Proxy: $HTTPS_PROXY"
 
 # 默认参数设置
-HARBOR_VERSION="v2.5.0"
+HARBOR_VERSION="v2.12.0-rc1"
 HARBOR_INSTALLER="harbor-offline-installer-${HARBOR_VERSION}.tgz"
 HARBOR_URL="https://github.com/goharbor/harbor/releases/download/${HARBOR_VERSION}/${HARBOR_INSTALLER}"
 
