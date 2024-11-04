@@ -1,6 +1,6 @@
 DC = docker-compose -f
 
-SERVICES = $(shell find . -mindepth 1 -maxdepth 1 -type d -exec basename {} \;)
+SERVICES = $(shell find . -mindepth 1 -maxdepth 1 -type d -exec basename {} \; | sort)
 
 .PHONY: $(SERVICES) stop clean help
 
