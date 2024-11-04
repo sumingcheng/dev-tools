@@ -1,12 +1,8 @@
 # 通用变量定义
 DC = docker-compose -f
 
-# 定义服务列表
-SERVICES = alist apisix api-testing consul deep-lx elasticsearch filebrowser frp \
-           gitlab-runner goproxy halo hoppscotch jellyfin kafka kkfileview lobe-chat-db \
-           mailCatcher maxkb minio mongo mysql nacos neo4j nginx portainer postgres \
-           prometheus rancher redis rocketMQ sentry sftpGo syncthing trivy vault \
-           xinference zentao milvus attu uptime-kuma omniparse
+# 自动获取当前目录下的所有子目录作为服务列表
+SERVICES = $(shell find . -mindepth 1 -maxdepth 1 -type d -exec basename {} \;)
 
 # 执行目标：启动和停止服务
 .PHONY: $(SERVICES) stop clean help
