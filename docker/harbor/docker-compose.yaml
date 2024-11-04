@@ -37,7 +37,7 @@ services:
       - /data/registry:/storage:z
       - ./common/config/registry/:/etc/registry/:z
       - type: bind
-        source: /data/secret/registry/root.crt
+        source: ./root.crt
         target: /etc/registry/root.crt
       - type: bind
         source: ./common/config/shared/trust-certificates
