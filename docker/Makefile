@@ -18,7 +18,7 @@ stop:
 
 # 帮助命令
 help:
-	@echo "可用的命令："
+	@echo "help："
 	@echo "  make [服务名]         - 启动指定的服务。例如：make nginx"
 	@echo "  make stop            - 输入服务名来停止指定的服务。"
 	@echo "可管理的服务：$(SERVICES)"

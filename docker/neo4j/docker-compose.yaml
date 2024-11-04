@@ -24,9 +24,9 @@ services:
       interval: 10m # 每 10 分钟检查一次
       timeout: 5m # 超时时间设置为 5 分钟
       retries: 3 # 失败重试 3 次
-    deploy:
-      # resources:
-      #   limits:
-      #     cpus: '2' # 限制使用 2 个 CPU
-      #     memory: 4G # 限制最大使用 4G 内存
+    #    deploy:
+    #      resources:
+    #        limits:
+    #          cpus: '2' # 限制使用 2 个 CPU
+    #          memory: 4G # 限制最大使用 4G 内存
     restart: unless-stopped
