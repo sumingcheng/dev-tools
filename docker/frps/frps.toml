@@ -39,7 +39,7 @@ webServer.user = "admin"
 webServer.password = "123456"
 
 # 是否提供 Prometheus 监控接口
-enablePrometheus = true
+enablePrometheus = false
 
 # 允许客户端设置的最大连接池大小
 transport.maxPoolCount = 1000
