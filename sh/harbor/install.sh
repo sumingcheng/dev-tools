@@ -33,13 +33,13 @@ tar xvf "$HARBOR_TAR" || { echo "解压失败，退出。"; exit 1; }
 cd harbor || { echo "无法进入目录 harbor，退出。"; exit 1; }
 
 # 确保当前目录下有 harbor.yml 文件
-if [[ ! -f "../harbor.yml" ]]; then
+if [[ ! -f "../../harbor.yml" ]]; then
     echo "配置文件 harbor.yml 不存在，请确保当前目录下有该文件。"
     exit 1
 fi
 
 # 使用当前目录的 harbor.yml 代替模板文件
-cp ../harbor.yml . || { echo "复制 harbor.yml 失败，退出。"; exit 1; }
+cp ../../harbor.yml . || { echo "复制 harbor.yml 失败，退出。"; exit 1; }
 
 # 安装 Harbor
 ./install.sh || { echo "Harbor 安装失败，退出。"; exit 1; }
