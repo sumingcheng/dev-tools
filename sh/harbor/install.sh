@@ -14,7 +14,7 @@ echo "HTTPS Proxy: $HTTPS_PROXY"
 HARBOR_VERSION="v2.11.1"
 HARBOR_TAR="harbor-offline-installer-$HARBOR_VERSION.tgz"
 HARBOR_URL="https://github.com/goharbor/harbor/releases/download/$HARBOR_VERSION/$HARBOR_TAR"
-HARBOR_DIR=~/harbor
+HARBOR_DIR="./harbor"  # 使用当前目录下的 harbor 文件夹
 
 # 创建 Harbor 安装目录
 mkdir -p "$HARBOR_DIR"
@@ -39,10 +39,10 @@ if [[ ! -f "harbor.yml" ]]; then
 fi
 
 # 安装 Harbor
-./install.sh || { echo "Harbor 安装失败，退出。"; exit 1; }
+ ./install.sh || { echo "Harbor 安装失败，退出。"; exit 1; }
 
-## 启动 Harbor
-#docker-compose up -d || { echo "启动 Harbor 失败，退出。"; exit 1; }
+# 启动 Harbor
+ docker-compose up -d || { echo "启动 Harbor 失败，退出。"; exit 1; }
 
 # 提示用户
 echo "Harbor 已下载并解压。"
