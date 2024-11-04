@@ -14,23 +14,29 @@ echo "HTTPS Proxy: $HTTPS_PROXY"
 HARBOR_VERSION="v2.11.1"
 HARBOR_TAR="harbor-offline-installer-$HARBOR_VERSION.tgz"
 HARBOR_URL="https://github.com/goharbor/harbor/releases/download/$HARBOR_VERSION/$HARBOR_TAR"
+HARBOR_DIR=~/harbor
 
 # 创建 Harbor 安装目录
-mkdir -p ~/harbor && cd ~/harbor
+mkdir -p "$HARBOR_DIR"
+cd "$HARBOR_DIR"
 
-# 下载最新版本的 Harbor
-curl -LO $HARBOR_URL
+# 检查是否已经下载过 Harbor
+if [[ ! -f "$HARBOR_TAR" ]]; then
+    echo "下载 Harbor 安装包..."
+    curl -LO "$HARBOR_URL"
+else
+    echo "Harbor 安装包已存在，跳过下载。"
+fi
 
 # 解压安装包
-tar xvf $HARBOR_TAR
+tar xvf "$HARBOR_TAR"
 cd harbor
 
-# 复制配置文件
-cp harbor.yml.tmpl harbor.yml
-
-# 自动配置示例 (可根据需要调整)
-# 修改主机名
-sed -i 's/hostname: reg.mydomain.com/hostname: localhost/g' harbor.yml
+# 确保 harbor.yml 文件已经存在并有效
+if [[ ! -f "harbor.yml" ]]; then
+    echo "配置文件 harbor.yml 不存在，请确保已正确配置。"
+    exit 1
+fi
 
 # 安装 Harbor
 ./install.sh
