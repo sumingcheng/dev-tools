@@ -41,8 +41,8 @@ fi
 # 安装 Harbor
 ./install.sh || { echo "Harbor 安装失败，退出。"; exit 1; }
 
-# 启动 Harbor
-docker-compose up -d || { echo "启动 Harbor 失败，退出。"; exit 1; }
+## 启动 Harbor
+#docker-compose up -d || { echo "启动 Harbor 失败，退出。"; exit 1; }
 
 # 提示用户
 echo "Harbor 已下载并解压。"
