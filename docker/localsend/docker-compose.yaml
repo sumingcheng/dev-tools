@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  localsend:
+    image: localsend/localsend
+    container_name: localsend
+    ports:
+      - "5000:5000"
+    restart: always
