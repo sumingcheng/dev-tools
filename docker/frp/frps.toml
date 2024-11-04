@@ -1,0 +1,45 @@
+# 监听地址
+bindAddr = "0.0.0.0"
+# 监听端口
+bindPort = 7000
+# 监听 KCP 协议端口
+kcpBindPort = 7000
+# 监听 HTTP 协议端口
+vhostHTTPPort = 80
+# 监听 HTTPS 协议端口
+vhostHTTPSPort = 443
+
+# 二级域名后缀
+subDomainHost = "hty1024.com"
+
+# 允许代理绑定的服务端端口
+allowPorts = [
+    { start = 2000, end = 3000 },
+    { single = 3001 },
+    { single = 3003 },
+    { start = 4000, end = 50000 }
+]
+
+# 鉴权配置
+## 鉴权方式
+auth.method = "token"
+## Token
+auth.token = "123456"
+
+# 日志配置
+log.to = "/frp/logs/frps.log"
+log.level = "info"
+log.maxDays = 180
+log.disablePrintColor = false
+
+# 仪表盘配置
+webServer.addr = "0.0.0.0"
+webServer.port = 7500
+webServer.user = "admin"
+webServer.password = "123456"
+
+# 是否提供 Prometheus 监控接口
+enablePrometheus = true
+
+# 允许客户端设置的最大连接池大小
+transport.maxPoolCount = 1000

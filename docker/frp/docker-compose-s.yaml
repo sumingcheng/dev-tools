@@ -1,0 +1,12 @@
+version: "3.9"
+services:
+  frps:
+    image: snowdreamtech/frps:0.52.3
+    container_name: frps
+    hostname: frps
+    restart: always
+    network_mode: host
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./frps.toml:/etc/frp/frps.toml:ro
+      - ./logs:/frp/logs
