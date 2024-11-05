@@ -23,7 +23,7 @@ services:
     ports:
       - "8080:8080"  # UI 的端口
     environment:
-      - REGISTRY_URL=http://registry:5000  # 指定 Registry 服务的地址
+      - REGISTRY_URL=http://172.22.220.64:5000  # 指定 Registry 服务的地址
     networks:
       - registry_network
 
