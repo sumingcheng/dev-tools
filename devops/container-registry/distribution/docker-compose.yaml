@@ -21,7 +21,7 @@ services:
     container_name: registry-ui
     restart: always
     ports:
-      - "8080:8080"
+      - "8080:80"
     environment:
       - REGISTRY_HOST=http://registry:5000
       - REGISTRY_SSL=true
