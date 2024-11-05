@@ -32,8 +32,12 @@ if [[ ! -f "harbor.yml" ]]; then
     exit 1
 fi
 
-# 使用当前目录的 harbor.yml 代替模板文件
-cp harbor.yml . || { echo "复制 harbor.yml 失败，退出。"; exit 1; }
+# 删除现有的 harbor.yml 文件并复制新的配置文件
+echo "删除现有的 harbor.yml 文件并覆盖..."
+rm -f "harbor.yml" || { echo "删除现有 harbor.yml 文件失败，退出。"; exit 1; }
+
+# 复制当前目录下的 harbor.yml 配置文件
+cp harbor.yml . || { echo "复制 harbor.yml 文件失败，退出。"; exit 1; }
 
 # 安装 Harbor
 ./install.sh || { echo "Harbor 安装失败，退出。"; exit 1; }
