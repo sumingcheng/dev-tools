@@ -32,8 +32,11 @@ if [[ ! -f "./harbor.yml" ]]; then
     exit 1
 fi
 
-# 复制当前目录下的 harbor.yml 到 harbor 文件夹
+# 复制当前目录下的 harbor.yml 到 harbor 文件夹（会覆盖现有文件）
 cp ./harbor.yml ./harbor/ || { echo "复制 harbor.yml 文件失败，退出。"; exit 1; }
+
+# 给 install.sh 文件添加执行权限
+chmod +x ./install.sh || { echo "无法给 install.sh 添加执行权限，退出。"; exit 1; }
 
 # 安装 Harbor
 ./install.sh || { echo "Harbor 安装失败，退出。"; exit 1; }
