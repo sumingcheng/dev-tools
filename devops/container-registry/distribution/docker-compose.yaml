@@ -15,6 +15,12 @@ services:
       REGISTRY_HTTP_SECRET: "sumingcheng"
       REGISTRY_HTTP_ADDR: ":5000"
       REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY: "/var/lib/registry"
+      REGISTRY_HTTP_HEADERS_Access-Control-Allow-Origin: '[http://172.22.220.64]'
+      REGISTRY_HTTP_HEADERS_Access-Control-Allow-Methods: '[HEAD,GET,POST,OPTIONS,DELETE]'
+      REGISTRY_HTTP_HEADERS_Access-Control-Allow-Credentials: '[true]'
+      REGISTRY_HTTP_HEADERS_Access-Control-Allow-Headers: '[Authorization,Accept,Cache-Control]'
+      REGISTRY_HTTP_HEADERS_Access-Control-Expose-Headers: '[Docker-Content-Digest]'
+      REGISTRY_STORAGE_DELETE_ENABLED: 'true'
 
   registry_ui:
     image: jc21/registry-ui:latest
