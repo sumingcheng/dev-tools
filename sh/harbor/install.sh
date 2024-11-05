@@ -32,7 +32,7 @@ if [[ ! -f "./harbor.yml" ]]; then
     exit 1
 fi
 
-# 复制当前目录下的 harbor.yml 到 harbor 文件夹（会覆盖现有文件）
+# 将配置文件复制到 harbor 文件夹中
 cp ./harbor.yml ./harbor/ || { echo "复制 harbor.yml 文件失败，退出。"; exit 1; }
 
 # 给 install.sh 文件添加执行权限
@@ -42,7 +42,7 @@ chmod +x ./harbor/install.sh || { echo "无法给 install.sh 添加执行权限�
 ./harbor/install.sh || { echo "Harbor 安装失败，退出。"; exit 1; }
 
 # 启动 Harbor
-docker-compose up -d || { echo "启动 Harbor 失败，退出。"; exit 1; }
+docker-compose -f ./docker-compose.yml -f ./harbor/docker-compose.yml up -d || { echo "启动 Harbor 失败，退出。"; exit 1; }
 
 # 提示用户
 echo "Harbor 已下载并解压。"
