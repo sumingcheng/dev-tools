@@ -36,10 +36,10 @@ fi
 cp ./harbor.yml ./harbor/ || { echo "复制 harbor.yml 文件失败，退出。"; exit 1; }
 
 # 给 install.sh 文件添加执行权限
-chmod +x ./install.sh || { echo "无法给 install.sh 添加执行权限，退出。"; exit 1; }
+chmod +x ./harbor/install.sh || { echo "无法给 install.sh 添加执行权限，退出。"; exit 1; }
 
 # 安装 Harbor
-./install.sh || { echo "Harbor 安装失败，退出。"; exit 1; }
+./harbor/install.sh || { echo "Harbor 安装失败，退出。"; exit 1; }
 
 # 启动 Harbor
 docker-compose up -d || { echo "启动 Harbor 失败，退出。"; exit 1; }
