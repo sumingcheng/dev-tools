@@ -23,9 +23,9 @@ services:
     ports:
       - "8080:80"
     environment:
-      - REGISTRY_HOST=http://registry:5000
+      - REGISTRY_HOST=http://172.22.220.64:5000
       - REGISTRY_SSL=true
-      - REGISTRY_DOMAIN=registry:5000
+      - REGISTRY_DOMAIN=172.22.220.64:5000
       - REGISTRY_STORAGE_DELETE_ENABLED=true
     depends_on:
       - registry
