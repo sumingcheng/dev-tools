@@ -6,18 +6,26 @@ services:
     container_name: registry
     restart: always
     ports:
-      - "5000:5000"  # Docker Registry 服务端口
+      - "5000:5000"
     volumes:
-      - ./data:/var/lib/registry  # 存储镜像数据，确保挂载的目录有足够权限
+      - ./data:/var/lib/registry
     networks:
       - registry_network
     environment:
-      REGISTRY_HTTP_SECRET: "sumingcheng"  # HTTP 身份验证
-      REGISTRY_HTTP_ADDR: ":5000"  # 监听的端口地址
-      REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY: "/var/lib/registry"  # 存储镜像的路径
-      REGISTRY_HTTP_HEADERS_X_CONTENT_TYPE_OPTIONS: "nosniff"  # 增强安全性
-      REGISTRY_HTTP_HEADERS_X_FRAME_OPTIONS: "deny"  # 增强安全性
-      REGISTRY_HTTP_HEADERS_X_XSS_PROTECTION: "1; mode=block"  # 增强安全性
+      REGISTRY_HTTP_SECRET: "sumingcheng"
+      REGISTRY_HTTP_ADDR: ":5000"
+      REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY: "/var/lib/registry"
+
+  registry_ui:
+    image: jeremywohl/registry-ui
+    container_name: registry-ui
+    restart: always
+    ports:
+      - "8080:8080"  # UI 的端口
+    environment:
+      - REGISTRY_URL=http://registry:5000  # 指定 Registry 服务的地址
+    networks:
+      - registry_network
 
 networks:
   registry_network:
