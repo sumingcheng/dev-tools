@@ -17,7 +17,7 @@ services:
       REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY: "/var/lib/registry"
 
   registry_ui:
-    image: jeremywohl/registry-ui
+    image: jc21/registry-ui:latest
     container_name: registry-ui
     restart: always
     ports:
