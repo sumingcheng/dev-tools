@@ -41,9 +41,6 @@ chmod +x ./harbor/install.sh || { echo "无法给 install.sh 添加执行权限�
 # 安装 Harbor
 ./harbor/install.sh || { echo "Harbor 安装失败，退出。"; exit 1; }
 
-# 启动 Harbor
-docker-compose -f ./harbor/docker-compose.yml up -d || { echo "启动 Harbor 失败，退出。"; exit 1; }
-
 # 提示用户
 echo "Harbor 已下载并解压。"
 echo "Harbor 正在运行中。"
