@@ -26,18 +26,14 @@ fi
 # 解压安装包
 tar xvf "$HARBOR_TAR" || { echo "解压失败，退出。"; exit 1; }
 
-# 确保当前目录下有 harbor.yml 文件，假设你把它放在上一级目录
-if [[ ! -f "../harbor.yml" ]]; then
-    echo "配置文件 harbor.yml 不存在，请确保当前目录上一级目录下有该文件。"
+# 确保当前目录下有 harbor.yml 文件
+if [[ ! -f "./harbor.yml" ]]; then
+    echo "配置文件 harbor.yml 不存在，请确保当前目录下有该文件。"
     exit 1
 fi
 
-# 删除现有的 harbor.yml 文件并复制新的配置文件
-echo "删除现有的 harbor.yml 文件并覆盖..."
-rm -f "./harbor.yml" || { echo "删除现有 harbor.yml 文件失败，退出。"; exit 1; }
-
-# 复制上一级目录的 harbor.yml 配置文件到当前目录
-cp ../harbor.yml . || { echo "复制 harbor.yml 文件失败，退出。"; exit 1; }
+# 复制当前目录下的 harbor.yml 到 harbor 文件夹
+cp ./harbor.yml ./harbor/ || { echo "复制 harbor.yml 文件失败，退出。"; exit 1; }
 
 # 安装 Harbor
 ./install.sh || { echo "Harbor 安装失败，退出。"; exit 1; }
