@@ -8,11 +8,10 @@ services:
     ports:
       - "5212:5212"
     volumes:
-      - type: bind
-        source: /www/cloudreve/conf.ini
-        target: /cloudreve/conf.ini
-      - type: bind
-        source: /www/cloudreve/cloudreve.db
-        target: /cloudreve/cloudreve.db
-      - /www/cloudreve/uploads:/cloudreve/uploads
-      - /www/cloudreve/avatar:/cloudreve/avatar
+      - ./conf.ini:/cloudreve/conf.ini  # 配置文件挂载到容器内
+      - ./cloudreve.db:/cloudreve/cloudreve.db  # 数据库文件挂载到容器内
+      - ./uploads:/cloudreve/uploads   # 上传文件目录挂载到容器内
+      - ./avatar:/cloudreve/avatar   # 头像目录挂载到容器内
+    environment:
+      - TZ=Asia/Shanghai  # 可选，设置时区
+    user: "1000:1000"  # 运行容器时指定用户ID，确保容器对文件具有合适的权限
