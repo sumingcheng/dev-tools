@@ -1,0 +1,18 @@
+version: '3.3'
+
+services:
+  cloudreve:
+    image: cloudreve/cloudreve:latest
+    container_name: cloudreve
+    restart: unless-stopped
+    ports:
+      - "5212:5212"
+    volumes:
+      - type: bind
+        source: /www/cloudreve/conf.ini
+        target: /cloudreve/conf.ini
+      - type: bind
+        source: /www/cloudreve/cloudreve.db
+        target: /cloudreve/cloudreve.db
+      - /www/cloudreve/uploads:/cloudreve/uploads
+      - /www/cloudreve/avatar:/cloudreve/avatar
