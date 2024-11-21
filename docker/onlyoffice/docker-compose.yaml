@@ -3,7 +3,7 @@ services:
     image: onlyoffice/documentserver
     container_name: onlyoffice
     ports:
-      - "32221:80"
+      - "80:80"
     restart: always
     environment:
       - JWT_ENABLED=false
