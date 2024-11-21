@@ -1,48 +1,38 @@
-version: "3.8"
+version: '3.8'
 services:
-  redis:
-    container_name: redis
-    image: bitnami/redis:latest
-    restart: unless-stopped
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-    volumes:
-      - redis_data:/bitnami/redis/data
-
   cloudreve:
-    container_name: cloudreve
     image: cloudreve/cloudreve:latest
+    container_name: cloudreve
     restart: unless-stopped
     ports:
-      - "5212:5212"
+      - '5212:5212'
     volumes:
-      - temp_data:/data
       - ./cloudreve/uploads:/cloudreve/uploads
-      - ./cloudreve/conf.ini:/cloudreve/conf.ini:rw
-      - ./cloudreve/cloudreve.db:/cloudreve/cloudreve.db:rw
-      - ./cloudreve/avatar:/cloudreve/avatar:rw
-    environment:
-      - PUID=1000
-      - PGID=1000
+      - ./cloudreve/conf:/cloudreve/conf
+      - ./cloudreve/db:/cloudreve/db
+      - ./cloudreve/avatar:/cloudreve/avatar
     depends_on:
       - aria2
+      - redis
 
   aria2:
     container_name: aria2
-    image: p3terx/aria2-pro # third party image, please keep notice what you are doing
+    image: p3terx/aria2-pro
     restart: unless-stopped
-    environment:
-      - RPC_SECRET=your_aria_rpc_token # aria rpc token, customize your own
-      - RPC_PORT=6800
+    ports:
+      - '6800:6800'
     volumes:
       - ./aria2/config:/config
-      - temp_data:/data
-volumes:
-  redis_data:
-    driver: local
-  temp_data:
-    driver: local
-    driver_opts:
-      type: none
-      device: $PWD/data
-      o: bind
+      - ./cloudreve/uploads:/downloads
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - RPC_SECRET=your_aria2_secret
+      - RPC_PORT=6800
+
+  redis:
+    container_name: redis
+    image: redis:alpine
+    restart: unless-stopped
+    volumes:
+      - ./redis:/data
