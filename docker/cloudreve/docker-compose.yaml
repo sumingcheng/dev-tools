@@ -7,7 +7,7 @@ services:
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
-      - redis_data:/bitnami/redis/data
+      - /var/lib/cloudreve/redis_data:/bitnami/redis/data
 
   cloudreve:
     container_name: cloudreve
@@ -16,30 +16,27 @@ services:
     ports:
       - "5212:5212"
     volumes:
-      - temp_data:/data
-      - ./cloudreve/uploads:/cloudreve/uploads
-      - ./cloudreve/conf.ini:/cloudreve/conf.ini
-      - ./cloudreve/cloudreve.db:/cloudreve/cloudreve.db
-      - ./cloudreve/avatar:/cloudreve/avatar
+      - /var/lib/cloudreve/data:/data
+      - /var/lib/cloudreve/uploads:/cloudreve/uploads
+      - /var/lib/cloudreve/conf.ini:/cloudreve/conf.ini
+      - /var/lib/cloudreve/cloudreve.db:/cloudreve/cloudreve.db
+      - /var/lib/cloudreve/avatar:/cloudreve/avatar
     depends_on:
       - aria2
 
   aria2:
     container_name: aria2
-    image: p3terx/aria2-pro # third party image, please keep notice what you are doing
+    image: p3terx/aria2-pro
     restart: unless-stopped
     environment:
-      - RPC_SECRET=your_aria_rpc_token # aria rpc token, customize your own
+      - RPC_SECRET=your_aria_rpc_token
       - RPC_PORT=6800
     volumes:
-      - ./aria2/config:/config
-      - temp_data:/data
+      - /var/lib/cloudreve/aria2/config:/config
+      - /var/lib/cloudreve/data:/data
+
 volumes:
   redis_data:
     driver: local
   temp_data:
     driver: local
-    driver_opts:
-      type: none
-      device: $PWD/data
-      o: bind
