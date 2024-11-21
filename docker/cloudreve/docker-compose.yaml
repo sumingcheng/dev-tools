@@ -18,9 +18,12 @@ services:
     volumes:
       - temp_data:/data
       - ./cloudreve/uploads:/cloudreve/uploads
-      #      - ./cloudreve/conf.ini:/cloudreve/conf.ini
-      - ./cloudreve/cloudreve.db:/cloudreve/cloudreve.db
-      - ./cloudreve/avatar:/cloudreve/avatar
+      - ./cloudreve/conf.ini:/cloudreve/conf.ini:rw
+      - ./cloudreve/cloudreve.db:/cloudreve/cloudreve.db:rw
+      - ./cloudreve/avatar:/cloudreve/avatar:rw
+    environment:
+      - PUID=1000
+      - PGID=1000
     depends_on:
       - aria2
 
