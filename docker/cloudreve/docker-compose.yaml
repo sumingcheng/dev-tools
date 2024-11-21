@@ -1,4 +1,3 @@
-version: "3.8"
 services:
   redis:
     container_name: redis
@@ -7,7 +6,7 @@ services:
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
-      - /var/lib/cloudreve/redis_data:/bitnami/redis/data
+      - ./redis_data:/bitnami/redis/data  # 使用当前目录的相对路径
 
   cloudreve:
     container_name: cloudreve
@@ -16,11 +15,11 @@ services:
     ports:
       - "5212:5212"
     volumes:
-      - /var/lib/cloudreve/data:/data
-      - /var/lib/cloudreve/uploads:/cloudreve/uploads
-      - /var/lib/cloudreve/conf.ini:/cloudreve/conf.ini
-      - /var/lib/cloudreve/cloudreve.db:/cloudreve/cloudreve.db
-      - /var/lib/cloudreve/avatar:/cloudreve/avatar
+      - ./data:/data  # 使用当前目录的相对路径
+      - ./uploads:/cloudreve/uploads  # 使用当前目录的相对路径
+      - ./conf.ini:/cloudreve/conf.ini  # 使用当前目录的相对路径
+      - ./cloudreve.db:/cloudreve/cloudreve.db  # 使用当前目录的相对路径
+      - ./avatar:/cloudreve/avatar  # 使用当前目录的相对路径
     depends_on:
       - aria2
 
@@ -32,8 +31,8 @@ services:
       - RPC_SECRET=your_aria_rpc_token
       - RPC_PORT=6800
     volumes:
-      - /var/lib/cloudreve/aria2/config:/config
-      - /var/lib/cloudreve/data:/data
+      - ./aria2/config:/config  # 使用当前目录的相对路径
+      - ./data:/data  # 使用当前目录的相对路径
 
 volumes:
   redis_data:
