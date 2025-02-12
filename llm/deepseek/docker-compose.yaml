@@ -1,6 +1,6 @@
 services:
   vllm:
-    image: ghcr.io/vllm-project/vllm:latest
+    image: vllm/vllm-openai:latest
     restart: always
     ports:
       - '8000:8000'
