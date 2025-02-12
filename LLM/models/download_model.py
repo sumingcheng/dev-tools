@@ -24,12 +24,8 @@ class ModelDownloader:
         }
 
     def validate_model_name(self, model_name: str) -> bool:
-        """验证模型名称的有效性"""
-        if not model_name or not isinstance(model_name, str):
-            return False
-        # 检查是否包含非法字符
-        illegal_chars = ['<', '>', ':', '"', '/', '\\', '|', '?', '*']
-        return not any(char in model_name for char in illegal_chars)
+        """验证模型名称的有效性 - 这个方法将被新的验证规则替代"""
+        return True  # 移除原有的验证，改用针对不同平台的验证规则
 
     def prepare_model_directory(self, model_name: str) -> Path:
         """准备模型保存目录"""
@@ -113,20 +109,41 @@ class ModelDownloader:
         """主下载流程"""
         print("欢迎使用模型下载工具！")
         
-        # 获取模型名称
-        while True:
-            model_name = input("\n请输入要下载的模型名称 (例如: deepseek-ai/deepseek-coder-7b-base): ").strip()
-            if self.validate_model_name(model_name):
-                break
-            print("无效的模型名称，请重新输入")
-        
-        # 选择下载源
+        # 先选择下载源
         self.show_source_options()
         while True:
             source = input("\n请输入数字 (1-3): ").strip()
             if source in self.supported_sources:
                 break
             print("无效的选择，请重新输入")
+        
+        # 根据不同平台显示不同的提示信息
+        source_name, _ = self.supported_sources[source]
+        model_name_examples = {
+            'Hugging Face': 'deepseek-ai/deepseek-coder-7b-base',
+            'GitHub': 'https://github.com/username/repo',
+            'ModelScope': 'deepseek/DeepSeek-R1-Distill-Qwen-7B'
+        }
+        example = model_name_examples[source_name]
+        
+        # 修改验证规则
+        def validate_model_name_for_source(name: str, source: str) -> bool:
+            if not name or not isinstance(name, str):
+                return False
+            if source == '3':  # ModelScope
+                return True  # ModelScope允许使用/字符
+            elif source == '2':  # GitHub
+                return name.startswith('http://') or name.startswith('https://')
+            else:  # Hugging Face
+                illegal_chars = ['<', '>', ':', '"', '\\', '|', '?', '*']
+                return not any(char in name for char in illegal_chars)
+        
+        # 获取模型名称
+        while True:
+            model_name = input(f"\n请输入要下载的模型名称\n示例: {example}\n输入: ").strip()
+            if validate_model_name_for_source(model_name, source):
+                break
+            print(f"无效的模型名称，请参考示例格式重新输入")
         
         # 获取token
         token = input("\n如果需要 token，请输入（不需要直接回车）: ").strip() or None
