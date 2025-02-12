@@ -166,6 +166,6 @@ frpc.ini
 .idea/*
 
 # 忽略模型文件夹中的所有内容，除了脚本和requirements
-/models/*
-!/models/download_model.py
-!/models/requirements.txt
+LLM/models/*
+!/LLM/models/download_model.py
+!/LLM/models/requirements.txt

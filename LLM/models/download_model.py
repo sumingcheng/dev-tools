@@ -48,12 +48,17 @@ class ModelDownloader:
             if token:
                 os.environ['MODELSCOPE_API_TOKEN'] = token
             
+            # 检查是否包含命名空间，如果没有则添加默认命名空间
+            if '/' not in model_name:
+                model_name = f"deepseek/{model_name}"
+                logger.info(f"使用完整模型ID: {model_name}")
+            
             local_path = ms_download(model_name, cache_dir='./')
             return True, str(local_path)
         except ImportError:
             return False, "请先安装 modelscope: pip install modelscope"
         except Exception as e:
-            return False, f"从ModelScope下载失败: {str(e)}"
+            return False, f"从ModelScope下载失败: {str(e)}\n提示：请确保使用完整的模型ID，格式为: namespace/model_id"
 
     def download_from_huggingface(self, model_name: str, token: Optional[str]) -> Tuple[bool, str]:
         """从Hugging Face下载模型"""
