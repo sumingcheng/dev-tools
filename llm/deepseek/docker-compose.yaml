@@ -1,6 +1,6 @@
 services:
   vllm:
-    image: dockerhub.qingcloud.com/vllm-project/vllm:latest
+    image: ghcr.io/vllm-project/vllm
     restart: always
     ports:
       - '8000:8000'
