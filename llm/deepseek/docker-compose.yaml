@@ -1,6 +1,6 @@
 services:
   vllm:
-    image: ghcr.io/vllm-project/vllm
+    image: ghcr.io/vllm-project/vllm:latest
     restart: always
     ports:
       - '8000:8000'
