@@ -1,4 +1,3 @@
-version: '3.8'
 services:
   vllm:
     image: dockerhub.qingcloud.com/vllm-project/vllm:latest
