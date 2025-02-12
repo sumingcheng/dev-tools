@@ -169,3 +169,4 @@ frpc.ini
 LLM/models/*
 !/LLM/models/download_model.py
 !/LLM/models/requirements.txt
+!/LLM/models/setup.py
