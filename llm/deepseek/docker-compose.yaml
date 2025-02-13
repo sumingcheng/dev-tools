@@ -5,7 +5,7 @@ services:
     ports:
       - '8000:8000'
     volumes:
-      - /data/dev-tools/llm/models:/models # 使用绝对路径挂载
+      - ../models:/models # 使用绝对路径挂载
       - ./logs:/logs
     environment:
       - HUGGING_FACE_HUB_TOKEN=你的HF_TOKEN # 如果需要的话
@@ -23,3 +23,7 @@ services:
       --tensor-parallel-size 1
       --max-num-seqs 128
       --trust-remote-code
+      --gpu-memory-utilization 0.90
+      --max-model-len 8192
+      --swap-space 4
+      --disable-log-requests
