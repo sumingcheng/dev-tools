@@ -28,3 +28,5 @@ services:
       --swap-space 4
       --disable-log-requests
       --quantization bitsandbytes
+      --load-format bitsandbytes
+
