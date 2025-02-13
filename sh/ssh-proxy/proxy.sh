@@ -1,5 +1,21 @@
 #!/bin/bash
 
+# 检查是否通过 source 执行
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+    echo "错误：此脚本需要使用 source 命令执行"
+    echo "正确用法："
+    echo "设置代理：source proxy.sh set"
+    echo "取消代理：source proxy.sh unset"
+    echo "----------------------------------------"
+    exit 1
+fi
+
+# 显示使用说明
+echo "代理设置工具"
+echo "设置代理：source proxy.sh set"
+echo "取消代理：source proxy.sh unset"
+echo "----------------------------------------"
+
 # 函数：显示使用方法
 usage() {
     echo "Usage: source $0 [set|unset]"
@@ -10,12 +26,6 @@ usage() {
     echo "----------------------------------------"
     return
 }
-
-# 检查是否通过 source 执行
-if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
-    echo "错误：此脚本应该使用 'source' 或 '.' 命令执行以修改环境变量。"
-    exit 1
-fi
 
 # 检查参数数量
 if [ $# -ne 1 ]; then
