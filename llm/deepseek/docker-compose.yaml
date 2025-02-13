@@ -22,5 +22,4 @@ services:
       --port 8000
       --tensor-parallel-size 1
       --max-num-seqs 128
-      --quantization awq
       --trust-remote-code
