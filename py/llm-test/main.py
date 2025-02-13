@@ -5,6 +5,12 @@ client = OpenAI(
     api_key="dummy"  # vLLM 不需要真实的 API key
 )
 
+# 获取可用模型列表
+models = client.models.list()
+print("可用的模型：")
+for model in models.data:
+    print(f"- {model.id}")
+
 # 存储对话历史
 messages = []
 
