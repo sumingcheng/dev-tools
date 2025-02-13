@@ -20,7 +20,7 @@ def chat():
         
         # 发送流式请求
         response = client.chat.completions.create(
-            model="deepseek-ai/DeepSeek-R1-Distill-Qwen-7B",
+            model="deepseek-r1-distill-qwen-7b",
             messages=messages,
             stream=True  # 启用流式输出
         )
