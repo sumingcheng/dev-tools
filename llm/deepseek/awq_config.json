@@ -1,0 +1,7 @@
+{
+  "quantization_type": "awq",
+  "precision": 8,
+  "activation_threshold": 0.5,
+  "weight_threshold": 0.7,
+  "strategy": "dynamic"
+}

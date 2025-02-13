@@ -7,6 +7,7 @@ services:
     volumes:
       - /data/dev-tools/llm/models:/models # 使用绝对路径挂载
       - ./logs:/logs
+      - ./awq_config.json:/config/awq_config.json # 映射量化配置文件
     environment:
       - HUGGING_FACE_HUB_TOKEN=你的HF_TOKEN # 如果需要的话
     deploy:
@@ -22,5 +23,5 @@ services:
       --port 8000
       --tensor-parallel-size 1
       --max-num-seqs 128
-      --quantization awq
+      --quantization-config /config/awq_config.json
       --trust-remote-code
