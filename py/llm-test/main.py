@@ -7,9 +7,25 @@ client = OpenAI(
 
 # 获取可用模型列表
 models = client.models.list()
+available_models = [model.id for model in models.data]
+
+# 显示模型选项
 print("可用的模型：")
-for model in models.data:
-    print(f"- {model.id}")
+for i, model in enumerate(available_models, 1):
+    print(f"{i}. {model}")
+
+# 让用户选择模型
+while True:
+    try:
+        choice = int(input("\n请选择模型序号: "))
+        if 1 <= choice <= len(available_models):
+            selected_model = available_models[choice-1]
+            print(f"\n已选择模型: {selected_model}")
+            break
+        else:
+            print("无效的选择，请重试")
+    except ValueError:
+        print("请输入有效的数字")
 
 # 存储对话历史
 messages = []
@@ -26,7 +42,7 @@ def chat():
         
         # 发送流式请求
         response = client.chat.completions.create(
-            model="deepseek-r1-distill-qwen-7b",
+            model=selected_model,  # 使用用户选择的模型
             messages=messages,
             stream=True  # 启用流式输出
         )
