@@ -27,3 +27,4 @@ services:
       --max-model-len 8192
       --swap-space 4
       --disable-log-requests
+      --quantization int8
