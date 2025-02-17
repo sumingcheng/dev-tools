@@ -21,7 +21,7 @@ services:
     environment:
       - TZ=${TIMEZONE}
       - HF_ENDPOINT=${HF_ENDPOINT}
-      - MACOS=${MACOS}
+      # - MACOS=${MACOS}
     networks:
       - ragflow
     restart: on-failure
