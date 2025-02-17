@@ -55,3 +55,14 @@
 1. 显存占用与 `max-num-seqs` 和 `max-batch-size` 参数密切相关
 2. 使用量化时，建议先测试模型效果，某些模型可能对量化敏感
 3. 多 GPU 并行时，确保模型大小与显存配置相匹配
+
+## 4090 部署
+
+DeepSeek-R1-Distill-Qwen-32B-Q4_K_M
+
+```
+vllm serve /path/to/DeepSeek-R1-Distill-Qwen-32B-Q4_K_M \
+    --dtype float16 \
+    --trust-remote-code \
+    --device-map auto
+```
