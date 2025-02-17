@@ -4,7 +4,7 @@
 <summary></b>📗 目录</b></summary>
 
 - 🐳 [Docker Compose](#-docker-compose)
-- 🐬 [Docker 环境变量](#-docker-环境变量) 
+- 🐬 [Docker 环境变量](#-docker-环境变量)
 - 🐋 [服务配置](#服务配置)
 
 </details>
@@ -76,12 +76,12 @@
 - `SVR_HTTP_PORT`  
   用于将 RAGFlow 的 HTTP API 服务暴露给主机的端口,允许从 Docker 容器外部访问容器内运行的服务。默认为 `9380`。
 - `RAGFLOW-IMAGE`  
-  Docker 镜像版本。可用版本:  
-  
-  - `infiniflow/ragflow:v0.16.0-slim`(默认):不嵌入模型的 RAGFlow Docker 镜像。  
+  Docker 镜像版本。可用版本:
+
+  - `infiniflow/ragflow:v0.16.0-slim`(默认):不嵌入模型的 RAGFlow Docker 镜像。
   - `infiniflow/ragflow:v0.16.0`:嵌入模型的 RAGFlow Docker 镜像,包括:
     - 内置嵌入模型:
-      - `BAAI/bge-large-zh-v1.5` 
+      - `BAAI/bge-large-zh-v1.5`
       - `BAAI/bge-reranker-v2-m3`
       - `maidalun1020/bce-embedding-base_v1`
       - `maidalun1020/bce-reranker-base_v1`
@@ -94,15 +94,15 @@
       - `jinaai/jina-embeddings-v2-small-en`
       - `nomic-ai/nomic-embed-text-v1.5`
       - `sentence-transformers/all-MiniLM-L6-v2`
-  
+
 > [!TIP]  
-> 如果无法下载 RAGFlow Docker 镜像,请尝试以下镜像。  
-> 
-> - 对于 `nightly-slim` 版本:  
->   - `RAGFLOW_IMAGE=swr.cn-north-4.myhuaweicloud.com/infiniflow/ragflow:nightly-slim` 或
+> 如果无法下载 RAGFlow Docker 镜像,请尝试以下镜像。
+>
+> - 对于 `nightly-slim` 版本:
+    >   - `RAGFLOW_IMAGE=swr.cn-north-4.myhuaweicloud.com/infiniflow/ragflow:nightly-slim` 或
 >   - `RAGFLOW_IMAGE=registry.cn-hangzhou.aliyuncs.com/infiniflow/ragflow:nightly-slim`。
-> - 对于 `nightly` 版本:  
->   - `RAGFLOW_IMAGE=swr.cn-north-4.myhuaweicloud.com/infiniflow/ragflow:nightly` 或
+> - 对于 `nightly` 版本:
+    >   - `RAGFLOW_IMAGE=swr.cn-north-4.myhuaweicloud.com/infiniflow/ragflow:nightly` 或
 >   - `RAGFLOW_IMAGE=registry.cn-hangzhou.aliyuncs.com/infiniflow/ragflow:nightly`。
 
 ### 时区
@@ -151,7 +151,7 @@
   - `github`:应用程序的 GitHub 身份验证设置。访问 [Github Developer Settings page](https://github.com/settings/developers) 以获取你的 client_id 和 secret_key。
 
 - `user_default_llm`  
-  新 RAGFlow 用户使用的默认 LLM。默认情况下禁用。要启用此功能,请取消注释 **service_conf.yaml.template** 中的相应行。  
+  新 RAGFlow 用户使用的默认 LLM。默认情况下禁用。要启用此功能,请取消注释 **service_conf.yaml.template** 中的相应行。
   - `factory`:LLM 供应商。可用选项:
     - `"OpenAI"`
     - `"DeepSeek"`
