@@ -48,10 +48,10 @@ redis:
 #   secret: 'secret'
 #   tenant_id: 'tenant_id'
 #   container_name: 'container_name'
-# user_default_llm:
-#   factory: 'Tongyi-Qianwen'
-#   api_key: 'sk-xxxxxxxxxxxxx'
-#   base_url: ''
+user_default_llm:
+  factory: 'deepseek-qwen-32b'
+  api_key: 'sk-xxxxxxxxxxxxx'
+  base_url: 'http://192.168.33.41:8001'
 # oauth:
 #   github:
 #     client_id: xxxxxxxxxxxxxxxxxxxxxxxxx
