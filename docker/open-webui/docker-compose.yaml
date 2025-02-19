@@ -8,6 +8,7 @@ services:
       - "38001:8080"
     environment:
       # - OPENAI_API_KEY=sk-proj-1234567890
+      # 注意，纯UI模式下启动会遇到很多问题，建议使用ollama一起的启动方式，open-webui已经是ollama的形状了
       - AUTH_DISABLED=true
     volumes:
       - open-webui:/app/backend/data
