@@ -6,8 +6,8 @@ services:
     container_name: open-webui
     ports:
       - "38001:8080"
-    environment:
-      - OPENAI_API_KEY=sk-proj-1234567890
+    # environment:
+    #   - OPENAI_API_KEY=sk-proj-1234567890
     volumes:
       - open-webui:/app/backend/data
     restart: always
