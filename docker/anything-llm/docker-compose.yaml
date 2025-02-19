@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  anythingllm:
+    image: mintplexlabs/anythingllm:latest
+    container_name: anythingllm
+    ports:
+      - '3001:3001'
+    cap_add:
+      - SYS_ADMIN
+    volumes:
+      - ./storage:/app/server/storage
+      - ./.env:/app/server/.env
+    environment:
+      - STORAGE_DIR=/app/server/storage
+    restart: unless-stopped
