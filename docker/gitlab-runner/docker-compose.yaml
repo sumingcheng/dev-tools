@@ -2,8 +2,7 @@ services:
   gitlab-runner:
     image: gitlab/gitlab-runner:latest
     restart: always
-    depends_on:
-      - gitlab
+    privileged: true
     volumes:
       - '/var/run/docker.sock:/var/run/docker.sock'
       - 'config.toml:/etc/gitlab-runner/config.toml'
