@@ -8,6 +8,9 @@ services:
     user: root
     environment:
       - TZ=Asia/Shanghai
+      # 使用清华大学镜像源
+      - JENKINS_UC=https://mirrors.tuna.tsinghua.edu.cn/jenkins/updates/update-center.json
+      - JENKINS_UC_DOWNLOAD=https://mirrors.tuna.tsinghua.edu.cn/jenkins
     ports:
       - '8989:8080' # web
       - '50000:50000' # agent
