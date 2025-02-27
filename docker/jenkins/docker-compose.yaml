@@ -1,5 +1,4 @@
 version: '3.7'
-
 services:
   jenkins:
     image: 'jenkins/jenkins:lts'
@@ -11,6 +10,12 @@ services:
       # 使用清华大学镜像源
       - JENKINS_UC=https://mirrors.tuna.tsinghua.edu.cn/jenkins/updates/update-center.json
       - JENKINS_UC_DOWNLOAD=https://mirrors.tuna.tsinghua.edu.cn/jenkins
+      # 配置HTTP代理
+      - HTTP_PROXY=http://172.22.220.21:1081
+      - HTTPS_PROXY=http://172.22.220.21:1081
+      - NO_PROXY=localhost,127.0.0.1
+      # 通过JVM参数也配置代理
+      - JAVA_OPTS="-Dhttp.proxyHost=172.22.220.21 -Dhttp.proxyPort=1081 -Dhttps.proxyHost=172.22.220.21 -Dhttps.proxyPort=1081 -Dhttp.nonProxyHosts=localhost|127.0.0.1"
     ports:
       - '8989:8080' # web
       - '50000:50000' # agent
@@ -20,7 +25,6 @@ services:
       - '/usr/bin/docker:/usr/bin/docker'
     networks:
       - ci-network
-
 networks:
   ci-network:
     driver: bridge
