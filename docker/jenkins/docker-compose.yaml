@@ -9,7 +9,6 @@ services:
       - TZ=Asia/Shanghai
       # 使用清华大学镜像源
       - JENKINS_UC=https://mirrors.tuna.tsinghua.edu.cn/jenkins/updates/update-center.json
-      - JENKINS_UC_DOWNLOAD=https://mirrors.tuna.tsinghua.edu.cn/jenkins
       # 配置HTTP代理
       - HTTP_PROXY=http://172.22.220.21:1081
       - HTTPS_PROXY=http://172.22.220.21:1081
