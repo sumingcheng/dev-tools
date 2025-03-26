@@ -68,12 +68,5 @@ make up      # 启动服务
 
 ## 许可证
 
-本项目采用 MIT 许可证,详情请见 [LICENSE](./LICENSE) 文件。
+本项目 MIT 许可证,详情请见 [LICENSE](./LICENSE) 文件。
 
-## 支持
-
-如果你觉得这个项目有用,欢迎给我们点个 star star 或分享给更多人。
-
-如遇到问题,欢迎提交 [Issues](https//github.com/sumingcheng/dev-tools/issues) 反馈。
-
-也非常欢迎你分享自己部署和使用过的有趣应用,让这个项目变得更加丰富多彩。
