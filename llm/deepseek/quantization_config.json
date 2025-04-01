@@ -1,0 +1,7 @@
+{
+  "bits": 4,
+  "group_size": 128,
+  "desc_act": false,
+  "model_type": "llama",
+  "version": "GPTQ"
+}

@@ -21,7 +21,7 @@ sdist/
 var/
 wheels/
 share/python-wheels/
-*.egg-info/ 
+*.egg-info/
 .installed.cfg
 *.egg
 MANIFEST
@@ -164,9 +164,3 @@ frpc.ini
 
 .idea/
 .idea/*
-
-# 忽略模型文件夹中的所有内容，除了脚本和requirements
-llm/models/*
-!/llm/models/download_model.py
-!/llm/models/requirements.txt
-!/llm/models/setup.py

@@ -1,0 +1,4 @@
+huggingface_hub
+tqdm
+requests
+modelscope 
