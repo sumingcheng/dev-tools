@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  n8n:
+    image: ghcr.io/n8n-io/n8n:1.87.1
+    container_name: n8n
+    ports:
+      - "5678:5678"
+    volumes:
+      - ./n8n:/home/node/.n8n
+    environment:
+      - TZ=Asia/Shanghai
+    restart: unless-stopped
