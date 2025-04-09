@@ -10,4 +10,6 @@ services:
       - ./n8n:/home/node/.n8n
     environment:
       - TZ=Asia/Shanghai
+      - NODE_ENV=production
     restart: unless-stopped
+    user: "1000:1000"
