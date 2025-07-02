@@ -1,18 +1,19 @@
-
+version: '3.3'
 services:
   mongo:
     image: mongo:5.0.18
     container_name: mongo
     restart: always
     ports:
-      - "27017:27017"
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: myusername
-      MONGO_INITDB_ROOT_PASSWORD: mypassword
-    volumes:
-      - ./mongo/data:/data/db
+      - 27017:27017
     networks:
       - mongo_network
+    command: mongod --keyFile /data/mongodb.key --replSet rs0
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=myusername
+      - MONGO_INITDB_ROOT_PASSWORD=mypassword
+    volumes:
+      - ./mongo/data:/data/db
     entrypoint:
       - bash
       - -c
@@ -33,7 +34,7 @@ services:
         exec docker-entrypoint.sh "$$@" &
 
         # 等待MongoDB服务启动
-        until mongo -u myusername -p mypassword --authenticationDatabase admin --eval "print('waited for connection')" > /dev/null 2>&1; do
+        until mongo -u myusername -p mypassword --authenticationDatabase admin --eval "print('waited for connection')"; do
           echo "Waiting for MongoDB to start..."
           sleep 2
         done
@@ -43,10 +44,6 @@ services:
 
         # 等待docker-entrypoint.sh脚本执行的MongoDB服务进程
         wait $$!
-
-volumes:
-  mongo_data:
-    driver: local
 
 networks:
   mongo_network:
