@@ -1,89 +1,99 @@
 <div align="center">
-<a href="https://github.com/sumingcheng/DevTools"><img src="https://github.com/sumingcheng/DevTools/assets/21992204/ea3d950c-823b-4a53-9299-3c0a9234a5d9" width="120" height="120" alt="DevToos logo" ></a>
+  <img src="https://github.com/sumingcheng/DevTools/assets/21992204/ea3d950c-823b-4a53-9299-3c0a9234a5d9" width="120" height="120" alt="DevTools logo" >
+  <h1>dev-tools</h1>
 
-# DevToos
+  <p align="center">
+    <a href="./README_EN.md">English</a> |
+    <a href="./README.md">简体中文</a>
+  </p>
 
-<p align="center">
-  <a href="./README_EN.md">English</a> |
-  <a href="./README.md">简体中文</a>
-</p>
+  <p align="center">
+    <a href="https://github.com/sumingcheng/dev-tools/stargazers"><img src="https://img.shields.io/github/stars/sumingcheng/dev-tools" alt="Stars Badge"/></a>
+    <a href="https://github.com/sumingcheng/dev-tools/network/members"><img src="https://img.shields.io/github/forks/sumingcheng/dev-tools" alt="Forks Badge"/></a>
+    <a href="https://github.com/sumingcheng/dev-tools/pulls"><img src="https://img.shields.io/github/issues-pr/sumingcheng/dev-tools" alt="Pull Requests Badge"/></a>
+    <a href="https://github.com/sumingcheng/dev-tools/issues"><img src="https://img.shields.io/github/issues/sumingcheng/dev-tools" alt="Issues Badge"/></a>
+    <a href="./LICENSE"><img src="https://img.shields.io/github/license/sumingcheng/dev-tools?color=2b9348" alt="License Badge"/></a>
+  </p>
 </div>
 
-## Application Deployment Toolkit
+## Introduction
 
-Getting started is often the hardest part, especially when deploying applications as it involves time-consuming tasks like searching for images and writing Docker compose files. Thus, this toolkit provides pre-configured Docker compose files and various automation scripts to help you quickly launch and run various services and applications, saving time and enhancing efficiency.
+Tired of the tedious work of setting up environments repeatedly for every new project? `dev-tools` is here to solve that.
 
-### Features
+This is a powerful `make` + `docker-compose` toolkit that bundles dozens of essential development services—from databases to large language models—into standard, one-command-to-start templates. Say goodbye to tedious configurations and get a complete development environment up and running in minutes, so you can focus on what truly matters: coding and innovation.
 
-This toolkit integrates Docker compose files for various commonly used services and applications, accessible to anyone familiar with Docker. It includes practical scripts for quickly handling environment configurations, installations, and uninstallations. Most tools and scripts have been tested on `Ubuntu jammy 22.04 x86_64` and are confirmed to work smoothly. If you need to use other environments, please test and submit a `PR`.
+Most tools and scripts have been tested on Ubuntu 22.04 x86_64. For other environments, please test and submit a PR if needed.
 
-### Application List
+## What's Inside?
 
-Here are the currently supported applications and services:
+### 🐳 Docker Service Orchestration ([docker/](./docker/))
 
-| Application/Service | Service Directory | Main Function                 |
-| ------------------- | ----------------- | ----------------------------- |
-| Elasticsearch       | `elasticsearch`   | Full-text search engine       |
-| GitLab Runner       | `gitlab-runner`   | CI/CD task automation         |
-| Jellyfin            | `jellyfin`        | Media server                  |
-| Kafka               | `kafka`           | Message queue system          |
-| MinIO               | `minio`           | Object storage                |
-| MongoDB             | `mongo`           | NoSQL database                |
-| MySQL               | `mysql`           | Relational database           |
-| Portainer           | `portainer`       | Container management platform |
-| PostgreSQL          | `postgres`        | Relational database           |
-| Prometheus          | `prometheus`      | Monitoring system             |
-| Redis               | `redis`           | Key-value store               |
-| RocketMQ            | `rocketMQ`        | Message middleware            |
-| Syncthing           | `syncthing`       | File synchronization service  |
+A collection of `docker-compose` configurations for a wide range of popular development tools and services, covering everything from databases to AI applications.
 
-### Script List
+- **AI / Large Language Models (LLM)**: `anything-llm`, `dify`, `maxkb`, `ragflow`, `lobeChat`, `gpt-sovits`, `xinference`, `open-webui`, `omniparse`, `deep-lx`, `searxng-api`
+- **Databases & Caching**: `mysql`, `postgres`, `mongo`, `redis`, `milvus`, `neo4j`, `elasticsearch`, `consul`
+- **CI/CD & DevOps**: `gitlab`, `gitlab-runner`, `jenkins`, `rancher`, `sentry`, `trivy`, `portainer`
+- **Object Storage & File Services**: `minio`, `cloudreve`, `alist`, `filebrowser`, `sftpGo`
+- **API Gateway & Testing**: `apisix`, `one-api`, `hoppscotch`, `api-testing`, `goproxy`
+- **Monitoring & Alerting**: `prometheus`, `uptime-kuma`
+- **Message Queues & Service Discovery**: `kafka`, `rocketMQ`, `nacos`
+- **Content Management & Collaboration**: `wordpress`, `halo`, `onlyoffice`, `zentao`, `waline`, `jellyfin`
+- **Utilities**: `vault` (secret management), `syncthing` (file sync), `kkfileview` (file preview), `mailCatcher` (email capture), `frpc`/`frps` (NAT traversal)
+- **Vector Database Management**: `attu` (Milvus admin)
 
-| Service Directory | Script File Name        | Main Function                   |
-| ----------------- | ----------------------- | ------------------------------- |
-| harbor            | `install.sh`            | Install Harbor                  |
-| http-proxy        | `set_proxy.sh`          | Set proxy server configuration  |
-| minikube          | `install_minikube.sh`   | Install Minikube                |
-| minikube          | `uninstall_minikube.sh` | Uninstall Minikube              |
-| packages          | `install_apt.sh`        | Install common packages via APT |
-| packages          | `select-sources.sh`     | Switch APT sources              |
-| pyenv             | `install_pyenv.sh`      | Install Pyenv                   |
-| pyenv             | `uninstall_pyenv.sh`    | Uninstall Pyenv                 |
+### 🚀 Vector Model Services ([vector-models/](./vector-models/))
 
-### Additional
+Quickly deploy services for popular vector embedding and reranker models.
 
-| Service Directory | File Type                               | File Names                                                   |
-| ----------------- | --------------------------------------- | ------------------------------------------------------------ |
-| gitlab-runner     | Configuration files                     | `config.toml`, `gitlab.rb`                                   |
-| http-proxy        | Script file                             | `set_proxy.sh`                                               |
-| harbor            | Installation script                     | `install.sh`                                                 |
-| minikube          | Installation and uninstallation scripts | `install_minikube.sh`, `uninstall_minikube.sh`               |
-| minio             | Scripts and text file                   | `file.txt`, `upload.py`                                      |
-| packages          | Scripts and configuration files         | `apt-list.json`, `install_apt.sh`, `select-sources.sh`, `sources.list` |
-| prometheus        | Configuration files                     | `grafana.ini`, `prometheus.yml`                              |
-| pyenv             | Installation and uninstallation scripts | `install_pyenv.sh`, `uninstall_pyenv.sh`                     |
-| system-info       | Python scripts                          | `getGPUs.py`, `requirements.txt`                             |
+- **Embedding Models**: `bge-large-api`, `m3e-large-api`
+- **Reranker Models**: `bge-reranker-base`, `bge-reranker-large`, `bge-reranker-v2-m3`
+
+### 🐍 Python Scripts ([py/](./py/))
+
+A collection of useful Python automation scripts.
+
+- `doc2md`: Convert Word documents to Markdown
+- `get-gpu`: Detect GPU information
+- `llm-test`: Test LLM services
+- `logger`: Logger module configuration
+- `uploadFiles`: A simple file upload application
+
+### 🐚 Shell Scripts ([sh/](./sh/))
+
+Shell scripts for environment configuration, software installation, and management.
+
+- **Environment Management**: `anaconda`, `miniconda3`, `pyenv`
+- **System Tools**: `openssl` (certificate generation), `setup` (apt tool installation), `sources` (source switching)
+- **Development Tools**: `minikube` (local K8s), `remote-dev` (remote dev permissions)
+- **Proxy Tools**: `http-proxy`, `ssh-proxy`
+- **Others**: `gui`, `randomGitHistory`
+
+### 📦 DevOps & K8s ([devops/](./devops/), [k8s/](./k8s/))
+
+- **DevOps**: Includes deployment solutions for CI/CD related services like `container-registry` (Harbor, Distribution).
+- **Kubernetes**: Provides K8s configurations for basic services like `mysql`, `nginx`, and `redis` (work in progress).
 
 ## Quick Start
 
-```
-git
-Copy code
-git clone https://github.com/sumingcheng/DevTools.git
+Clone the project:
+
+```bash
+git clone https://github.com/sumingcheng/dev-tools.git
+cd dev-tools
 ```
 
-Choose the application you need to deploy, go to the corresponding directory, and execute `docker-compose up`.
+Navigate to the directory of the application you want to deploy. For example, to start Redis:
 
-### How to Contribute
+```bash
+cd docker/
+make help    # View supported commands
+make up      # Start the service
+```
+
+## How to Contribute
 
 We welcome and encourage community members to contribute code, documentation, report issues, or provide new ideas. If you have good suggestions or feature additions, please share them through Issues or Pull Requests.
 
-### License
+## License
 
-This project is under the MIT License, see the LICENSE file for details.
-
-### Support
-
-If you find this toolkit useful, consider starring our project or sharing it with more colleagues. If you encounter any problems, feel free to submit an Issue on GitHub.
-
-We look forward to your contributions and more interesting applications that you have deployed!
+This project is under the MIT License, see the [LICENSE](./LICENSE) file for details.

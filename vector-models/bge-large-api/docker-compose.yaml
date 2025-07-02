@@ -14,8 +14,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '4'
-          memory: 8G
+          cpus: '8'
+          memory: 16G
       restart_policy:
         condition: on-failure
         max_attempts: 3
