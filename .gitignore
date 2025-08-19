@@ -170,3 +170,12 @@ llm/models/*
 !/llm/models/download_model.py
 !/llm/models/requirements.txt
 !/llm/models/setup.py
+
+# 缓存文件不提交
+cache/
+tmp/
+
+# 只保留目录结构
+!cache/.gitkeep
+!logs/.gitkeep
+!tmp/.gitkeep
