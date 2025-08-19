@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  vllm-qwen:
+    image: vllm/vllm-openai:latest
+    container_name: vllm-qwen-1.5b
+    ports:
+      - "8000:8000"
+    command: >
+      --model Qwen/Qwen2.5-1.5B-Instruct
+      --trust-remote-code
+      --max-model-len 2048
+      --gpu-memory-utilization 0.8
+      --dtype float16
+      --port 8000
+      --host 0.0.0.0
+      --max-num-seqs 16
+      --disable-log-requests
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
+      - HF_HOME=/root/.cache/huggingface
+    volumes:
+      # 模型缓存目录，避免重复下载
+      - ~/.cache/huggingface:/root/.cache/huggingface
+      # 日志目录
+      - ./logs:/app/logs
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8000/health" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 120s  # 模型加载需要时间
+    networks:
+      - vllm-network
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [ "gpu" ]
+        limits:
+          memory: 8G
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "3"
+
+networks:
+  vllm-network:
+    driver: bridge
