@@ -1,12 +1,47 @@
+version: '3.8'
+
 services:
   omniparse:
     image: savatar101/omniparse:0.1
+    container_name: omniparse-service
     ports:
       - "8000:8000"
     environment:
       - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
+    volumes:
+      # 挂载数据目录（如果需要持久化存储）
+      - ./data:/app/data
+      # 挂载配置文件（如果有）
+      - ./config:/app/config
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8000/health" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - omniparse-network
     deploy:
       resources:
         reservations:
           devices:
-            - capabilities: [ "gpu" ]
+            - driver: nvidia
+              count: all
+              capabilities: [ "gpu" ]
+        limits:
+          memory: 8G  # 根据需要调整
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+networks:
+  omniparse-network:
+    driver: bridge
+
+volumes:
+  omniparse-data:
+    driver: local
