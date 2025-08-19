@@ -1,8 +1,8 @@
 services:
   redis:
-    image: redis:6.2.6
+    image: redis:8.0.3
     container_name: redis_server
-    # command: redis-server --appendonly yes --requirepass sumingcheng
+    # command: redis-server --appendonly yes --requirepass sumingcheng  # 启用持久化和密码
     ports:
       - "6379:6379"
     volumes:
