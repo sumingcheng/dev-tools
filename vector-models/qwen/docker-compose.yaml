@@ -21,11 +21,8 @@ services:
       - NVIDIA_DRIVER_CAPABILITIES=compute,utility
       - HF_HOME=/root/.cache/huggingface
     volumes:
-      # 模型缓存目录 - 改到当前目录
       - ./cache/huggingface:/root/.cache/huggingface
-      # 日志目录 - 当前目录
       - ./logs:/app/logs
-      # 临时文件目录 - 当前目录
       - ./tmp:/tmp
     restart: unless-stopped
     healthcheck:
