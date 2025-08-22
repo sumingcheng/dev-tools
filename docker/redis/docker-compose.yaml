@@ -4,7 +4,7 @@ services:
     container_name: redis_server
     command: redis-server --appendonly yes  # 只启用持久化，不设置密码
     ports:
-      - "6379:6379"
+      - "56379:6379"
     volumes:
       - ./redis:/data
       - ./logs:/var/log/redis
