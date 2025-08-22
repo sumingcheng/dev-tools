@@ -2,7 +2,7 @@ services:
   reranker:
     image: registry.cn-hangzhou.aliyuncs.com/fastgpt/bge-rerank-base:v0.1
     container_name: reranker
-    shm_size: '2gb'
+    shm_size: '8gb'
     # GPU运行环境，如果宿主机未安装，将deploy配置隐藏即可
     deploy:
       resources:
