@@ -6,7 +6,7 @@ services:
     ports:
       - "6379:6379"
     volumes:
-      - redis:/data
+      - ./redis:/data
       - ./logs:/var/log/redis
     healthcheck:
       test: [ "CMD", "redis-cli", "ping" ]
