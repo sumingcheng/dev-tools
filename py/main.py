@@ -1,61 +1,48 @@
-import os
-import sys
-import subprocess
 from rich.console import Console
 from rich.panel import Panel
+from handlers import run_upload_server, run_vllm_test, run_issue_analyzer
 
 console = Console()
 
+# 工具配置映射表 - 添加新工具只需在这里配置
+TOOLS = {
+    1: {"name": "文件上传服务器", "handler": run_upload_server},
+    2: {"name": "vLLM模型测试", "handler": run_vllm_test},
+    3: {"name": "Issue分析工具", "handler": run_issue_analyzer},
+}
+
 
 def show_menu():
+    """动态生成菜单"""
     console.print(Panel("[bold cyan]开发工具集合[/bold cyan]", expand=False))
-    console.print("1. 文件上传服务器")
-    console.print("2. vLLM模型测试")
+
+    for num, tool in TOOLS.items():
+        console.print(f"{num}. {tool['name']}")
+
     console.print("0. 退出")
 
 
-def run_upload():
-    console.print("\n[green]启动文件上传服务器...[/green]")
-    console.print("服务将在 http://localhost:8888 启动")
-    console.print("按 Ctrl+C 停止服务")
-
-    try:
-        subprocess.run(
-            [sys.executable, "uploadFiles.py"], cwd=os.path.dirname(__file__)
-        )
-    except KeyboardInterrupt:
-        console.print("\n[yellow]文件上传服务器已停止[/yellow]")
-    except Exception as e:
-        console.print(f"[red]启动失败: {e}[/red]")
-
-
-def run_vllm():
-    console.print("\n[green]启动vLLM测试客户端...[/green]")
-    console.print("请确保vLLM服务已在 http://localhost:8000 运行")
-    console.print("输入 'exit' 或 '退出' 结束对话")
-
-    try:
-        subprocess.run([sys.executable, "vllm.test.py"], cwd=os.path.dirname(__file__))
-    except KeyboardInterrupt:
-        console.print("\n[yellow]vLLM测试客户端已停止[/yellow]")
-    except Exception as e:
-        console.print(f"[red]启动失败: {e}[/red]")
-
-
 def main():
+    """主函数 - 配置驱动的工具选择器"""
+    max_choice = max(TOOLS.keys()) if TOOLS else 0
+
     while True:
         show_menu()
 
         try:
-            choice = input("\n请选择 (0-2): ").strip()
+            choice_str = input(f"\n请选择 (0-{max_choice}): ").strip()
 
-            if choice == "0":
+            if not choice_str.isdigit():
+                console.print("[red]请输入数字[/red]")
+                continue
+
+            choice = int(choice_str)
+
+            if choice == 0:
                 console.print("[cyan]退出[/cyan]")
                 break
-            elif choice == "1":
-                run_upload()
-            elif choice == "2":
-                run_vllm()
+            elif choice in TOOLS:
+                TOOLS[choice]["handler"]()
             else:
                 console.print("[red]无效选择[/red]")
 
