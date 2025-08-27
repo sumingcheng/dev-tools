@@ -179,3 +179,4 @@ tmp/
 !cache/.gitkeep
 !logs/.gitkeep
 !tmp/.gitkeep
+compose/*/
