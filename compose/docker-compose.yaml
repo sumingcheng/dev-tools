@@ -4,6 +4,7 @@ services:
   flow-postgres:
     image: postgres:15
     container_name: flow-postgres
+    restart: unless-stopped
     environment:
       POSTGRES_PASSWORD: postgres
     ports:
@@ -15,6 +16,7 @@ services:
   redis:
     image: redis:8.0.3
     container_name: redis_server
+    restart: unless-stopped
     ports:
       - "6379:6379"
     volumes:
@@ -23,6 +25,7 @@ services:
   kafka:
     image: apache/kafka:latest
     container_name: kafka_server
+    restart: unless-stopped
     ports:
       - "9092:9092"
     environment:
